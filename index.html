@@ -524,6 +524,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .mg-cards{grid-template-columns:1fr}
   .mg-cards.col-2{grid-template-columns:1fr}
   .mg-actions{flex-direction:column}
+  .ih-stops-grid{grid-template-columns:1fr!important}
 }
 
 /* ============ CHECKOUT ============ */
@@ -1988,6 +1989,134 @@ function openJetskiModal(initialId = "js-free"){
   document.body.style.overflow = "hidden";
 }
 
+function openIslandHoppingModal(){
+  const s = CATALOG["island-hopping"] || { price: 550, unit: "per boat · max 12 pax", dur: "3 Hours" };
+  let qty = 1;
+
+  function render(){
+    const baseWa = "Hi! I would like to book an island hopping tour in Langkawi.";
+    const waText = qty === 1
+      ? encodeURIComponent(baseWa)
+      : encodeURIComponent(`Hi! I would like to book an island hopping tour in Langkawi (${qty} boats for ${rm(s.price * qty)}).`);
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+    $("#svcModal").innerHTML = `
+      <div class="sm-head g-island">
+        <img src="images/island_hopping.jpg" alt="Island Hopping Langkawi" onerror="this.remove()">
+        <button class="sm-close" id="smClose" aria-label="Close"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="sm-body">
+        <div class="sm-pills">
+          <span>⏱️ 3 Hours</span>
+          <span>🚤 Medium Boat (Private)</span>
+          <span>👥 Max 12 Pax</span>
+          <span style="color:var(--orange-dark)">★ Best Seller</span>
+        </div>
+        <h3 style="margin-bottom:4px">Island Hopping in Langkawi</h3>
+        <div class="sm-stars">
+          <span class="stars">★★★★★</span>
+          <b>4.9</b>
+          <span>· 340 reviews</span>
+        </div>
+        <p style="margin-bottom:12px;font-size:.9rem;color:#111">The classic Langkawi boat tour. Cruise out on your own private medium boat for up to 12 passengers — visit iconic islands and watch wild eagles feed.</p>
+
+        <!-- Featured Package Card -->
+        <div class="mg-sec-title"><span>Featured Package</span><small style="color:#555;font-size:.7rem">Private Boat</small></div>
+        <div class="mg-card selected" style="cursor:default;margin-bottom:12px">
+          <div class="mg-card-top">
+            <div>
+              <b style="font-size:.95rem">Island Hopping Tour</b>
+              <div style="font-size:.74rem;color:#555;font-weight:500;margin-top:2px">Medium Boat · 3 Hours · Max 12 pax</div>
+            </div>
+            <span class="mg-price" style="font-size:1.15rem">${rm(s.price)}</span>
+          </div>
+        </div>
+
+        <!-- Islands Visited (3 stops) -->
+        <div class="mg-sec-title"><span>Islands Visited (3 Stops)</span><small style="color:#555;font-size:.7rem">Classic Route</small></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px" class="ih-stops-grid">
+          <div style="background:#F0FAF5;border:1px solid #D2EADB;border-radius:12px;padding:10px 11px;display:flex;flex-direction:column;gap:3px">
+            <span style="font-size:.66rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.05em">01 · Stop</span>
+            <b style="font-size:.82rem;color:#000">Pulau Dayang Bunting</b>
+            <small style="font-size:.72rem;color:#555;line-height:1.25">Pregnant Maiden Lake &amp; freshwater dip</small>
+          </div>
+          <div style="background:#F0FAF5;border:1px solid #D2EADB;border-radius:12px;padding:10px 11px;display:flex;flex-direction:column;gap:3px">
+            <span style="font-size:.66rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.05em">02 · Stop</span>
+            <b style="font-size:.82rem;color:#000">Pulau Beras Basah</b>
+            <small style="font-size:.72rem;color:#555;line-height:1.25">White sandy beach, swimming &amp; relaxation</small>
+          </div>
+          <div style="background:#F0FAF5;border:1px solid #D2EADB;border-radius:12px;padding:10px 11px;display:flex;flex-direction:column;gap:3px">
+            <span style="font-size:.66rem;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.05em">03 · Stop</span>
+            <b style="font-size:.82rem;color:#000">Eagle Watch Point</b>
+            <small style="font-size:.72rem;color:#555;line-height:1.25">Pulau Singa Besar eagle feeding</small>
+          </div>
+        </div>
+
+        <!-- Inclusions Checklist -->
+        <h6 style="font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#000;font-weight:700;margin:12px 0 8px">What's Included &amp; Good to Know:</h6>
+        <ul class="inc-list" style="margin-bottom:16px;gap:6px">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Private medium boat exclusively for your group (up to 12 pax)</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Experienced local boatman &amp; guide</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Full life jackets for adults and children included</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Classic route — easily adjusted to suit your group (weather permitting)</li>
+        </ul>
+
+        <!-- Bottom Booking Bar -->
+        <div class="sm-book">
+          <div class="sm-qty">
+            <label style="font-size:.82rem;font-weight:700;color:#000">Number of Boats: <span style="color:var(--green-dark)">Medium Boat (Max 12 pax)</span></label>
+            <div class="qty">
+              <button id="smMinus">−</button><b id="smQtyVal">${qty}</b><button id="smPlus">+</button>
+            </div>
+          </div>
+          <div class="sm-foot" style="margin-bottom:14px">
+            <div class="price">
+              <b id="smTotal">${rm(s.price * qty)}</b>
+              <span>total · per boat · 3 hrs</span>
+            </div>
+          </div>
+          <div class="mg-actions">
+            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
+            <a class="mg-wa-btn" id="ihWaBtn" href="${waUrl}" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
+              Book Your Trip (WhatsApp)
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+
+    $("#smClose").onclick = closeService;
+
+    $("#smMinus").onclick = () => {
+      if (qty > 1) { qty--; updQty(); }
+    };
+    $("#smPlus").onclick = () => {
+      qty++; updQty();
+    };
+
+    function updQty(){
+      $("#smQtyVal").textContent = qty;
+      $("#smTotal").textContent = rm(s.price * qty);
+      $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
+      const updatedWaText = qty === 1
+        ? encodeURIComponent(baseWa)
+        : encodeURIComponent(`Hi! I would like to book an island hopping tour in Langkawi (${qty} boats for ${rm(s.price * qty)}).`);
+      $("#ihWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
+    }
+
+    $("#smAdd").onclick = e => {
+      e.stopPropagation();
+      addToCart("island-hopping", e.currentTarget, qty);
+      closeService();
+    };
+  }
+
+  render();
+  $("#svcOverlay").classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
 function openService(id){
   if (id === "mangrove" || id.startsWith("mg-")){
     openMangroveModal(id.startsWith("mg-") ? id : "mg-2h-small");
@@ -1995,6 +2124,10 @@ function openService(id){
   }
   if (id === "jetski" || id.startsWith("js-")){
     openJetskiModal(id.startsWith("js-") ? id : "js-free");
+    return;
+  }
+  if (id === "island-hopping" || id === "ih-tour"){
+    openIslandHoppingModal();
     return;
   }
   const s = CATALOG[id];
