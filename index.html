@@ -1312,9 +1312,9 @@ const SERVICES = [
   {id:"mangrove", img:"images/mangrove_tour.jpg", grad:"g-mangrove", title:"Mangrove Tours in Langkawi", price:350, unit:"from RM 350 · per boat", dur:"2–4 Hours", rating:4.8, reviews:280, pax:"2–20 pax", qtyLabel:"Boats", tag:"Options Available",
    desc:"Glide through Langkawi mangrove rivers — pick your duration and boat size, from private boats to VIP cruises.",
    inc:["Private boat & experienced local guide","Kilim Geoforest Park cruise","Bat Cave, fish farm & eagle watching","All life jackets & safety gear included","Options for 2h, 4h, VIP, Jetski & Kayak"]},
-  {id:"jetski", img:"images/jetski_tour.jpg", grad:"g-jetski", title:"Jet Ski Tours in Langkawi", price:280, unit:"per jet ski", dur:"30 Mins – Half Day", rating:4.8, reviews:195, pax:"Guided tour", qtyLabel:"Jet Skis",
-   desc:"Jet ski thrills — from a 30-minute free ride to guided half-day island adventures.",
-   inc:["Guided island jet ski tour","Safety gear & full briefing","Island of the Pregnant Maiden stop","Photo stops at scenic points","Professional guide leads the way"]},
+  {id:"jetski", img:"images/jetski_tour.jpg", grad:"g-jetski", title:"Jet Ski Tours in Langkawi", price:280, unit:"from RM 280 · per ride", dur:"30 Mins – 6 Hours", rating:4.8, reviews:195, pax:"Guided tour", qtyLabel:"Jet Skis", tag:"4 Packages Available",
+   desc:"Ride the open water free — from a quick 30-minute free ride over Chenang Beach to 4 & 6-hour guided island expeditions.",
+   inc:["Professional English-speaking guide leads the group","Full safety briefing & life jacket included","Single rider per jet ski (tandem on WhatsApp)","Dayang Bunting, Beras Basah & private islands","Options: Free Ride, Package A, B & C"]},
   {id:"island-hopping", img:"images/island_hopping.jpg", grad:"g-island", title:"Island Hopping in Langkawi", price:550, unit:"per boat · max 12 pax", dur:"3 Hours", rating:4.9, reviews:340, pax:"Max 12 pax", qtyLabel:"Boats", tag:"Best Seller",
    desc:"Island hopping in Langkawi — a medium boat for 3 hours, up to 12 pax, priced per boat.",
    inc:["Private medium boat (up to 12 pax)","Pulau Dayang Bunting — Lake of Pregnant Maiden","Beras Basah Island beach stop","Eagle watching at Pulau Singa Besar","Snorkelling time & life jackets"]},
@@ -1353,6 +1353,57 @@ const MANGROVE_OPTIONS = [
   // Jetski / Kayak
   { id: "mg-jetski-4h", cat: "adv", catLabel: "Jetski / Kayak", name: "Jetski Ride", pax: "Per ride", price: 750, unit: "per jet ski · 4 hrs", dur: "4 Hours", desc: "Ride your own jet ski through scenic mangrove channels with guided escort.", stops: ["Bat Cave", "Fish Farm", "Eagle Feeding", "Andaman Sea (Kilim)", "Crocodile Cave", "Beach Stop", "Dangli Island Fish Feeding"] },
   { id: "mg-kayak-4h",  cat: "adv", catLabel: "Jetski / Kayak", name: "Kayak Trip", pax: "Per person", price: 220, unit: "per person · 4 hrs", dur: "4 Hours", desc: "Quiet eco-paddling adventure through untouched mangrove nature reserves.", stops: ["Bat Cave", "Fish Farm", "Eagle Feeding", "Andaman Sea (Kilim)", "Crocodile Cave", "Beach Stop", "Dangli Island Fish Feeding"] }
+];
+
+const JETSKI_OPTIONS = [
+  {
+    id: "js-free",
+    name: "Free Ride",
+    dur: "30 Mins",
+    price: 280,
+    unit: "per ride · 30 mins",
+    pax: "Single rider",
+    sub: "Chenang Beach Area",
+    waMsg: "Free Ride jet ski",
+    desc: "A quick 30-minute high-speed free ride skimming over Chenang Beach waters with safety briefing & life jacket.",
+    stops: ["Chenang Beach Area", "Open Sea Free Ride", "Safety Briefing & Life Jacket"]
+  },
+  {
+    id: "js-pkga",
+    name: "Package A",
+    dur: "4 Hours",
+    price: 550,
+    unit: "per jet ski · 4 hrs",
+    pax: "Single rider",
+    sub: "5 Iconic Island Stops",
+    waMsg: "Package A jet ski",
+    desc: "4-hour guided jet ski island cruise to legendary Dayang Bunting lake and Beras Basah Island.",
+    stops: ["Tasik Dayang Bunting", "Beras Basah Island", "Eagle Feeding", "Limestone Hills", "Eco Tour"]
+  },
+  {
+    id: "js-pkgb",
+    name: "Package B",
+    dur: "4 Hours",
+    price: 650,
+    unit: "per jet ski · 4 hrs",
+    pax: "Single rider",
+    sub: "8 Stops & 6 Private Islands",
+    waMsg: "Package B jet ski",
+    desc: "Enhanced 4-hour exploration covering Dayang Bunting, Pulau Tuba, Datang Lang and 6 private secluded islands.",
+    stops: ["Tasik Dayang Bunting", "Beras Basah Island", "Eagle Feeding", "Pulau Tuba", "Datang Lang", "6 Private Islands", "Limestone Hills", "Eco Tour"]
+  },
+  {
+    id: "js-pkgc",
+    name: "Package C",
+    dur: "6 Hours",
+    price: 1300,
+    unit: "per jet ski · 6 hrs",
+    pax: "Single rider",
+    sub: "Full Langkawi Perimeter",
+    waMsg: "Package C jet ski",
+    desc: "The ultimate 6-hour expedition circumnavigating Langkawi’s perimeter, Kilim mangroves and remote islands.",
+    stops: ["Tasik Dayang Bunting", "Beras Basah Island", "Eagle Feeding", "Pulau Tuba", "Datang Lang", "6 Private Islands", "Mangrove (Kilim)", "All Langkawi Perimeter"]
+  }
 ];
 const I_BACKPACK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="13" rx="3.5"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/><path d="M9 13.5h6"/></svg>';
 const I_COMPASS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 6.8-6.8 2.2 2.2-6.8z"/></svg>';
@@ -1455,6 +1506,28 @@ MANGROVE_OPTIONS.forEach(opt => {
       "Eagle feeding & wildlife spotting",
       "Swimming stop (weather permitting)",
       "Waterproof storage box for your valuables"
+    ]
+  };
+});
+JETSKI_OPTIONS.forEach(opt => {
+  CATALOG[opt.id] = {
+    id: opt.id,
+    title: `Jet Ski Tour — ${opt.name} (${opt.dur})`,
+    price: opt.price,
+    unit: opt.unit,
+    dur: opt.dur,
+    img: "images/jetski_tour.jpg",
+    grad: "g-jetski",
+    rating: 4.8,
+    reviews: 195,
+    pax: opt.pax,
+    qtyLabel: "Jet Skis",
+    desc: opt.desc,
+    inc: [
+      "Professional English-speaking guide leads the group",
+      "Full safety briefing & life jacket provided before every ride",
+      "Single rider per jet ski (tandem package can be arranged)",
+      "Sun protection & change of clothes recommended"
     ]
   };
 });
@@ -1785,9 +1858,143 @@ function openMangroveModal(initialId = "mg-2h-small"){
   document.body.style.overflow = "hidden";
 }
 
+function openJetskiModal(initialId = "js-free"){
+  let currentOpt = JETSKI_OPTIONS.find(o => o.id === initialId) || JETSKI_OPTIONS[0];
+  let qty = 1;
+
+  function render(){
+    const baseWaMsg = currentOpt.waMsg || `${currentOpt.name} jet ski`;
+    const waText = qty === 1
+      ? encodeURIComponent(`Hi! I would like to book: ${baseWaMsg}.`)
+      : encodeURIComponent(`Hi! I would like to book: ${baseWaMsg} (${qty} jet skis for ${rm(currentOpt.price * qty)}).`);
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+    $("#svcModal").innerHTML = `
+      <div class="sm-head g-jetski">
+        <img src="images/jetski_tour.jpg" alt="Jet Ski Tours Langkawi" onerror="this.remove()">
+        <button class="sm-close" id="smClose" aria-label="Close"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="sm-body">
+        <div class="sm-pills">
+          <span>⚡ 30 Mins – 6 Hours</span>
+          <span>🌊 Professional Guide</span>
+          <span>🦺 Life Jackets &amp; Safety</span>
+          <span style="color:var(--orange-dark)">Chenang &amp; Islands</span>
+        </div>
+        <h3 style="margin-bottom:4px">Jet Ski Tours in Langkawi</h3>
+        <div class="sm-stars">
+          <span class="stars">★★★★★</span>
+          <b>4.8</b>
+          <span>· 195 reviews</span>
+        </div>
+        <p style="margin-bottom:12px;font-size:.9rem;color:#111">Ride the open water free. Guided jet ski rides around Langkawi’s coastline and across to its islands. Select your package:</p>
+
+        <!-- Package Selection Cards (2x2 Grid) -->
+        <div class="mg-sec-title"><span>Select Jet Ski Package</span><small style="color:#555;font-size:.7rem">Tap to choose</small></div>
+        <div class="mg-cards col-2" id="jsCards">
+          ${JETSKI_OPTIONS.map(o => `
+            <div class="mg-card ${o.id === currentOpt.id ? 'selected' : ''}" data-jsid="${o.id}">
+              <div class="mg-card-top">
+                <b>${o.name}</b>
+                <small>${o.dur}</small>
+              </div>
+              <span style="font-size:.72rem;color:#444;font-weight:600;margin-top:2px">${o.sub}</span>
+              <span class="mg-price">${rm(o.price)}</span>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Description callout -->
+        <div style="font-size:.82rem;color:#111;background:#F2FAF6;padding:10px 12px;border-radius:10px;border-left:3px solid var(--green);margin-bottom:12px;line-height:1.45">
+          <b>${currentOpt.name} (${currentOpt.dur}) — ${rm(currentOpt.price)}:</b> ${currentOpt.desc}
+        </div>
+
+        <!-- Stops / Highlights Included -->
+        <div class="mg-sec-title"><span>Highlights &amp; Stops Included (${currentOpt.stops.length})</span></div>
+        <div class="mg-stops">
+          ${currentOpt.stops.map(s => `<span class="mg-stop">📍 ${s}</span>`).join('')}
+        </div>
+
+        <!-- Good to Know / Inclusions -->
+        <h6 style="font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#000;font-weight:700;margin:12px 0 8px">Good To Know &amp; Inclusions:</h6>
+        <ul class="inc-list" style="margin-bottom:16px;gap:6px">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Professional English-speaking guide leads the group</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Full safety briefing &amp; life jacket provided before every ride</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>One rider per jet ski (tandem package can be arranged on WhatsApp)</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Sun protection and a change of clothes recommended</li>
+        </ul>
+
+        <!-- Bottom Booking Bar -->
+        <div class="sm-book">
+          <div class="sm-qty">
+            <label style="font-size:.82rem;font-weight:700;color:#000">Selected: <span style="color:var(--green-dark)">${currentOpt.name} (${currentOpt.dur})</span></label>
+            <div class="qty">
+              <button id="smMinus">−</button><b id="smQtyVal">${qty}</b><button id="smPlus">+</button>
+            </div>
+          </div>
+          <div class="sm-foot" style="margin-bottom:14px">
+            <div class="price">
+              <b id="smTotal">${rm(currentOpt.price * qty)}</b>
+              <span>total · ${currentOpt.unit}</span>
+            </div>
+          </div>
+          <div class="mg-actions">
+            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
+            <a class="mg-wa-btn" id="jsWaBtn" href="${waUrl}" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
+              WhatsApp Book
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+
+    $("#smClose").onclick = closeService;
+
+    $$("[data-jsid]").forEach(c => {
+      c.onclick = () => {
+        const found = JETSKI_OPTIONS.find(o => o.id === c.dataset.jsid);
+        if (found) { currentOpt = found; render(); }
+      };
+    });
+
+    $("#smMinus").onclick = () => {
+      if (qty > 1) { qty--; updQty(); }
+    };
+    $("#smPlus").onclick = () => {
+      qty++; updQty();
+    };
+
+    function updQty(){
+      $("#smQtyVal").textContent = qty;
+      $("#smTotal").textContent = rm(currentOpt.price * qty);
+      $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}`;
+      const baseWa = currentOpt.waMsg || `${currentOpt.name} jet ski`;
+      const updatedWaText = qty === 1
+        ? encodeURIComponent(`Hi! I would like to book: ${baseWa}.`)
+        : encodeURIComponent(`Hi! I would like to book: ${baseWa} (${qty} jet skis for ${rm(currentOpt.price * qty)}).`);
+      $("#jsWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
+    }
+
+    $("#smAdd").onclick = e => {
+      e.stopPropagation();
+      addToCart(currentOpt.id, e.currentTarget, qty);
+      closeService();
+    };
+  }
+
+  render();
+  $("#svcOverlay").classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
 function openService(id){
   if (id === "mangrove" || id.startsWith("mg-")){
     openMangroveModal(id.startsWith("mg-") ? id : "mg-2h-small");
+    return;
+  }
+  if (id === "jetski" || id.startsWith("js-")){
+    openJetskiModal(id.startsWith("js-") ? id : "js-free");
     return;
   }
   const s = CATALOG[id];
