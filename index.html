@@ -458,8 +458,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .rm-btn:hover{color:#E23B0E}
 .cd-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#333;text-align:center;padding:30px}
 .cd-empty b{color:#000}
-.cd-empty svg{animation:floaty 3.5s ease-in-out infinite}
-.cd-foot{border-top:1px solid var(--line);padding:22px 24px;background:#FBFDFC}
+.cd-foot{border-top:1px solid var(--line);padding:18px 20px;background:#FBFDFC;max-height:65vh;overflow-y:auto}
 .subtotal-row{display:flex;justify-content:space-between;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:#000}
 .subtotal-row span:last-child{color:#000}
 .cd-note{font-size:.72rem;color:#333;margin-bottom:16px;display:flex;gap:6px}
@@ -527,7 +526,20 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .ih-stops-grid{grid-template-columns:1fr!important}
   .atv-steps-grid{grid-template-columns:1fr!important}
   .st-sched-grid{grid-template-columns:1fr!important}
+  .sm-datetime-grid{grid-template-columns:1fr!important}
+  .cart-cust-row{grid-template-columns:1fr!important}
 }
+
+.sm-datetime-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.sm-dt-input{width:100%;padding:10px 12px;border:1.5px solid #CFD8D3;border-radius:11px;font-size:.84rem;font-weight:600;color:#000;background:#fff;outline:none;transition:border-color .2s;font-family:inherit}
+.sm-dt-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(11,166,120,.12)}
+
+/* Cart customer details box */
+.cart-cust-box{background:#F4FAF6;border:1.5px solid #D2EADB;border-radius:14px;padding:12px 14px;margin:12px 0}
+.cart-cust-title{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#000;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.cart-input{width:100%;padding:9px 11px;border:1.5px solid #CFD8D3;border-radius:9px;font-size:.82rem;font-weight:600;color:#000;background:#fff;outline:none;transition:border-color .2s;font-family:inherit}
+.cart-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(11,166,120,.12)}
+.cart-input.invalid{border-color:#E23B0E;background:#FFF5F5}
 
 /* ============ CHECKOUT ============ */
 .ck-overlay{position:fixed;inset:0;background:rgba(10,30,25,.65);backdrop-filter:blur(5px);z-index:120;display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
@@ -1188,10 +1200,41 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   </div>
   <div class="cd-foot hidden" id="cartFoot">
     <div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">RM 0</span></div>
+    
+    <!-- Customer Details for Payment -->
+    <div class="cart-cust-box">
+      <div class="cart-cust-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Your Contact Details</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div>
+          <label style="display:block;font-size:.72rem;font-weight:700;color:#000;margin-bottom:3px">Full Name *</label>
+          <input id="cartCustName" type="text" class="cart-input" placeholder="e.g. Ahmad bin Ali">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" class="cart-cust-row">
+          <div>
+            <label style="display:block;font-size:.72rem;font-weight:700;color:#000;margin-bottom:3px">Email Address *</label>
+            <input id="cartCustEmail" type="email" class="cart-input" placeholder="you@email.com">
+          </div>
+          <div>
+            <label style="display:block;font-size:.72rem;font-weight:700;color:#000;margin-bottom:3px">Phone / WhatsApp *</label>
+            <input id="cartCustPhone" type="tel" class="cart-input" placeholder="+60 12-345 6789">
+          </div>
+        </div>
+      </div>
+    </div>
+
     <p class="cd-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pay securely online, or cash on arrival.</p>
-    <button class="btn btn-orange" id="checkoutBtn">Checkout
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </button>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button class="btn btn-orange" id="checkoutBtn" style="font-size:.9rem;padding:13px">Proceed to Payment
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <button class="mg-wa-btn" id="cartWaPayBtn" style="border-radius:12px;padding:11px 14px;font-size:.84rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#25D366;color:#fff!important;border:none;cursor:pointer;width:100%;transition:.2s">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
+        Order &amp; Pay via WhatsApp
+      </button>
+    </div>
   </div>
 </aside>
 
@@ -1798,7 +1841,7 @@ function renderStops(){
 }
 
 /* ================================================================
-   CART
+   CART & CUSTOMER INFO
 ================================================================ */
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem("ltt_cart")) || []; } catch(e){ cart = []; }
@@ -1806,12 +1849,82 @@ const saveCart  = () => localStorage.setItem("ltt_cart", JSON.stringify(cart));
 const cartTotal = () => cart.reduce((t,i) => t + (CATALOG[i.id]?.price || 0) * i.qty, 0);
 const cartCount = () => cart.reduce((t,i) => t + i.qty, 0);
 
+function formatDateDisplay(isoStr){
+  if (!isoStr) return "";
+  try {
+    const parts = isoStr.split("-");
+    if (parts.length < 3) return isoStr;
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const d = parseInt(parts[2], 10);
+    const m = months[parseInt(parts[1], 10) - 1] || parts[1];
+    const y = parts[0];
+    return `${d} ${m} ${y}`;
+  } catch(e){
+    return isoStr;
+  }
+}
+
+function renderDateTimeSelector(selDate, selTime, timeOptions){
+  return `
+    <div class="mg-sec-title"><span>Select Date &amp; Time</span><small style="color:#555;font-size:.7rem">Required</small></div>
+    <div class="sm-datetime-grid">
+      <div>
+        <label style="display:block;font-size:.74rem;font-weight:700;color:#000;margin-bottom:4px">📅 Travel Date</label>
+        <input type="date" id="smDate" class="sm-dt-input" value="${selDate}" min="${todayISO()}">
+      </div>
+      <div>
+        <label style="display:block;font-size:.74rem;font-weight:700;color:#000;margin-bottom:4px">⏰ Preferred Time</label>
+        <select id="smTime" class="sm-dt-input">
+          ${timeOptions.map(t => `<option value="${t}" ${t === selTime ? 'selected' : ''}>${t}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+  `;
+}
+
+function saveCustDetails(){
+  try{
+    const cust = {
+      name: $("#cartCustName") ? $("#cartCustName").value.trim() : "",
+      email: $("#cartCustEmail") ? $("#cartCustEmail").value.trim() : "",
+      phone: $("#cartCustPhone") ? $("#cartCustPhone").value.trim() : ""
+    };
+    localStorage.setItem("ltt_cust", JSON.stringify(cust));
+  }catch(e){}
+}
+
+function loadCustDetails(){
+  try{
+    const cust = JSON.parse(localStorage.getItem("ltt_cust")) || {};
+    if ($("#cartCustName") && cust.name && !$("#cartCustName").value) $("#cartCustName").value = cust.name;
+    if ($("#cartCustEmail") && cust.email && !$("#cartCustEmail").value) $("#cartCustEmail").value = cust.email;
+    if ($("#cartCustPhone") && cust.phone && !$("#cartCustPhone").value) $("#cartCustPhone").value = cust.phone;
+    if ($("#ckName") && cust.name && !$("#ckName").value) $("#ckName").value = cust.name;
+    if ($("#ckEmail") && cust.email && !$("#ckEmail").value) $("#ckEmail").value = cust.email;
+    if ($("#ckPhone") && cust.phone && !$("#ckPhone").value) $("#ckPhone").value = cust.phone;
+  }catch(e){}
+}
+
+function attachCartCustListeners(){
+  ["cartCustName","cartCustEmail","cartCustPhone"].forEach(id => {
+    const el = $("#" + id);
+    if (el && !el._hasListener){
+      el._hasListener = true;
+      el.addEventListener("input", () => {
+        el.classList.remove("invalid");
+        saveCustDetails();
+      });
+    }
+  });
+}
+
 function updateBadge(){
   const n = cartCount(), b = $("#cartCount");
   b.textContent = n;
   b.classList.toggle("hidden", n === 0);
   b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump");
 }
+
 function renderCart(){
   const wrap = $("#cartItems"), empty = $("#cartEmpty"), foot = $("#cartFoot");
   const list = cart.filter(i => CATALOG[i.id]);
@@ -1825,25 +1938,35 @@ function renderCart(){
   $("#cartQtyLabel").textContent = `(${cartCount()})`;
   wrap.innerHTML = list.map(i => {
     const s = CATALOG[i.id];
+    const itemKey = i.key || `${i.id}_${i.date || ''}_${i.time || ''}`;
     return `
     <div class="cd-item">
       <div class="cd-thumb ${s.grad || "g-island"}">${s.img ? `<img src="${imgUrl(s.img,160)}" alt="">` : ""}</div>
       <div class="cd-info">
         <h5>${s.title}</h5>
+        ${(i.date || i.time) ? `
+          <div style="display:inline-flex;align-items:center;gap:6px;margin:3px 0 6px;background:#EBF7F2;padding:2px 8px;border-radius:6px;font-size:.68rem;color:var(--green-dark);font-weight:700">
+            ${i.date ? `<span>📅 ${formatDateDisplay(i.date)}</span>` : ""}
+            ${i.time ? `<span>⏰ ${i.time}</span>` : ""}
+          </div>
+        ` : ""}
         <small>${s.unit || ""} · ${rm(s.price)}</small>
         <div class="qty-row">
           <div class="qty">
-            <button data-qact="minus" data-id="${s.id}">−</button><b>${i.qty}</b>
-            <button data-qact="plus" data-id="${s.id}">+</button>
+            <button data-qact="minus" data-key="${itemKey}">−</button><b>${i.qty}</b>
+            <button data-qact="plus" data-key="${itemKey}">+</button>
           </div>
           <span class="cd-price">${rm(s.price * i.qty)}</span>
         </div>
       </div>
-      <button class="rm-btn" data-rm="${s.id}" aria-label="Remove"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg></button>
+      <button class="rm-btn" data-rmkey="${itemKey}" aria-label="Remove"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg></button>
     </div>`;
   }).join("");
   $("#cartSubtotal").textContent = rm(cartTotal());
+  loadCustDetails();
+  attachCartCustListeners();
 }
+
 function flyToCart(srcEl, gradClass){
   if (reduceMotion || !srcEl) return;
   try{
@@ -1861,22 +1984,119 @@ function flyToCart(srcEl, gradClass){
     setTimeout(() => { dot.remove(); $("#cartBtn").classList.add("wiggle"); setTimeout(() => $("#cartBtn").classList.remove("wiggle"), 500); }, 780);
   }catch(e){}
 }
-function addToCart(id, srcBtn, qty=1){
+
+function addToCart(id, srcBtn, qty=1, date="", time=""){
   if (!CATALOG[id]) return;
-  const item = cart.find(i => i.id === id);
-  if (item) item.qty += qty; else cart.push({id, qty});
+  const d = date || todayISO();
+  const t = time || "10:00 AM";
+  const key = `${id}_${d}_${t}`;
+  const item = cart.find(i => (i.key === key) || (i.id === id && i.date === d && i.time === t));
+  if (item) {
+    item.qty += qty;
+  } else {
+    cart.push({ id, qty, date: d, time: t, key });
+  }
   flyToCart(srcBtn, CATALOG[id].grad);
   saveCart(); renderCart(); updateBadge();
   toast(`${qty} × ${CATALOG[id].title} added to cart`);
 }
-function changeQty(id, delta){
-  const item = cart.find(i => i.id === id);
+
+function changeCartQty(key, delta){
+  const item = cart.find(i => (i.key || i.id) === key);
   if (!item) return;
   item.qty += delta;
-  if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+  if (item.qty <= 0) cart = cart.filter(i => (i.key || i.id) !== key);
   saveCart(); renderCart(); updateBadge();
 }
-function openCart(){ $("#cartDrawer").classList.add("open"); $("#cartOverlay").classList.add("show"); document.body.style.overflow = "hidden"; }
+
+function removeCartItem(key){
+  cart = cart.filter(i => (i.key || i.id) !== key);
+  saveCart(); renderCart(); updateBadge(); toast("Item removed");
+}
+
+function handleCartCheckout(){
+  const nameInput = $("#cartCustName");
+  const emailInput = $("#cartCustEmail");
+  const phoneInput = $("#cartCustPhone");
+  const name = nameInput ? nameInput.value.trim() : "";
+  const email = emailInput ? emailInput.value.trim() : "";
+  const phone = phoneInput ? phoneInput.value.trim() : "";
+
+  let ok = true;
+  if (!name || name.length < 2) {
+    if (nameInput) nameInput.classList.add("invalid");
+    ok = false;
+  }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (emailInput) emailInput.classList.add("invalid");
+    ok = false;
+  }
+  if (!phone || phone.replace(/\D/g,"").length < 8) {
+    if (phoneInput) phoneInput.classList.add("invalid");
+    ok = false;
+  }
+
+  if (!ok) {
+    toast("Please enter your name, email and phone number to proceed");
+    return;
+  }
+  saveCustDetails();
+  if ($("#ckName")) $("#ckName").value = name;
+  if ($("#ckEmail")) $("#ckEmail").value = email;
+  if ($("#ckPhone")) $("#ckPhone").value = phone;
+  openCheckout();
+}
+
+function handleCartWaPay(){
+  const nameInput = $("#cartCustName");
+  const emailInput = $("#cartCustEmail");
+  const phoneInput = $("#cartCustPhone");
+  const name = nameInput ? nameInput.value.trim() : "";
+  const email = emailInput ? emailInput.value.trim() : "";
+  const phone = phoneInput ? phoneInput.value.trim() : "";
+
+  let ok = true;
+  if (!name || name.length < 2) {
+    if (nameInput) nameInput.classList.add("invalid");
+    ok = false;
+  }
+  if (!phone || phone.replace(/\D/g,"").length < 8) {
+    if (phoneInput) phoneInput.classList.add("invalid");
+    ok = false;
+  }
+  if (!ok) {
+    toast("Please enter your name and phone number for WhatsApp booking");
+    return;
+  }
+  saveCustDetails();
+
+  const lines = cart.map((item, idx) => {
+    const s = CATALOG[item.id];
+    const dt = (item.date || item.time) ? ` [${formatDateDisplay(item.date)} · ${item.time}]` : "";
+    return `${idx + 1}. ${s ? s.title : item.id}${dt} × ${item.qty} = ${rm((s?.price || 0) * item.qty)}`;
+  });
+
+  const msg = `Hi! I would like to book and pay for my cart in Langkawi:
+Name: ${name}
+Phone: ${phone}${email ? `\nEmail: ${email}` : ""}
+
+Booked Tours & Packages:
+${lines.join("\n")}
+
+Total: ${rm(cartTotal())}
+
+Please confirm availability and payment details. Thank you!`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+function openCart(){
+  $("#cartDrawer").classList.add("open");
+  $("#cartOverlay").classList.add("show");
+  document.body.style.overflow = "hidden";
+  loadCustDetails();
+}
+
 function closeCart(){ $("#cartDrawer").classList.remove("open"); $("#cartOverlay").classList.remove("show"); document.body.style.overflow = ""; }
 
 /* ================================================================
@@ -1886,13 +2106,16 @@ function openMangroveModal(initialId = "mg-2h-small"){
   let currentOpt = MANGROVE_OPTIONS.find(o => o.id === initialId) || MANGROVE_OPTIONS[0];
   let activeCat = currentOpt.cat;
   let qty = 1;
+  let selDate = todayISO();
+  let selTime = "10:00 AM";
+  const mgTimes = ["09:00 AM", "10:00 AM", "11:30 AM", "02:00 PM", "03:00 PM", "04:30 PM"];
 
   function render(){
     const optsInCat = MANGROVE_OPTIONS.filter(o => o.cat === activeCat);
     if (!optsInCat.some(o => o.id === currentOpt.id)) {
       currentOpt = optsInCat[0];
     }
-    const waText = encodeURIComponent(`Hi! I would like to book: Mangrove Tour (${currentOpt.catLabel} · ${currentOpt.name} - ${currentOpt.pax}) for ${rm(currentOpt.price * qty)}. Please check availability.`);
+    const waText = encodeURIComponent(`Hi! I would like to book: Mangrove Tour (${currentOpt.catLabel} · ${currentOpt.name} - ${currentOpt.pax}) for ${rm(currentOpt.price * qty)}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}. Please check availability.`);
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
     $("#svcModal").innerHTML = `
@@ -1943,6 +2166,9 @@ function openMangroveModal(initialId = "mg-2h-small"){
         <div class="mg-stops">
           ${currentOpt.stops.map(s => `<span class="mg-stop">📍 ${s}</span>`).join('')}
         </div>
+
+        <!-- Date & Time Selection -->
+        ${renderDateTimeSelector(selDate, selTime, mgTimes)}
 
         <!-- Inclusions -->
         <h6 style="font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#000;font-weight:700;margin:12px 0 8px">All Tours Include:</h6>
@@ -2007,13 +2233,16 @@ function openMangroveModal(initialId = "mg-2h-small"){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(currentOpt.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}`;
-      const updatedWaText = encodeURIComponent(`Hi! I would like to book: Mangrove Tour (${currentOpt.catLabel} · ${currentOpt.name} - ${currentOpt.pax}) × ${qty} for ${rm(currentOpt.price * qty)}. Please check availability.`);
+      const updatedWaText = encodeURIComponent(`Hi! I would like to book: Mangrove Tour (${currentOpt.catLabel} · ${currentOpt.name} - ${currentOpt.pax}) × ${qty} for ${rm(currentOpt.price * qty)}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}. Please check availability.`);
       $("#mgWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
+    $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
+    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+
     $("#smAdd").onclick = e => {
       e.stopPropagation();
-      addToCart(currentOpt.id, e.currentTarget, qty);
+      addToCart(currentOpt.id, e.currentTarget, qty, selDate, selTime);
       closeService();
     };
   }
@@ -2026,12 +2255,15 @@ function openMangroveModal(initialId = "mg-2h-small"){
 function openJetskiModal(initialId = "js-free"){
   let currentOpt = JETSKI_OPTIONS.find(o => o.id === initialId) || JETSKI_OPTIONS[0];
   let qty = 1;
+  let selDate = todayISO();
+  let selTime = "10:00 AM";
+  const jsTimes = ["09:30 AM", "10:30 AM", "11:30 AM", "02:00 PM", "03:30 PM", "04:30 PM"];
 
   function render(){
     const baseWaMsg = currentOpt.waMsg || `${currentOpt.name} jet ski`;
     const waText = qty === 1
-      ? encodeURIComponent(`Hi! I would like to book: ${baseWaMsg}.`)
-      : encodeURIComponent(`Hi! I would like to book: ${baseWaMsg} (${qty} jet skis for ${rm(currentOpt.price * qty)}).`);
+      ? encodeURIComponent(`Hi! I would like to book: ${baseWaMsg}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+      : encodeURIComponent(`Hi! I would like to book: ${baseWaMsg} (${qty} jet skis for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
     $("#svcModal").innerHTML = `
@@ -2089,6 +2321,9 @@ function openJetskiModal(initialId = "js-free"){
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Sun protection and a change of clothes recommended</li>
         </ul>
 
+        <!-- Date & Time Selection -->
+        ${renderDateTimeSelector(selDate, selTime, jsTimes)}
+
         <!-- Bottom Booking Bar -->
         <div class="sm-book">
           <div class="sm-qty">
@@ -2136,14 +2371,17 @@ function openJetskiModal(initialId = "js-free"){
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}`;
       const baseWa = currentOpt.waMsg || `${currentOpt.name} jet ski`;
       const updatedWaText = qty === 1
-        ? encodeURIComponent(`Hi! I would like to book: ${baseWa}.`)
-        : encodeURIComponent(`Hi! I would like to book: ${baseWa} (${qty} jet skis for ${rm(currentOpt.price * qty)}).`);
+        ? encodeURIComponent(`Hi! I would like to book: ${baseWa}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+        : encodeURIComponent(`Hi! I would like to book: ${baseWa} (${qty} jet skis for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       $("#jsWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
+    $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
+    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+
     $("#smAdd").onclick = e => {
       e.stopPropagation();
-      addToCart(currentOpt.id, e.currentTarget, qty);
+      addToCart(currentOpt.id, e.currentTarget, qty, selDate, selTime);
       closeService();
     };
   }
@@ -2156,12 +2394,15 @@ function openJetskiModal(initialId = "js-free"){
 function openIslandHoppingModal(){
   const s = CATALOG["island-hopping"] || { price: 550, unit: "per boat · max 12 pax", dur: "3 Hours" };
   let qty = 1;
+  let selDate = todayISO();
+  let selTime = "09:00 AM (Morning Tour)";
+  const ihTimes = ["09:00 AM (Morning Tour)", "09:30 AM", "02:00 PM (Afternoon Tour)", "02:30 PM"];
 
   function render(){
     const baseWa = "Hi! I would like to book an island hopping tour in Langkawi.";
     const waText = qty === 1
-      ? encodeURIComponent(baseWa)
-      : encodeURIComponent(`Hi! I would like to book an island hopping tour in Langkawi (${qty} boats for ${rm(s.price * qty)}).`);
+      ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+      : encodeURIComponent(`Hi! I would like to book an island hopping tour in Langkawi (${qty} boats for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
     $("#svcModal").innerHTML = `
@@ -2225,6 +2466,9 @@ function openIslandHoppingModal(){
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Classic route — easily adjusted to suit your group (weather permitting)</li>
         </ul>
 
+        <!-- Date & Time Selection -->
+        ${renderDateTimeSelector(selDate, selTime, ihTimes)}
+
         <!-- Bottom Booking Bar -->
         <div class="sm-book">
           <div class="sm-qty">
@@ -2264,14 +2508,17 @@ function openIslandHoppingModal(){
       $("#smTotal").textContent = rm(s.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
       const updatedWaText = qty === 1
-        ? encodeURIComponent(baseWa)
-        : encodeURIComponent(`Hi! I would like to book an island hopping tour in Langkawi (${qty} boats for ${rm(s.price * qty)}).`);
+        ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+        : encodeURIComponent(`Hi! I would like to book an island hopping tour in Langkawi (${qty} boats for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       $("#ihWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
+    $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
+    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+
     $("#smAdd").onclick = e => {
       e.stopPropagation();
-      addToCart("island-hopping", e.currentTarget, qty);
+      addToCart("island-hopping", e.currentTarget, qty, selDate, selTime);
       closeService();
     };
   }
@@ -2285,6 +2532,8 @@ function openVipModal(initialId = "vip-boat-3h"){
   let currentOpt = VIP_OPTIONS.find(o => o.id === initialId) || VIP_OPTIONS[0];
   let activeCat = currentOpt.cat;
   let qty = currentOpt.cat === "cruise" ? 2 : 1;
+  let selDate = todayISO();
+  let selTime = activeCat === "cruise" ? "03:00 PM (Sunset Departure)" : "09:30 AM";
 
   function render(){
     const optsInCat = VIP_OPTIONS.filter(o => o.cat === activeCat);
@@ -2293,13 +2542,20 @@ function openVipModal(initialId = "vip-boat-3h"){
       qty = currentOpt.cat === "cruise" ? 2 : 1;
     }
 
+    const currentTimes = currentOpt.cat === "cruise"
+      ? ["03:00 PM (Sunset Departure)", "03:30 PM", "04:00 PM"]
+      : ["09:00 AM", "10:30 AM", "01:30 PM", "03:00 PM (Sunset VIP)", "04:00 PM"];
+    if (!currentTimes.includes(selTime)) {
+      selTime = currentTimes[0];
+    }
+
     let waText = "";
     if (currentOpt.cat === "boat") {
       waText = qty === 1
-        ? encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} - ${rm(currentOpt.price)}).`)
-        : encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} × ${qty} boats for ${rm(currentOpt.price * qty)}).`);
+        ? encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} - ${rm(currentOpt.price)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+        : encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} × ${qty} boats for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     } else {
-      waText = encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} persons for ${rm(currentOpt.price * qty)}).`);
+      waText = encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} persons for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     }
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
@@ -2370,6 +2626,9 @@ function openVipModal(initialId = "vip-boat-3h"){
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${currentOpt.cat === 'boat' ? 'Private boat capacity up to 13 pax' : 'Minimum 2 persons required for cruise bookings'}</li>
         </ul>
 
+        <!-- Date & Time Selection -->
+        ${renderDateTimeSelector(selDate, selTime, currentTimes)}
+
         <!-- Bottom Booking Bar -->
         <div class="sm-book">
           <div class="sm-qty">
@@ -2431,17 +2690,20 @@ function openVipModal(initialId = "vip-boat-3h"){
       let updatedWa = "";
       if (currentOpt.cat === "boat") {
         updatedWa = qty === 1
-          ? encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} - ${rm(currentOpt.price)}).`)
-          : encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} × ${qty} boats for ${rm(currentOpt.price * qty)}).`);
+          ? encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} - ${rm(currentOpt.price)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+          : encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} × ${qty} boats for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       } else {
-        updatedWa = encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} persons for ${rm(currentOpt.price * qty)}).`);
+        updatedWa = encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} persons for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       }
       $("#vipWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWa}`;
     }
 
+    $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
+    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+
     $("#smAdd").onclick = e => {
       e.stopPropagation();
-      addToCart(currentOpt.id, e.currentTarget, qty);
+      addToCart(currentOpt.id, e.currentTarget, qty, selDate, selTime);
       closeService();
     };
   }
@@ -2454,17 +2716,20 @@ function openVipModal(initialId = "vip-boat-3h"){
 function openWatersportsModal(initialId = "ws-combo"){
   let currentOpt = WATERSPORTS_OPTIONS.find(o => o.id === initialId) || WATERSPORTS_OPTIONS[0];
   let qty = 1;
+  let selDate = todayISO();
+  let selTime = "11:00 AM";
+  const wsTimes = ["10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:30 PM", "04:30 PM", "05:30 PM"];
 
   function render(){
     let waText = "";
     if (currentOpt.id === "ws-combo") {
       waText = qty === 1
-        ? encodeURIComponent("Hi! I would like to book the beach water sport combo 3 in 1.")
-        : encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1 (${qty} persons for ${rm(currentOpt.price * qty)}).`);
+        ? encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+        : encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1 (${qty} persons for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     } else {
       waText = qty === 1
-        ? encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg}.`)
-        : encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} ${currentOpt.id === 'ws-jetski' ? 'rides' : 'persons'} for ${rm(currentOpt.price * qty)}).`);
+        ? encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+        : encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} ${currentOpt.id === 'ws-jetski' ? 'rides' : 'persons'} for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     }
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
@@ -2523,6 +2788,9 @@ function openWatersportsModal(initialId = "ws-combo"){
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Wear swimwear and sunscreen; a change of clothes is recommended</li>
         </ul>
 
+        <!-- Date & Time Selection -->
+        ${renderDateTimeSelector(selDate, selTime, wsTimes)}
+
         <!-- Bottom Booking Bar -->
         <div class="sm-book">
           <div class="sm-qty">
@@ -2571,19 +2839,22 @@ function openWatersportsModal(initialId = "ws-combo"){
       let updatedWa = "";
       if (currentOpt.id === "ws-combo") {
         updatedWa = qty === 1
-          ? encodeURIComponent("Hi! I would like to book the beach water sport combo 3 in 1.")
-          : encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1 (${qty} persons for ${rm(currentOpt.price * qty)}).`);
+          ? encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+          : encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1 (${qty} persons for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       } else {
         updatedWa = qty === 1
-          ? encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg}.`)
-          : encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} ${currentOpt.id === 'ws-jetski' ? 'rides' : 'persons'} for ${rm(currentOpt.price * qty)}).`);
+          ? encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+          : encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} ${currentOpt.id === 'ws-jetski' ? 'rides' : 'persons'} for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       }
       $("#wsWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWa}`;
     }
 
+    $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
+    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+
     $("#smAdd").onclick = e => {
       e.stopPropagation();
-      addToCart(currentOpt.id, e.currentTarget, qty);
+      addToCart(currentOpt.id, e.currentTarget, qty, selDate, selTime);
       closeService();
     };
   }
@@ -2596,12 +2867,15 @@ function openWatersportsModal(initialId = "ws-combo"){
 function openAtvCruiseModal(){
   const s = CATALOG["atv-cruise"] || { price: 350, unit: "per person · min 2 pax", dur: "Half Day" };
   let qty = 2; // Minimum 2 persons
+  let selDate = todayISO();
+  let selTime = "09:30 AM (Full Day Combo)";
+  const atvTimes = ["09:30 AM (Full Day Combo)", "10:30 AM", "01:00 PM"];
 
   function render(){
     const baseWa = "Hi! I would like to book the ATV jungle ride + sunset dinner cruise combo in Langkawi.";
     const waText = qty === 2
-      ? encodeURIComponent(baseWa)
-      : encodeURIComponent(`Hi! I would like to book the ATV jungle ride + sunset dinner cruise combo in Langkawi (${qty} persons for ${rm(s.price * qty)}).`);
+      ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+      : encodeURIComponent(`Hi! I would like to book the ATV jungle ride + sunset dinner cruise combo in Langkawi (${qty} persons for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
     $("#svcModal").innerHTML = `
@@ -2667,6 +2941,9 @@ function openAtvCruiseModal(){
           <b style="color:#000">💡 Handy Tips:</b> Wear comfortable clothes you don't mind getting dusty for the ATV ride. Bring sunscreen, sunglasses, and a light jacket for the evening cruise. Duration and pickup are flexible.
         </div>
 
+        <!-- Date & Time Selection -->
+        ${renderDateTimeSelector(selDate, selTime, atvTimes)}
+
         <!-- Bottom Booking Bar -->
         <div class="sm-book">
           <div class="sm-qty">
@@ -2706,14 +2983,17 @@ function openAtvCruiseModal(){
       $("#smTotal").textContent = rm(s.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
       const updatedWaText = qty === 2
-        ? encodeURIComponent(baseWa)
-        : encodeURIComponent(`Hi! I would like to book the ATV jungle ride + sunset dinner cruise combo in Langkawi (${qty} persons for ${rm(s.price * qty)}).`);
+        ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+        : encodeURIComponent(`Hi! I would like to book the ATV jungle ride + sunset dinner cruise combo in Langkawi (${qty} persons for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       $("#atvWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
+    $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
+    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+
     $("#smAdd").onclick = e => {
       e.stopPropagation();
-      addToCart("atv-cruise", e.currentTarget, qty);
+      addToCart("atv-cruise", e.currentTarget, qty, selDate, selTime);
       closeService();
     };
   }
@@ -2733,13 +3013,16 @@ function openSharingTransportModal(){
     reviews: 260
   };
   let qty = 1;
+  let selDate = todayISO();
+  let selTime = "09:00 AM (Hotel Pickup - 10 AM to 6 PM Tour)";
+  const stTimes = ["09:00 AM (Hotel Pickup - 10 AM to 6 PM Tour)"];
   const baseWa = "Hi! I would like to reserve a seat on the Langkawi sharing transport package.";
   const enquireWa = "Hi! I would like to enquire about Langkawi tours and transport.";
 
   function render(){
     const waText = qty === 1
-      ? encodeURIComponent(baseWa)
-      : encodeURIComponent(`Hi! I would like to reserve ${qty} seats on the Langkawi sharing transport package (${rm(s.price * qty)}).`);
+      ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+      : encodeURIComponent(`Hi! I would like to reserve ${qty} seats on the Langkawi sharing transport package (${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
     const enquireUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(enquireWa)}`;
 
@@ -2842,6 +3125,9 @@ function openSharingTransportModal(){
           <b style="color:#000">💡 Handy Tips:</b> Seats are shared — booking early reserves your spot. Pace of the day follows the shared group itinerary. Perfect for solo travellers and small groups!
         </div>
 
+        <!-- Date & Time Selection -->
+        ${renderDateTimeSelector(selDate, selTime, stTimes)}
+
         <!-- Bottom Booking Bar -->
         <div class="sm-book">
           <div class="sm-qty">
@@ -2884,14 +3170,17 @@ function openSharingTransportModal(){
       $("#smTotal").textContent = rm(s.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
       const updatedWaText = qty === 1
-        ? encodeURIComponent(baseWa)
-        : encodeURIComponent(`Hi! I would like to reserve ${qty} seats on the Langkawi sharing transport package (${rm(s.price * qty)}).`);
+        ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+        : encodeURIComponent(`Hi! I would like to reserve ${qty} seats on the Langkawi sharing transport package (${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       $("#stWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
+    $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
+    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+
     $("#smAdd").onclick = e => {
       e.stopPropagation();
-      addToCart("sharing-transport", e.currentTarget, qty);
+      addToCart("sharing-transport", e.currentTarget, qty, selDate, selTime);
       closeService();
     };
   }
@@ -2911,13 +3200,16 @@ function openSunsetCruiseModal(){
     reviews: 305
   };
   let qty = 2; // Minimum 2 persons per booking
+  let selDate = todayISO();
+  let selTime = "03:00 PM (Departure - Sunset Cruise)";
+  const scTimes = ["03:00 PM (Departure - Sunset Cruise)", "03:30 PM", "04:00 PM"];
   const baseWa = "Hi! I would like to book the Langkawi sunset dinner cruise.";
   const enquireWa = "Hi! I would like to enquire about Langkawi tours and transport.";
 
   function render(){
     const waText = qty === 2
-      ? encodeURIComponent(baseWa)
-      : encodeURIComponent(`Hi! I would like to book the Langkawi sunset dinner cruise (${qty} persons for ${rm(s.price * qty)}).`);
+      ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+      : encodeURIComponent(`Hi! I would like to book the Langkawi sunset dinner cruise (${qty} persons for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
     const enquireUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(enquireWa)}`;
 
@@ -2991,6 +3283,9 @@ function openSunsetCruiseModal(){
           <b style="color:#000">💡 Handy Tips:</b> Arrive a little early for the best seating onboard. Bring a light layer or cardigan for the evening sea breeze at sunset. Departure time and pickup are flexible — arrange directly via WhatsApp.
         </div>
 
+        <!-- Date & Time Selection -->
+        ${renderDateTimeSelector(selDate, selTime, scTimes)}
+
         <!-- Bottom Booking Bar -->
         <div class="sm-book">
           <div class="sm-qty">
@@ -3033,14 +3328,17 @@ function openSunsetCruiseModal(){
       $("#smTotal").textContent = rm(s.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
       const updatedWaText = qty === 2
-        ? encodeURIComponent(baseWa)
-        : encodeURIComponent(`Hi! I would like to book the Langkawi sunset dinner cruise (${qty} persons for ${rm(s.price * qty)}).`);
+        ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
+        : encodeURIComponent(`Hi! I would like to book the Langkawi sunset dinner cruise (${qty} persons for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
       $("#scWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
+    $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
+    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+
     $("#smAdd").onclick = e => {
       e.stopPropagation();
-      addToCart("sunset-cruise", e.currentTarget, qty);
+      addToCart("sunset-cruise", e.currentTarget, qty, selDate, selTime);
       closeService();
     };
   }
@@ -3094,6 +3392,9 @@ function openService(id){
     "Flexible island timing & custom itinerary"
   ];
   let qty = 1;
+  let selDate = todayISO();
+  let selTime = "10:00 AM";
+  const defTimes = ["09:00 AM", "10:00 AM", "11:30 AM", "02:00 PM", "03:30 PM", "05:00 PM"];
   $("#svcModal").innerHTML = `
     <div class="sm-head ${s.grad || "g-island"}">
       ${s.img ? `<img src="${imgUrl(s.img,1100)}" alt="${s.title}" onerror="this.remove()">` : ""}
@@ -3116,6 +3417,10 @@ function openService(id){
         ${inc.map(i => `<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${i}</li>`).join("")}
       </ul>
       ${id === "private-transfer" ? `<p style="margin:-6px 0 16px;font-size:.82rem"><a href="#/private-transfer" onclick="closeService()" style="color:var(--green-dark);font-weight:600;text-decoration:underline">Need specific car models or point-to-point transfers? View Fleet &amp; Routes →</a></p>` : ""}
+
+      <!-- Date & Time Selection -->
+      ${renderDateTimeSelector(selDate, selTime, defTimes)}
+
       <div class="sm-book">
         <div class="sm-qty">
           <label>${s.qtyLabel || "Quantity"}</label>
@@ -3137,9 +3442,11 @@ function openService(id){
     $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
   };
   $("#smClose").onclick = closeService;
+  $("#smDate").onchange = e => { selDate = e.target.value; };
+  $("#smTime").onchange = e => { selTime = e.target.value; };
   $("#smMinus").onclick = () => { if (qty > 1){ qty--; upd(); } };
   $("#smPlus").onclick  = () => { qty++; upd(); };
-  $("#smAdd").onclick = e => { e.stopPropagation(); addToCart(id, e.currentTarget, qty); closeService(); };
+  $("#smAdd").onclick = e => { e.stopPropagation(); addToCart(id, e.currentTarget, qty, selDate, selTime); closeService(); };
   upd();
 }
 function closeService(){ $("#svcOverlay").classList.remove("show"); document.body.style.overflow = ""; }
@@ -3153,7 +3460,11 @@ function buildSummary(){
     const s = CATALOG[i.id];
     return `<div class="ck-item">
       <div class="mini ${s.grad || "g-island"}">${s.img ? `<img src="${imgUrl(s.img,120)}" alt="">` : ""}</div>
-      <div><h6>${s.title}</h6><small>${i.qty} × ${rm(s.price)}</small></div>
+      <div>
+        <h6>${s.title}</h6>
+        ${(i.date || i.time) ? `<small style="display:block;color:var(--green-dark);font-weight:700;margin:1px 0">📅 ${formatDateDisplay(i.date)} · ⏰ ${i.time}</small>` : ""}
+        <small>${i.qty} × ${rm(s.price)}</small>
+      </div>
       <span class="amt">${rm(s.price * i.qty)}</span></div>`;
   }).join("");
   const total = cartTotal();
@@ -3168,6 +3479,10 @@ function openCheckout(){
   ["ckProcessing","ckSuccess"].forEach(id => $("#"+id).classList.add("hidden"));
   $("#ckForm").classList.remove("hidden"); $("#ckSummary").classList.remove("hidden");
   $("#ckDate").min = todayISO();
+  // prefill first item's date if set
+  const firstItemWithDate = cart.find(i => i.date);
+  if (firstItemWithDate && !$("#ckDate").value) $("#ckDate").value = firstItemWithDate.date;
+  loadCustDetails();
   $("#ckOverlay").classList.add("show");
   closeCart(); document.body.style.overflow = "hidden";
 }
@@ -3219,7 +3534,7 @@ async function processPayment(){
     travelDate:$("#ckDate").value, method: method === "card" ? "Card (Paid)" : "Cash on Arrival",
     total: cartTotal(),
     customer:{name:$("#ckName").value.trim(), email:$("#ckEmail").value.trim(), phone:$("#ckPhone").value.trim()},
-    items: cart.map(i => ({...i, title:CATALOG[i.id]?.title, price:CATALOG[i.id]?.price}))
+    items: cart.map(i => ({...i, title:CATALOG[i.id]?.title, price:CATALOG[i.id]?.price, date:i.date, time:i.time}))
   };
   const orders = JSON.parse(localStorage.getItem("ltt_orders") || "[]");
   orders.push(order); localStorage.setItem("ltt_orders", JSON.stringify(orders));
@@ -3252,15 +3567,16 @@ document.addEventListener("click", e => {
     openService(card.dataset.view); return;
   }
   const q = e.target.closest("[data-qact]");
-  if (q){ changeQty(q.dataset.id, q.dataset.qact === "plus" ? 1 : -1); return; }
-  const r = e.target.closest("[data-rm]");
-  if (r){ cart = cart.filter(i => i.id !== r.dataset.rm); saveCart(); renderCart(); updateBadge(); toast("Item removed"); }
+  if (q){ changeCartQty(q.dataset.key || q.dataset.id, q.dataset.qact === "plus" ? 1 : -1); return; }
+  const r = e.target.closest("[data-rmkey], [data-rm]");
+  if (r){ removeCartItem(r.dataset.rmkey || r.dataset.rm); return; }
 });
  $("#cartBtn").onclick = openCart;
  $("#closeCart").onclick = closeCart;
  $("#cartOverlay").onclick = closeCart;
  $("#emptyBrowse").onclick = () => { closeCart(); location.hash = "#services"; };
- $("#checkoutBtn").onclick = openCheckout;
+ $("#checkoutBtn").onclick = handleCartCheckout;
+ if ($("#cartWaPayBtn")) $("#cartWaPayBtn").onclick = handleCartWaPay;
  $("#svcOverlay").onclick = e => { if (e.target === e.currentTarget) closeService(); };
  $("#ckOverlay").onclick = e => { if (e.target === e.currentTarget) closeCheckout(); };
  $("#ckPayBtn").onclick = processPayment;
