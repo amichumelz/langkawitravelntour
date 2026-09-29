@@ -237,29 +237,41 @@ body.loaded .h-line:nth-child(2)>span{transition-delay:.5s}
 
 /* ============ PRICING ============ */
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:56px;align-items:stretch}
-.p-card{background:#fff;border-radius:22px;padding:36px 30px;border:1px solid rgba(13,43,36,.09);box-shadow:0 14px 34px -4px rgba(13,43,36,.12),0 4px 12px -2px rgba(13,43,36,.06);display:flex;flex-direction:column;position:relative;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.p-card{background:#fff;border-radius:22px;padding:26px 24px 30px;border:1px solid rgba(13,43,36,.09);box-shadow:0 14px 34px -4px rgba(13,43,36,.12),0 4px 12px -2px rgba(13,43,36,.06);display:flex;flex-direction:column;position:relative;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
 .p-card:hover{transform:translateY(-8px);box-shadow:0 24px 50px -6px rgba(13,43,36,.18),0 8px 18px -4px rgba(13,43,36,.08);border-color:rgba(11,166,120,.4)}
 @property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
-.p-card.featured{border:none;padding:38px 32px;transform:scale(1.04);box-shadow:0 20px 50px rgba(13,43,36,.28),0 8px 24px rgba(11,166,120,.15)}
+.p-card.featured{border:none;padding:28px 26px 32px;transform:scale(1.04);box-shadow:0 20px 50px rgba(13,43,36,.28),0 8px 24px rgba(11,166,120,.15)}
 .p-card.featured:hover{transform:scale(1.04) translateY(-8px);box-shadow:0 30px 60px rgba(13,43,36,.36),0 12px 28px rgba(11,166,120,.22)}
 .p-card.featured::before{content:'';position:absolute;inset:-3px;border-radius:25px;background:conic-gradient(from var(--ang),#0BA678,#FF7A3D,#FFD97A,#4ADE9E,#0BA678);animation:spinBorder 5s linear infinite;z-index:0}
 .p-card.featured::after{content:'';position:absolute;inset:0;border-radius:22px;background:var(--dark);z-index:0}
 .p-card.featured>*{position:relative;z-index:1}
 @keyframes spinBorder{to{--ang:360deg}}
-.pop-tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;padding:6px 18px;border-radius:999px;text-transform:uppercase;z-index:2!important;box-shadow:0 6px 16px rgba(240,86,31,.4)}
+.pop-tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;padding:6px 18px;border-radius:999px;text-transform:uppercase;z-index:3!important;box-shadow:0 6px 16px rgba(240,86,31,.4)}
+.p-thumb{position:relative;height:165px;border-radius:15px;overflow:hidden;margin-bottom:18px;flex:none}
+.p-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.p-card:hover .p-thumb img{transform:scale(1.08)}
+.p-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,25,.04) 40%,rgba(10,30,25,.55));z-index:1}
+.p-thumb-tag{position:absolute;bottom:10px;left:12px;z-index:2;background:rgba(255,255,255,.94);color:var(--dark);backdrop-filter:blur(6px);padding:4px 12px;border-radius:999px;font-size:.65rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.p-card.featured .p-thumb-tag{background:linear-gradient(90deg,var(--orange),#F0561F);color:#fff;box-shadow:0 3px 10px rgba(240,86,31,.35)}
+.p-card-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.p-card-head .p-ico{margin-bottom:0;flex:none;width:48px;height:48px;border-radius:14px}
+.p-card-head h3{font-size:1.15rem;font-weight:700;line-height:1.25}
+.p-sub{display:block;font-size:.76rem;color:var(--muted);font-weight:500;margin-top:2px}
+.p-card.featured .p-sub{color:#9DBFB4}
 .p-ico{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;margin-bottom:18px}
-.p-ico svg{width:26px;height:26px}
+.p-ico svg{width:24px;height:24px}
 .pe-a{background:#FFF3E4;color:#F0611F}
+.pe-b{background:#E6F8F0;color:#0BA678}
 .p-card.featured .p-ico{background:rgba(255,255,255,.12);color:#FFC28F}
 .pe-c{background:#F0EBFF;color:#7C3AED}
 .p-card h3{font-size:1.2rem;font-weight:700}
 .p-card.featured h3{color:#fff}
-.p-amount{display:flex;align-items:baseline;gap:6px;margin:12px 0 22px}
-.p-amount b{font-size:2.5rem;font-weight:800;color:var(--green-dark);line-height:1}
+.p-amount{display:flex;align-items:baseline;gap:6px;margin:12px 0 20px}
+.p-amount b{font-size:2.3rem;font-weight:800;color:var(--green-dark);line-height:1}
 .p-card.featured .p-amount b{color:#FFC28F}
-.p-amount span{font-size:.85rem;color:var(--muted)}
+.p-amount span{font-size:.82rem;color:var(--muted)}
 .p-card.featured .p-amount span{color:#9DBFB4}
-.p-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.p-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:26px}
 .p-list li{display:flex;gap:10px;font-size:.88rem;align-items:flex-start}
 .p-list svg{flex:none;color:var(--green);margin-top:3px}
 .p-card.featured .p-list svg{color:#4ADE9E}
@@ -269,11 +281,18 @@ body.loaded .h-line:nth-child(2)>span{transition-delay:.5s}
 .add-btn::after{content:'';position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shine 3.5s infinite}
 
 /* ============ ABOUT / CONTACT ============ */
-.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.about-sec{position:relative;overflow:hidden;padding:105px 0}
+.about-sec .px-bg{position:absolute;inset:-20% 0;will-change:transform}
+.about-sec .px-veil{position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,28,23,.90) 0%,rgba(13,43,36,.84) 50%,rgba(6,22,18,.92) 100%);z-index:1}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;position:relative;z-index:2}
+.about-sec .eyebrow{background:rgba(255,255,255,.14);color:#4ADE9E;border:1px solid rgba(74,222,158,.3)}
+.about-sec .h2{color:#fff}
+.about-sec .h2 em{color:#FFD97A}
+.about-sec p{color:rgba(235,248,242,.88)}
 .about-list{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:12px}
-.about-list li{display:flex;gap:10px;font-size:.92rem}
-.about-list svg{flex:none;color:var(--green);margin-top:4px}
-.contact-card{background:#fff;border-radius:22px;padding:34px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.about-list li{display:flex;gap:10px;font-size:.92rem;color:#ffffff}
+.about-list svg{flex:none;color:#4ADE9E;margin-top:4px}
+.contact-card{background:#fff;border-radius:22px;padding:34px;box-shadow:0 24px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.3)}
 .contact-card h4{font-weight:700;font-size:1.05rem;margin-bottom:18px}
 .c-row{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px dashed var(--line)}
 .c-row:last-of-type{border-bottom:none}
@@ -851,7 +870,11 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 </section>
 
 <!-- ABOUT / CONTACT -->
-<section id="about" style="background:#fff">
+<section id="about" class="about-sec px-wrap">
+  <div class="px-bg" data-parallax="0.18">
+    <img src="images/sunset_dinner_cruise.jpg" alt="Langkawi Sunset Scenery" loading="lazy">
+  </div>
+  <div class="px-veil"></div>
   <div class="container about-grid">
     <div data-reveal="left">
       <span class="eyebrow">About Us</span>
@@ -1567,15 +1590,15 @@ const I_BACKPACK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 const I_COMPASS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 6.8-6.8 2.2 2.2-6.8z"/></svg>';
 const I_CROWN   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l4 4 4-7 4 7 4-4-1.4 10H5.4z"/><path d="M6.5 20.5h11"/></svg>';
 const PACKAGES = [
-  {id:"pkg-budget", img:"images/island_hopping.jpg", grad:"g-island", ico:I_BACKPACK, em:"pe-a", title:"Budget Explorer", price:250, unit:"per person · full day", dur:"Full Day", rating:4.8, reviews:215, pax:"1–12 pax", qtyLabel:"Pax",
-   desc:"Explore Langkawi on a budget without missing out on the island highlights and adventures.",
-   inc:["Sharing island transport route","Island hopping (shared boat)","1 water sports fun ride","Sunset dinner cruise seat","Duty-free shopping stop"]},
-  {id:"pkg-mid", img:"images/mangrove_tour.jpg", grad:"g-vip", ico:I_COMPASS, em:"pe-b", title:"Mid-Range Traveller", price:480, featured:true, unit:"per person · full day", dur:"Full Day", rating:4.9, reviews:340, pax:"1–10 pax", qtyLabel:"Pax",
-   desc:"The perfect blend of private comfort, guided boat tours, jet ski adventure and sunset dining.",
-   inc:["Private transfer (8 hours)","Private mangrove boat tour","Guided jet ski island tour","Island hopping (private boat)","Sunset dinner cruise seat"]},
-  {id:"pkg-lux", img:"images/vip_experiences.jpg", grad:"g-sunset", ico:I_CROWN, em:"pe-c", title:"Luxury Escapade", price:820, unit:"per person · full day", dur:"VIP Schedule", rating:5.0, reviews:120, pax:"VIP Charter", qtyLabel:"Pax",
-   desc:"Ultimate VIP luxury travel experience in Langkawi with private boat charter, sunset cruise and personal coordinator.",
-   inc:["VIP private boat charter","ATV jungle ride + cruise combo","Private jet ski adventure","Airport pickup & drop-off","Personal trip coordinator"]}
+  {id:"pkg-budget", img:"images/island_hopping.jpg", grad:"g-island", ico:I_BACKPACK, em:"pe-a", title:"Island Hopping & Beach Fun", tag:"Best For Families", price:280, unit:"per person · combo", dur:"Half Day · 4 Hours", rating:4.8, reviews:245, pax:"Min 2 pax", qtyLabel:"Pax",
+   desc:"The classic Langkawi sea adventure — 3-hour island hopping boat to Pregnant Maiden Lake and Beras Basah Island, paired with beach watersports.",
+   inc:["3-Hour Island Hopping boat tour","Tasik Dayang Bunting (Lake of Pregnant Maiden)","Beras Basah Island white sand beach","Eagle feeding & watching session","Life jackets & licensed boat guide"]},
+  {id:"pkg-mid", img:"images/atv_jungle_ride.jpg", grad:"g-atv", ico:I_COMPASS, em:"pe-b", title:"ATV Jungle + Sunset Dinner Cruise", tag:"★ Most Popular", price:350, featured:true, unit:"per person · combo", dur:"Full Day Adventure", rating:4.9, reviews:480, pax:"Min 2 pax", qtyLabel:"Pax",
+   desc:"The unbeatable Langkawi combo! Rev through the rainforest to a hidden waterfall on an ATV, then relax aboard a sunset dinner cruise with buffet on deck.",
+   inc:["Exhilarating ATV jungle ride to waterfall","Sunset dinner cruise with evening buffet","Open sea salt water jacuzzi net","Door-to-door hotel pickup & drop-off","All safety briefing, helmets & gear included"]},
+  {id:"pkg-lux", img:"images/vip_experiences.jpg", grad:"g-sunset", ico:I_CROWN, em:"pe-c", title:"VIP Private Mangrove & Cruise", tag:"VIP Luxury", price:650, unit:"per person · VIP charter", dur:"VIP Schedule", rating:5.0, reviews:165, pax:"Private charter", qtyLabel:"Pax",
+   desc:"The ultimate premium Langkawi experience — private VIP boat through Kilim Geoforest Park mangroves, private transfers, and luxury sunset cruise.",
+   inc:["Private VIP boat charter at Kilim Geoforest","Bat Cave, Crocodile Cave & floating fish farm","Sunset dinner cruise with dining on open deck","Private air-conditioned hotel/airport transfers","Personal trip coordinator & priority boarding"]}
 ];
 const ROUTES = [
   {key:"air-chen", from:"Airport", to:"Chenang", toIcon:"sun",    sedan:50,  mpv:80,  van:130, img:"images/island_hopping.jpg", grad:"g-island"},
@@ -1769,9 +1792,18 @@ function renderPackages(){
   $("#packagesGrid").innerHTML = PACKAGES.map((p,i) => `
     <div class="p-card ${p.featured ? "featured" : ""}" data-view="${p.id}" data-reveal="zoom" style="--d:${i*.12}s;cursor:pointer">
       ${p.featured ? '<span class="pop-tag">★ Most Popular</span>' : ""}
-      <div class="p-ico ${p.em}">${p.ico}</div>
-      <h3>${p.title}</h3>
-      <div class="p-amount"><b data-countup="${p.price}" data-prefix="RM ">RM ${p.price}</b><span>Per Day</span></div>
+      <div class="p-thumb ${p.grad || "g-island"}">
+        <img src="${imgUrl(p.img,700)}" alt="${p.title}" loading="lazy" onerror="this.remove()">
+        <span class="p-thumb-tag">${p.tag || "Combo Package"}</span>
+      </div>
+      <div class="p-card-head">
+        <div class="p-ico ${p.em}">${p.ico}</div>
+        <div>
+          <h3>${p.title}</h3>
+          <span class="p-sub">${p.dur} · ${p.pax}</span>
+        </div>
+      </div>
+      <div class="p-amount"><b data-countup="${p.price}" data-prefix="RM ">RM ${p.price}</b><span>${p.unit}</span></div>
       <ul class="p-list">
         ${p.inc.map(i => `<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${i}</li>`).join("")}
       </ul>
