@@ -573,13 +573,13 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 /* ============ CART DRAWER ============ */
 .overlay{position:fixed;inset:0;background:rgba(10,30,25,.55);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.3s;z-index:105}
 .overlay.show{opacity:1;visibility:visible}
-.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100%;background:#fff;z-index:110;transform:translateX(105%);transition:transform .35s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(0,0,0,.15)}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100%;background:#fff;z-index:110;transform:translateX(105%);transition:transform .35s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;box-shadow:-20px 0 50px rgba(0,0,0,.15)}
 .cart-drawer.open{transform:translateX(0)}
-.cd-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--line)}
+.cd-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--line);background:#fff}
 .cd-head h3{font-size:1.1rem;font-weight:700;display:flex;gap:9px;align-items:center;color:#000}
 .x-btn{width:38px;height:38px;border-radius:12px;background:#F1F7F3;display:grid;place-items:center;transition:.2s;color:#000}
 .x-btn:hover{background:#E2EFE8}
-.cd-items{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:16px}
+.cd-items{flex:none;min-height:0;overflow:visible;padding:20px 24px;display:flex;flex-direction:column;gap:16px}
 .cd-item{display:flex;gap:14px;min-width:0;border:1.5px solid #D5E2DB;border-radius:14px;padding:12px;animation:pop .35s var(--ease)}
 @keyframes pop{from{transform:scale(.9) translateY(14px);opacity:0}}
 .cd-thumb{width:64px;height:64px;border-radius:12px;overflow:hidden;flex:none;position:relative}
@@ -595,9 +595,9 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .cd-price{font-weight:700;color:#000;font-size:.9rem;white-space:nowrap;margin-left:auto}
 .rm-btn{color:#C9D6D0;transition:.2s}
 .rm-btn:hover{color:#E23B0E}
-.cd-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#274035;text-align:center;padding:30px}
+.cd-empty{flex:none;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#274035;text-align:center;padding:30px}
 .cd-empty b{color:#000}
-.cd-foot{border-top:1px solid var(--line);padding:18px 20px;background:#FBFDFC;max-height:65vh;overflow-y:auto}
+.cd-foot{flex:none;min-height:0;border-top:1px solid var(--line);padding:18px 20px;background:#FBFDFC;overflow:visible}
 .subtotal-row{display:flex;justify-content:space-between;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:#000}
 .subtotal-row span:last-child{color:#000}
 .cd-note{font-size:.74rem;color:#274035;margin-bottom:16px;display:flex;gap:6px;font-weight:500}
@@ -741,7 +741,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .ck-processing h3{font-size:1.2rem;font-weight:700;color:#000}
 .ck-processing p{color:#333;font-size:.9rem}
-.ck-success{padding:56px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;grid-column:span 2}
+.ck-success{padding:56px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;grid-column:span 2;min-width:0;max-width:100%;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-gutter:stable}
 .success-ic{width:86px;height:86px;border-radius:50%;background:#E7F8F0;display:grid;place-items:center;color:var(--green);animation:pop .5s var(--ease)}
 .success-ic path{stroke-dasharray:40;stroke-dashoffset:40;animation:drawCheck .55s .25s ease forwards}
 @keyframes drawCheck{to{stroke-dashoffset:0}}
@@ -894,7 +894,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .ck-overlay{padding:16px 16px calc(24px + env(safe-area-inset-bottom, 0px));align-items:center}
   .ck-box{border-radius:20px;max-height:calc(var(--app-vh, 100dvh) - 40px - env(safe-area-inset-bottom, 0px));height:calc(var(--app-vh, 100dvh) - 40px - env(safe-area-inset-bottom, 0px));min-height:0;display:flex;flex-direction:column}
   .ck-summary{flex:none;max-height:26vh;border-radius:20px 20px 0 0;padding:18px 20px 14px}
-  .ck-form{flex:1;min-height:0;max-height:none;padding:22px 20px 34px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .ck-form{flex:1;min-height:0;max-height:none;padding:22px 20px 34px;overflow-y:auto;touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
   .ck-success{flex:1;max-height:none;padding:24px 12px 20px;min-height:0;justify-content:flex-start}
   .ck-close{top:12px;right:14px;background:rgba(255,255,255,.2);color:#fff}
   .ck-close:hover{background:rgba(255,255,255,.3)}
@@ -1809,6 +1809,13 @@ const rm = n => "RM " + Number(n).toLocaleString("en-MY");
 const todayISO = () => new Date().toISOString().split("T")[0];
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const imgUrl = (id, w=900) => (id.startsWith('http') || id.startsWith('images/') || id.startsWith('/') || id.startsWith('.')) ? id : `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=60`;
+function updateViewportHeight(){
+  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  document.documentElement.style.setProperty("--app-vh", `${viewportHeight}px`);
+}
+updateViewportHeight();
+window.addEventListener("resize", updateViewportHeight, {passive:true});
+window.visualViewport?.addEventListener("resize", updateViewportHeight, {passive:true});
 
 function updateViewportHeight(){
   const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
