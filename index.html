@@ -96,6 +96,7 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 4px 20px rgba(13,43
 body.nav-hide header{transform:translateY(-105%)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:12px}
 .logo{display:inline-flex;align-items:center;text-decoration:none}
+.mobile-brand-name{display:none;color:var(--dark);font-size:.82rem;font-weight:700;line-height:1.1;white-space:nowrap}
 .brand-logo{height:52px;max-height:52px;width:auto;display:block;object-fit:contain;transition:transform .3s var(--ease)}
 .logo:hover .brand-logo{transform:scale(1.04)}
 .foot-brand-logo{height:60px;max-height:60px;width:auto;display:block;object-fit:contain}
@@ -877,6 +878,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .nav{height:62px}
   .brand-logo-pic{display:flex;align-items:center}
   .brand-logo{height:42px;max-height:42px;width:auto;object-fit:contain}
+  .mobile-brand-name{display:none}
   .nav-actions .btn{display:none!important} /* Hide Book Now in mobile header */
 
   /* Fly-out animations tuned for phone screens: punchy without overflow */
@@ -991,9 +993,10 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   <div class="container nav">
     <a href="#home" class="logo" aria-label="Langkawi Tour &amp; Transport">
       <picture class="brand-logo-pic">
-        <source media="(max-width: 640px)" srcset="images/logo-icon.png">
+        <source media="(max-width: 640px)" srcset="images/logo.png">
         <img src="images/logo.png" alt="Langkawi Tour &amp; Transport" class="brand-logo">
       </picture>
+      <span class="mobile-brand-name">Langkawi Travel</span>
     </a>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
