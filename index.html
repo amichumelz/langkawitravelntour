@@ -15,8 +15,8 @@
   --shadow:0 12px 32px -4px rgba(13,43,36,.12), 0 4px 12px -2px rgba(13,43,36,.06); --ease:cubic-bezier(.22,1,.36,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:92px}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--dark);line-height:1.6;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:92px;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--dark);line-height:1.6;overflow-x:hidden;width:100%;position:relative}
 img,svg,video{display:block}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
@@ -113,10 +113,11 @@ body.nav-hide header{transform:translateY(-105%)}
 .cart-count.bump{animation:bump .35s}
 @keyframes bump{40%{transform:scale(1.45)}}
 .nav-toggle{display:none;width:44px;height:44px;border-radius:12px;background:#EFF7F3;place-items:center}
-.mobile-menu{display:none;flex-direction:column;gap:4px;padding:14px 24px 20px;background:#fff;border-top:1px solid var(--line);list-style:none}
+.mobile-menu{display:none;flex-direction:column;gap:6px;padding:16px 20px 22px;background:#fff;border-top:1px solid var(--line);box-shadow:0 16px 36px rgba(13,43,36,.12);list-style:none;animation:menuDrop .25s var(--ease)}
+@keyframes menuDrop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 .mobile-menu.open{display:flex}
-.mobile-menu a{padding:11px 12px;border-radius:10px;font-weight:500}
-.mobile-menu a:hover{background:#F0F8F4;color:var(--green)}
+.mobile-menu a{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;font-weight:600;font-size:.92rem;color:#0D2B24;background:#F8FCFA;transition:.2s}
+.mobile-menu a:hover,.mobile-menu a:active{background:#E7F6F0;color:var(--green-dark);transform:translateX(3px)}
 
 /* ============ HERO (VIDEO BACKGROUND) ============ */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:130px 24px 170px}
@@ -636,7 +637,9 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 /* ============ CHECKOUT ============ */
 .ck-overlay{position:fixed;inset:0;background:rgba(10,30,25,.65);backdrop-filter:blur(5px);z-index:120;display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
 .ck-overlay.show{display:flex}
-.ck-box{background:#fff;border-radius:24px;max-width:980px;width:100%;max-height:94vh;overflow:hidden;display:grid;grid-template-columns:1.12fr .88fr;animation:pop .35s var(--ease)}
+.ck-box{background:#fff;border-radius:24px;max-width:980px;width:100%;max-height:94vh;overflow:hidden;display:grid;grid-template-columns:1.12fr .88fr;animation:pop .35s var(--ease);position:relative}
+.ck-close{position:absolute;top:16px;right:18px;width:38px;height:38px;border-radius:12px;background:#F1F7F3;display:grid;place-items:center;color:#0D2B24;border:none;cursor:pointer;z-index:20;transition:.2s}
+.ck-close:hover{background:#E2EFE8;transform:rotate(90deg)}
 .ck-form{padding:34px 36px;overflow-y:auto;max-height:94vh;color:#000}
 .ck-form h3{font-size:1.35rem;font-weight:700;margin-bottom:4px;color:#000}
 .ck-form>p{font-size:.85rem;color:#222;margin-bottom:26px}
@@ -713,38 +716,160 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .foot-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
+  /* Navigation */
   .nav-links{display:none}
   .nav-toggle{display:grid}
-  section{padding:64px 0}
+  .nav{height:70px}
+
+  /* iOS input zoom prevention: must be >=16px */
+  input, select, textarea,
+  .sm-dt-input, .cart-input,
+  .f-group input, .f-group textarea, .f-group select,
+  .sub-form input{
+    font-size:16px!important;
+  }
+
+  /* General sections */
+  section{padding:58px 0}
   .card-grid,.route-grid{grid-template-columns:1fr}
   .price-grid{grid-template-columns:1fr}
   .p-card.featured{transform:none}
   .why-grid{grid-template-columns:1fr}
-  .why-media{min-height:380px}
+  .why-media{min-height:360px}
+  .float-card{right:8px;top:10px;padding:10px 14px}
+  .ph-tag{left:12px;bottom:12px;padding:7px 12px;font-size:.74rem}
+  .ph-tag small{font-size:.66rem}
   .about-grid{grid-template-columns:1fr}
-  .sub-banner{grid-template-columns:1fr;padding:38px 28px}
+  .about-sec{padding:65px 0}
+  .sub-banner{grid-template-columns:1fr;padding:34px 24px}
   .sub-form{flex-direction:column}
-  .foot-grid{grid-template-columns:1fr;gap:36px}
+  .foot-grid{grid-template-columns:1fr;gap:32px}
   .f-grid{grid-template-columns:1fr}
   .f-group textarea{grid-column:span 1}
-  .ck-form{padding:26px 22px}
   .feat-grid{grid-template-columns:1fr}
-  .hero{padding-bottom:150px}
-  .tv-header{min-height:52vh;padding:130px 24px 96px}
+  .tv-header{min-height:48vh;padding:115px 20px 80px}
+  .tv-media{min-height:300px}
   .success-meta{grid-template-columns:1fr 1fr}
-  .tc-foot{flex-wrap:wrap}
-  .t-card{width:280px}
+  .t-card{width:290px;padding:20px}
   .cp-track{grid-template-columns:repeat(2,1fr)}
   .info-grid{grid-template-columns:1fr 1fr}
-  .hstat{padding:12px 18px;min-width:100px}
-  .hstat b{font-size:1.25rem}
   .vid-card .vid-frame{height:220px}
-  .brand-logo{height:42px;max-height:42px}
-  #topBtn{bottom:20px;left:20px}
-  .wa-float{bottom:20px;right:20px;width:54px;height:54px}
-  .tv-media{min-height:320px}
+  .vid-cap{padding:30px 16px 14px}
+
+  /* Modals as native-feeling bottom sheets on mobile */
+  .ck-overlay{padding:0;align-items:flex-end}
+  .ck-box{border-radius:24px 24px 0 0;max-height:92vh;height:92vh;display:flex;flex-direction:column}
+  .ck-summary{flex:none;max-height:26vh;border-radius:24px 24px 0 0;padding:18px 20px 14px}
+  .ck-form{flex:1;padding:22px 20px 34px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .ck-close{top:12px;right:14px;background:rgba(255,255,255,.2);color:#fff}
+  .ck-close:hover{background:rgba(255,255,255,.3)}
+
+  .svc-overlay{padding:0;align-items:flex-end}
+  .svc-modal{border-radius:24px 24px 0 0;max-height:90vh}
+  .sm-head{height:165px}
+  .sm-body{padding:20px 18px 28px}
+  .sm-close{top:12px;right:12px}
   .sm-foot{flex-direction:column;align-items:stretch}
-  .sm-foot .btn{justify-content:center;padding:15px}
+  .sm-foot .btn{justify-content:center;padding:14px}
+
+  /* Floating action buttons with iOS safe area */
+  #topBtn{bottom:calc(16px + env(safe-area-inset-bottom, 0px));left:16px;width:46px;height:46px}
+  .wa-float{bottom:calc(16px + env(safe-area-inset-bottom, 0px));right:16px;width:54px;height:54px}
+  #toastWrap{bottom:calc(24px + env(safe-area-inset-bottom, 0px))}
+}
+@media(max-width:640px){
+  /* Header clean layout: logo spacious & uncrowded */
+  .nav{height:64px}
+  .brand-logo{height:38px;max-height:38px}
+  .nav-actions .btn{display:none} /* Hide redundant Book Now in mobile header */
+
+  /* Fly-out animations tuned for phone screens: punchy without overflow */
+  [data-reveal="fly-left"]{transform:translateX(-28px) rotate(-1.5deg)}
+  [data-reveal="fly-right"]{transform:translateX(28px) rotate(1.5deg)}
+  [data-reveal="fly-up"]{transform:translateY(28px) scale(.96)}
+}
+@media(max-width:540px){
+  .container{padding:0 18px}
+  .h2{font-size:1.62rem;margin:10px 0 12px}
+  .sub{font-size:.87rem}
+
+  /* Hero Section */
+  .hero{padding:105px 16px 140px;min-height:90vh}
+  .hero-badge{padding:6px 14px;font-size:.72rem}
+  .hero h1{font-size:2.05rem;margin:16px 0 8px}
+  .hero-sub{font-size:.88rem;margin:10px auto 22px;line-height:1.55}
+  .hero-cta{flex-direction:column;gap:10px;width:100%;max-width:300px;margin:0 auto}
+  .hero-cta .btn{width:100%;justify-content:center;padding:13px 18px;font-size:.92rem}
+  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;width:100%}
+  .hstat{padding:10px 4px;min-width:0}
+  .hstat+.hstat{border-left:1px solid rgba(255,255,255,.18)}
+  .hstat b{font-size:1.2rem}
+  .hstat span{font-size:.65rem;line-height:1.2}
+
+  /* Tour Cards */
+  .card-grid{gap:20px;margin-top:28px}
+  .tour-card{border-radius:18px}
+  .tc-media{height:185px}
+  .tc-body{padding:16px 16px 15px}
+  .tc-body h4{font-size:1.02rem}
+  .tc-foot{flex-wrap:nowrap;padding-top:12px}
+  .tc-foot .price b{font-size:1.15rem}
+  .book-btn{padding:10px 16px;font-size:.82rem}
+
+  /* Packages */
+  .price-grid{gap:20px;margin-top:32px}
+  .p-card{border-radius:18px;padding:20px 16px}
+  .p-card.featured{padding:22px 18px}
+  .p-thumb{height:150px;border-radius:14px;margin-bottom:14px}
+  .p-amount b{font-size:1.95rem}
+  .p-card .btn{width:100%;padding:13px}
+
+  /* Routes */
+  .route-grid{gap:20px;margin-top:28px}
+  .route-card{border-radius:18px}
+  .rc-img{height:135px}
+  .rc-body{padding:16px 14px}
+  .rc-chips{gap:6px}
+  .chip{min-width:74px;padding:7px 4px}
+  .chip small{font-size:.6rem}
+  .chip b{font-size:.86rem}
+
+  /* Fleet horizontal swipe */
+  .veh-card{width:84vw;max-width:280px;border-radius:18px}
+  .veh-media{height:155px}
+  .veh-body{padding:15px}
+
+  /* Checkpoints */
+  .cp-card{border-radius:14px}
+  .cp-img{height:95px}
+  .cp-card h5{font-size:.76rem;padding:9px 10px 11px}
+
+  /* Sharing Transport */
+  .share-inner{padding:50px 0}
+  .share-card h2{font-size:1.85rem}
+  .share-price b{font-size:2.3rem}
+  .share-card .btn{width:100%;justify-content:center}
+
+  /* Contact Card */
+  .contact-card{padding:20px 16px;border-radius:18px}
+  .contact-card h4{font-size:1.05rem;margin-bottom:14px}
+  .c-row{padding:10px 0;gap:12px}
+  .c-ic{width:38px;height:38px}
+
+  /* Cart Drawer */
+  .cart-drawer{width:100%;max-width:100%}
+  .cd-head{padding:16px 18px}
+  .cd-items{padding:14px 16px}
+  .cd-foot{padding:16px}
+
+  /* Checkout */
+  .pay-opts{grid-template-columns:1fr;gap:10px}
+  .pay-opt{padding:12px 14px}
+  .card-fields{padding:14px}
+
+  /* Sub-banner */
+  .sub-banner{padding:28px 18px;border-radius:20px}
+  .sub-form button{width:100%;padding:13px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -1353,6 +1478,9 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 <!-- CHECKOUT -->
 <div class="ck-overlay" id="ckOverlay">
   <div class="ck-box">
+    <button class="ck-close" onclick="closeCheckout()" aria-label="Close checkout">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
     <div class="ck-form" id="ckForm">
       <h3>Checkout</h3>
       <p>Complete your booking &amp; payment — it only takes a minute.</p>
