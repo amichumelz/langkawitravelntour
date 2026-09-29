@@ -1226,15 +1226,9 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     </div>
 
     <p class="cd-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pay securely online, or cash on arrival.</p>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <button class="btn btn-orange" id="checkoutBtn" style="font-size:.9rem;padding:13px">Proceed to Payment
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </button>
-      <button class="mg-wa-btn" id="cartWaPayBtn" style="border-radius:12px;padding:11px 14px;font-size:.84rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#25D366;color:#fff!important;border:none;cursor:pointer;width:100%;transition:.2s">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-        Order &amp; Pay via WhatsApp
-      </button>
-    </div>
+    <button class="btn btn-orange" id="checkoutBtn" style="font-size:.9rem;padding:13px;width:100%">Proceed to Payment
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
   </div>
 </aside>
 
@@ -2047,49 +2041,6 @@ function handleCartCheckout(){
   openCheckout();
 }
 
-function handleCartWaPay(){
-  const nameInput = $("#cartCustName");
-  const emailInput = $("#cartCustEmail");
-  const phoneInput = $("#cartCustPhone");
-  const name = nameInput ? nameInput.value.trim() : "";
-  const email = emailInput ? emailInput.value.trim() : "";
-  const phone = phoneInput ? phoneInput.value.trim() : "";
-
-  let ok = true;
-  if (!name || name.length < 2) {
-    if (nameInput) nameInput.classList.add("invalid");
-    ok = false;
-  }
-  if (!phone || phone.replace(/\D/g,"").length < 8) {
-    if (phoneInput) phoneInput.classList.add("invalid");
-    ok = false;
-  }
-  if (!ok) {
-    toast("Please enter your name and phone number for WhatsApp booking");
-    return;
-  }
-  saveCustDetails();
-
-  const lines = cart.map((item, idx) => {
-    const s = CATALOG[item.id];
-    const dt = (item.date || item.time) ? ` [${formatDateDisplay(item.date)} · ${item.time}]` : "";
-    return `${idx + 1}. ${s ? s.title : item.id}${dt} × ${item.qty} = ${rm((s?.price || 0) * item.qty)}`;
-  });
-
-  const msg = `Hi! I would like to book and pay for my cart in Langkawi:
-Name: ${name}
-Phone: ${phone}${email ? `\nEmail: ${email}` : ""}
-
-Booked Tours & Packages:
-${lines.join("\n")}
-
-Total: ${rm(cartTotal())}
-
-Please confirm availability and payment details. Thank you!`;
-
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
-}
-
 function openCart(){
   $("#cartDrawer").classList.add("open");
   $("#cartOverlay").classList.add("show");
@@ -2115,8 +2066,6 @@ function openMangroveModal(initialId = "mg-2h-small"){
     if (!optsInCat.some(o => o.id === currentOpt.id)) {
       currentOpt = optsInCat[0];
     }
-    const waText = encodeURIComponent(`Hi! I would like to book: Mangrove Tour (${currentOpt.catLabel} · ${currentOpt.name} - ${currentOpt.pax}) for ${rm(currentOpt.price * qty)}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}. Please check availability.`);
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
     $("#svcModal").innerHTML = `
       <div class="sm-head g-mangrove">
@@ -2193,13 +2142,7 @@ function openMangroveModal(initialId = "mg-2h-small"){
               <span>total · ${currentOpt.unit}</span>
             </div>
           </div>
-          <div class="mg-actions">
-            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
-            <a class="mg-wa-btn" id="mgWaBtn" href="${waUrl}" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-              WhatsApp Book
-            </a>
-          </div>
+          <button class="btn btn-orange" id="smAdd" style="font-size:.92rem;width:100%;padding:13px">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
         </div>
       </div>
     `;
@@ -2233,8 +2176,6 @@ function openMangroveModal(initialId = "mg-2h-small"){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(currentOpt.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}`;
-      const updatedWaText = encodeURIComponent(`Hi! I would like to book: Mangrove Tour (${currentOpt.catLabel} · ${currentOpt.name} - ${currentOpt.pax}) × ${qty} for ${rm(currentOpt.price * qty)}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}. Please check availability.`);
-      $("#mgWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
@@ -2260,12 +2201,6 @@ function openJetskiModal(initialId = "js-free"){
   const jsTimes = ["09:30 AM", "10:30 AM", "11:30 AM", "02:00 PM", "03:30 PM", "04:30 PM"];
 
   function render(){
-    const baseWaMsg = currentOpt.waMsg || `${currentOpt.name} jet ski`;
-    const waText = qty === 1
-      ? encodeURIComponent(`Hi! I would like to book: ${baseWaMsg}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-      : encodeURIComponent(`Hi! I would like to book: ${baseWaMsg} (${qty} jet skis for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-
     $("#svcModal").innerHTML = `
       <div class="sm-head g-jetski">
         <img src="images/jetski_tour.jpg" alt="Jet Ski Tours Langkawi" onerror="this.remove()">
@@ -2338,13 +2273,7 @@ function openJetskiModal(initialId = "js-free"){
               <span>total · ${currentOpt.unit}</span>
             </div>
           </div>
-          <div class="mg-actions">
-            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
-            <a class="mg-wa-btn" id="jsWaBtn" href="${waUrl}" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-              WhatsApp Book
-            </a>
-          </div>
+          <button class="btn btn-orange" id="smAdd" style="font-size:.92rem;width:100%;padding:13px">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
         </div>
       </div>
     `;
@@ -2369,11 +2298,6 @@ function openJetskiModal(initialId = "js-free"){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(currentOpt.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}`;
-      const baseWa = currentOpt.waMsg || `${currentOpt.name} jet ski`;
-      const updatedWaText = qty === 1
-        ? encodeURIComponent(`Hi! I would like to book: ${baseWa}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-        : encodeURIComponent(`Hi! I would like to book: ${baseWa} (${qty} jet skis for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      $("#jsWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
@@ -2399,12 +2323,6 @@ function openIslandHoppingModal(){
   const ihTimes = ["09:00 AM (Morning Tour)", "09:30 AM", "02:00 PM (Afternoon Tour)", "02:30 PM"];
 
   function render(){
-    const baseWa = "Hi! I would like to book an island hopping tour in Langkawi.";
-    const waText = qty === 1
-      ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-      : encodeURIComponent(`Hi! I would like to book an island hopping tour in Langkawi (${qty} boats for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-
     $("#svcModal").innerHTML = `
       <div class="sm-head g-island">
         <img src="images/island_hopping.jpg" alt="Island Hopping Langkawi" onerror="this.remove()">
@@ -2483,13 +2401,7 @@ function openIslandHoppingModal(){
               <span>total · per boat · 3 hrs</span>
             </div>
           </div>
-          <div class="mg-actions">
-            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
-            <a class="mg-wa-btn" id="ihWaBtn" href="${waUrl}" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-              Book Your Trip (WhatsApp)
-            </a>
-          </div>
+          <button class="btn btn-orange" id="smAdd" style="font-size:.92rem;width:100%;padding:13px">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
         </div>
       </div>
     `;
@@ -2507,10 +2419,6 @@ function openIslandHoppingModal(){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(s.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
-      const updatedWaText = qty === 1
-        ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-        : encodeURIComponent(`Hi! I would like to book an island hopping tour in Langkawi (${qty} boats for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      $("#ihWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
@@ -2548,16 +2456,6 @@ function openVipModal(initialId = "vip-boat-3h"){
     if (!currentTimes.includes(selTime)) {
       selTime = currentTimes[0];
     }
-
-    let waText = "";
-    if (currentOpt.cat === "boat") {
-      waText = qty === 1
-        ? encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} - ${rm(currentOpt.price)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-        : encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} × ${qty} boats for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    } else {
-      waText = encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} persons for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    }
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
     const headImg = currentOpt.cat === "boat"
       ? "images/vip_experiences.jpg"
@@ -2643,13 +2541,7 @@ function openVipModal(initialId = "vip-boat-3h"){
               <span>total · ${currentOpt.unit}</span>
             </div>
           </div>
-          <div class="mg-actions">
-            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
-            <a class="mg-wa-btn" id="vipWaBtn" href="${waUrl}" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-              Enquire on WhatsApp
-            </a>
-          </div>
+          <button class="btn btn-orange" id="smAdd" style="font-size:.92rem;width:100%;padding:13px">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
         </div>
       </div>
     `;
@@ -2687,15 +2579,6 @@ function openVipModal(initialId = "vip-boat-3h"){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(currentOpt.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}`;
-      let updatedWa = "";
-      if (currentOpt.cat === "boat") {
-        updatedWa = qty === 1
-          ? encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} - ${rm(currentOpt.price)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-          : encodeURIComponent(`Hi! I would like to book the VIP boat experience in Langkawi (${currentOpt.name} × ${qty} boats for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      } else {
-        updatedWa = encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} persons for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      }
-      $("#vipWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWa}`;
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
@@ -2721,18 +2604,6 @@ function openWatersportsModal(initialId = "ws-combo"){
   const wsTimes = ["10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:30 PM", "04:30 PM", "05:30 PM"];
 
   function render(){
-    let waText = "";
-    if (currentOpt.id === "ws-combo") {
-      waText = qty === 1
-        ? encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-        : encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1 (${qty} persons for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    } else {
-      waText = qty === 1
-        ? encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-        : encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} ${currentOpt.id === 'ws-jetski' ? 'rides' : 'persons'} for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    }
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-
     $("#svcModal").innerHTML = `
       <div class="sm-head g-watersports">
         <img src="images/watersports_fun.jpg" alt="Water Sports Langkawi" onerror="this.remove()">
@@ -2805,13 +2676,7 @@ function openWatersportsModal(initialId = "ws-combo"){
               <span>total · ${currentOpt.unit}</span>
             </div>
           </div>
-          <div class="mg-actions">
-            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
-            <a class="mg-wa-btn" id="wsWaBtn" href="${waUrl}" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-              ${currentOpt.id === 'ws-combo' ? 'Book the Combo' : 'Book this ride'}
-            </a>
-          </div>
+          <button class="btn btn-orange" id="smAdd" style="font-size:.92rem;width:100%;padding:13px">${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}</button>
         </div>
       </div>
     `;
@@ -2836,17 +2701,6 @@ function openWatersportsModal(initialId = "ws-combo"){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(currentOpt.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(currentOpt.price * qty)}`;
-      let updatedWa = "";
-      if (currentOpt.id === "ws-combo") {
-        updatedWa = qty === 1
-          ? encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-          : encodeURIComponent(`Hi! I would like to book the beach water sport combo 3 in 1 (${qty} persons for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      } else {
-        updatedWa = qty === 1
-          ? encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg}. Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-          : encodeURIComponent(`Hi! I would like to book: ${currentOpt.waMsg} (${qty} ${currentOpt.id === 'ws-jetski' ? 'rides' : 'persons'} for ${rm(currentOpt.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      }
-      $("#wsWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWa}`;
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
@@ -2872,12 +2726,6 @@ function openAtvCruiseModal(){
   const atvTimes = ["09:30 AM (Full Day Combo)", "10:30 AM", "01:00 PM"];
 
   function render(){
-    const baseWa = "Hi! I would like to book the ATV jungle ride + sunset dinner cruise combo in Langkawi.";
-    const waText = qty === 2
-      ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-      : encodeURIComponent(`Hi! I would like to book the ATV jungle ride + sunset dinner cruise combo in Langkawi (${qty} persons for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-
     $("#svcModal").innerHTML = `
       <div class="sm-head g-atv">
         <img src="images/atv_jungle_ride.jpg" alt="ATV Jungle Ride + Sunset Dinner Cruise Langkawi" onerror="this.remove()">
@@ -2958,13 +2806,7 @@ function openAtvCruiseModal(){
               <span>total · ${rm(s.price)} / person</span>
             </div>
           </div>
-          <div class="mg-actions">
-            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
-            <a class="mg-wa-btn" id="atvWaBtn" href="${waUrl}" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-              Book Your Trip (WhatsApp)
-            </a>
-          </div>
+          <button class="btn btn-orange" id="smAdd" style="font-size:.92rem;width:100%;padding:13px">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
         </div>
       </div>
     `;
@@ -2982,10 +2824,6 @@ function openAtvCruiseModal(){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(s.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
-      const updatedWaText = qty === 2
-        ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-        : encodeURIComponent(`Hi! I would like to book the ATV jungle ride + sunset dinner cruise combo in Langkawi (${qty} persons for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      $("#atvWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
@@ -3016,16 +2854,8 @@ function openSharingTransportModal(){
   let selDate = todayISO();
   let selTime = "09:00 AM (Hotel Pickup - 10 AM to 6 PM Tour)";
   const stTimes = ["09:00 AM (Hotel Pickup - 10 AM to 6 PM Tour)"];
-  const baseWa = "Hi! I would like to reserve a seat on the Langkawi sharing transport package.";
-  const enquireWa = "Hi! I would like to enquire about Langkawi tours and transport.";
 
   function render(){
-    const waText = qty === 1
-      ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-      : encodeURIComponent(`Hi! I would like to reserve ${qty} seats on the Langkawi sharing transport package (${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-    const enquireUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(enquireWa)}`;
-
     $("#svcModal").innerHTML = `
       <div class="sm-head g-sharing">
         <img src="images/sharing_transport.jpg" alt="Sharing Transport Package" onerror="this.remove()">
@@ -3142,16 +2972,7 @@ function openSharingTransportModal(){
               <span>total · ${rm(s.price)} / person</span>
             </div>
           </div>
-          <div class="mg-actions">
-            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
-            <a class="mg-wa-btn" id="stWaBtn" href="${waUrl}" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-              Reserve a Seat (WhatsApp)
-            </a>
-          </div>
-          <a href="${enquireUrl}" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:10px;font-size:.78rem;font-weight:600;color:var(--green-dark);text-decoration:underline">
-            Questions? WhatsApp Us →
-          </a>
+          <button class="btn btn-orange" id="smAdd" style="font-size:.92rem;width:100%;padding:13px">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
         </div>
       </div>
     `;
@@ -3169,10 +2990,6 @@ function openSharingTransportModal(){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(s.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
-      const updatedWaText = qty === 1
-        ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-        : encodeURIComponent(`Hi! I would like to reserve ${qty} seats on the Langkawi sharing transport package (${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      $("#stWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
@@ -3203,16 +3020,8 @@ function openSunsetCruiseModal(){
   let selDate = todayISO();
   let selTime = "03:00 PM (Departure - Sunset Cruise)";
   const scTimes = ["03:00 PM (Departure - Sunset Cruise)", "03:30 PM", "04:00 PM"];
-  const baseWa = "Hi! I would like to book the Langkawi sunset dinner cruise.";
-  const enquireWa = "Hi! I would like to enquire about Langkawi tours and transport.";
 
   function render(){
-    const waText = qty === 2
-      ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-      : encodeURIComponent(`Hi! I would like to book the Langkawi sunset dinner cruise (${qty} persons for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-    const enquireUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(enquireWa)}`;
-
     $("#svcModal").innerHTML = `
       <div class="sm-head g-sunset">
         <img src="images/sunset_dinner_cruise.jpg" alt="Sunset Dinner Cruise" onerror="this.remove()">
@@ -3300,16 +3109,7 @@ function openSunsetCruiseModal(){
               <span>total · ${rm(s.price)} / person</span>
             </div>
           </div>
-          <div class="mg-actions">
-            <button class="btn btn-orange" id="smAdd" style="font-size:.88rem">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
-            <a class="mg-wa-btn" id="scWaBtn" href="${waUrl}" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
-              Book Your Cruise (WhatsApp)
-            </a>
-          </div>
-          <a href="${enquireUrl}" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:10px;font-size:.78rem;font-weight:600;color:var(--green-dark);text-decoration:underline">
-            Questions? WhatsApp Us →
-          </a>
+          <button class="btn btn-orange" id="smAdd" style="font-size:.92rem;width:100%;padding:13px">${IC.cart} Add to Cart · ${rm(s.price * qty)}</button>
         </div>
       </div>
     `;
@@ -3327,10 +3127,6 @@ function openSunsetCruiseModal(){
       $("#smQtyVal").textContent = qty;
       $("#smTotal").textContent = rm(s.price * qty);
       $("#smAdd").innerHTML = `${IC.cart} Add to Cart · ${rm(s.price * qty)}`;
-      const updatedWaText = qty === 2
-        ? encodeURIComponent(`${baseWa} Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`)
-        : encodeURIComponent(`Hi! I would like to book the Langkawi sunset dinner cruise (${qty} persons for ${rm(s.price * qty)}). Date: ${formatDateDisplay(selDate)}, Time: ${selTime}.`);
-      $("#scWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${updatedWaText}`;
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
@@ -3576,7 +3372,6 @@ document.addEventListener("click", e => {
  $("#cartOverlay").onclick = closeCart;
  $("#emptyBrowse").onclick = () => { closeCart(); location.hash = "#services"; };
  $("#checkoutBtn").onclick = handleCartCheckout;
- if ($("#cartWaPayBtn")) $("#cartWaPayBtn").onclick = handleCartWaPay;
  $("#svcOverlay").onclick = e => { if (e.target === e.currentTarget) closeService(); };
  $("#ckOverlay").onclick = e => { if (e.target === e.currentTarget) closeCheckout(); };
  $("#ckPayBtn").onclick = processPayment;
