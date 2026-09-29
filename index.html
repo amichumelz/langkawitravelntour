@@ -240,7 +240,7 @@ body.loaded .h-line:nth-child(2)>span{transition-delay:.5s}
 .p-card{background:#fff;border-radius:22px;padding:26px 24px 30px;border:1px solid rgba(13,43,36,.09);box-shadow:0 14px 34px -4px rgba(13,43,36,.12),0 4px 12px -2px rgba(13,43,36,.06);display:flex;flex-direction:column;position:relative;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
 .p-card:hover{transform:translateY(-8px);box-shadow:0 24px 50px -6px rgba(13,43,36,.18),0 8px 18px -4px rgba(13,43,36,.08);border-color:rgba(11,166,120,.4)}
 @property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
-.p-card.featured{border:none;padding:28px 26px 32px;transform:scale(1.04);box-shadow:0 20px 50px rgba(13,43,36,.28),0 8px 24px rgba(11,166,120,.15)}
+.p-card.featured{border:none;padding:28px 26px 32px;transform:scale(1.04);box-shadow:0 20px 50px rgba(13,43,36,.28),0 8px 24px rgba(11,166,120,.15);color:#fff}
 .p-card.featured:hover{transform:scale(1.04) translateY(-8px);box-shadow:0 30px 60px rgba(13,43,36,.36),0 12px 28px rgba(11,166,120,.22)}
 .p-card.featured::before{content:'';position:absolute;inset:-3px;border-radius:25px;background:conic-gradient(from var(--ang),#0BA678,#FF7A3D,#FFD97A,#4ADE9E,#0BA678);animation:spinBorder 5s linear infinite;z-index:0}
 .p-card.featured::after{content:'';position:absolute;inset:0;border-radius:22px;background:var(--dark);z-index:0}
@@ -257,41 +257,42 @@ body.loaded .h-line:nth-child(2)>span{transition-delay:.5s}
 .p-card-head .p-ico{margin-bottom:0;flex:none;width:48px;height:48px;border-radius:14px}
 .p-card-head h3{font-size:1.15rem;font-weight:700;line-height:1.25}
 .p-sub{display:block;font-size:.76rem;color:var(--muted);font-weight:500;margin-top:2px}
-.p-card.featured .p-sub{color:#9DBFB4}
+.p-card.featured .p-sub{color:#E2F4ED!important;font-weight:500}
 .p-ico{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;margin-bottom:18px}
 .p-ico svg{width:24px;height:24px}
 .pe-a{background:#FFF3E4;color:#F0611F}
 .pe-b{background:#E6F8F0;color:#0BA678}
-.p-card.featured .p-ico{background:rgba(255,255,255,.12);color:#FFC28F}
+.p-card.featured .p-ico{background:rgba(255,255,255,.16);color:#FFD97A}
 .pe-c{background:#F0EBFF;color:#7C3AED}
 .p-card h3{font-size:1.2rem;font-weight:700}
-.p-card.featured h3{color:#fff}
+.p-card.featured h3{color:#ffffff!important}
 .p-amount{display:flex;align-items:baseline;gap:6px;margin:12px 0 20px}
 .p-amount b{font-size:2.3rem;font-weight:800;color:var(--green-dark);line-height:1}
-.p-card.featured .p-amount b{color:#FFC28F}
+.p-card.featured .p-amount b{color:#FFD97A!important}
 .p-amount span{font-size:.82rem;color:var(--muted)}
-.p-card.featured .p-amount span{color:#9DBFB4}
+.p-card.featured .p-amount span{color:#E2F4ED!important;font-weight:500}
 .p-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:26px}
 .p-list li{display:flex;gap:10px;font-size:.88rem;align-items:flex-start}
 .p-list svg{flex:none;color:var(--green);margin-top:3px}
-.p-card.featured .p-list svg{color:#4ADE9E}
+.p-card.featured .p-list li{color:#ffffff!important;font-weight:400}
+.p-card.featured .p-list svg{color:#4ADE9E!important;flex:none}
 .p-card .btn{margin-top:auto;justify-content:center}
 .add-btn{position:relative;overflow:hidden;background:var(--orange);color:#fff;padding:11px 18px;border-radius:11px;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:7px;box-shadow:0 6px 16px rgba(255,122,61,.3);transition:.25s}
 .add-btn:hover{background:var(--orange-dark);transform:translateY(-2px)}
 .add-btn::after{content:'';position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shine 3.5s infinite}
 
 /* ============ ABOUT / CONTACT ============ */
-.about-sec{position:relative;overflow:hidden;padding:105px 0}
+.about-sec{position:relative;overflow:hidden;padding:105px 0;color:#fff}
 .about-sec .px-bg{position:absolute;inset:-20% 0;will-change:transform}
 .about-sec .px-veil{position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,28,23,.90) 0%,rgba(13,43,36,.84) 50%,rgba(6,22,18,.92) 100%);z-index:1}
 .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;position:relative;z-index:2}
-.about-sec .eyebrow{background:rgba(255,255,255,.14);color:#4ADE9E;border:1px solid rgba(74,222,158,.3)}
-.about-sec .h2{color:#fff}
-.about-sec .h2 em{color:#FFD97A}
-.about-sec p{color:rgba(235,248,242,.88)}
+.about-sec .eyebrow{background:rgba(255,255,255,.18);color:#4ADE9E;border:1px solid rgba(74,222,158,.4)}
+.about-sec .h2{color:#ffffff!important}
+.about-sec .h2 em{color:#FFD97A!important}
+.about-sec p{color:#ffffff!important;opacity:.92;line-height:1.75}
 .about-list{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:12px}
-.about-list li{display:flex;gap:10px;font-size:.92rem;color:#ffffff}
-.about-list svg{flex:none;color:#4ADE9E;margin-top:4px}
+.about-list li{display:flex;gap:12px;font-size:.95rem;color:#ffffff!important;font-weight:500;align-items:flex-start}
+.about-list svg{flex:none;color:#4ADE9E!important;stroke:#4ADE9E!important;margin-top:3px}
 .contact-card{background:#fff;border-radius:22px;padding:34px;box-shadow:0 24px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.3)}
 .contact-card h4{font-weight:700;font-size:1.05rem;margin-bottom:18px}
 .c-row{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px dashed var(--line)}
@@ -327,20 +328,20 @@ body.loaded .h-line:nth-child(2)>span{transition-delay:.5s}
 .sub-form button:hover{background:#000}
 
 /* ============ FOOTER ============ */
-footer{background:var(--dark);color:#B9D4CB;padding:70px 0 0}
+footer{background:var(--dark);color:#E2F4ED;padding:70px 0 0}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:44px}
 .foot-brand .logo-txt b{color:#fff}
-.foot-brand p{font-size:.87rem;margin:18px 0 22px;line-height:1.7;opacity:.85}
+.foot-brand p{font-size:.87rem;margin:18px 0 22px;line-height:1.7;color:#D3EAE1;opacity:1}
 .socials{display:flex;gap:10px}
 .socials a{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#fff;transition:.25s}
 .socials a:hover{background:var(--green);transform:translateY(-3px)}
 footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .foot-links{list-style:none;display:flex;flex-direction:column;gap:11px}
-.foot-links a{font-size:.87rem;opacity:.85;transition:.2s}
+.foot-links a{font-size:.87rem;color:#E0F3EC;opacity:.95;transition:.2s}
 .foot-links a:hover{opacity:1;color:#4ADE9E}
-.foot-contact li{display:flex;gap:12px;font-size:.86rem;margin-bottom:14px;align-items:flex-start;opacity:.85;list-style:none}
+.foot-contact li{display:flex;gap:12px;font-size:.86rem;margin-bottom:14px;align-items:flex-start;color:#E0F3EC;opacity:.95;list-style:none}
 .foot-contact svg{flex:none;color:#4ADE9E;margin-top:3px}
-.foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:56px;padding:24px 0;text-align:center;font-size:.8rem;opacity:.6}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:56px;padding:24px 0;text-align:center;font-size:.8rem;color:#BEE3D6;opacity:.85}
 
 /* floating */
 .wa-float{position:fixed;bottom:26px;right:26px;z-index:95;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 12px 30px rgba(37,211,102,.45);transition:.25s}
@@ -708,7 +709,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#/private-transfer">Private Transfer</a></li>
-      <li><a href="#packages">Packages</a></li>
+      <li><a href="#packages">Best Sellers</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
@@ -723,6 +724,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   <ul class="mobile-menu" id="mobileMenu">
     <li><a href="#home">Home</a></li>
     <li><a href="#services">All Services</a></li>
+    <li><a href="#packages">Best Sellers</a></li>
     <li><a href="#/private-transfer">Private Transfer Page</a></li>
     <li><a href="#tv-routes">Pickup Routes</a></li>
     <li><a href="#tv-fleet">8-Hour Vehicles</a></li>
@@ -858,13 +860,13 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- BEST SELLERS -->
 <section id="packages">
   <div class="blob" style="width:320px;height:320px;background:#FFD97A;top:60px;right:-90px;opacity:.25"></div>
   <div class="container center">
-    <div data-reveal><span class="eyebrow">Travel Packages</span>
-    <h2 class="h2">Price For Travel <em>Langkawi</em></h2>
-    <p class="sub">Choose a full-day package that matches your travel style — add it to cart and check out in one go.</p></div>
+    <div data-reveal><span class="eyebrow">Best Sellers</span>
+    <h2 class="h2">Langkawi's <em>Best Seller</em> Packages</h2>
+    <p class="sub">Our top-rated, most-booked adventure combos and private tours — handpicked for an unforgettable trip.</p></div>
     <div class="price-grid" id="packagesGrid"></div>
   </div>
 </section>
@@ -879,12 +881,12 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     <div data-reveal="left">
       <span class="eyebrow">About Us</span>
       <h2 class="h2">Your Local Langkawi<br><em>Trip Specialist</em></h2>
-      <p style="color:var(--muted)">Langkawi Tour &amp; Transport is a local operator providing private transport, island adventures, sunset cruises and unforgettable experiences across Langkawi. Booking is fully online — pick your service, pay securely, and we handle the rest.</p>
+      <p style="color:#ffffff;opacity:.94;line-height:1.75">Langkawi Tour &amp; Transport is a local operator providing private transport, island adventures, sunset cruises and unforgettable experiences across Langkawi. Booking is fully online — pick your service, pay securely, and we handle the rest.</p>
       <ul class="about-list">
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Instant online booking &amp; secure payment</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Local drivers &amp; licensed tour guides</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Free reschedule — plans change, we understand</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>WhatsApp support for all other enquiries</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE9E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Instant online booking &amp; secure payment</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE9E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Local drivers &amp; licensed tour guides</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE9E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Free reschedule — plans change, we understand</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE9E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>WhatsApp support for all other enquiries</span></li>
       </ul>
     </div>
     <div class="contact-card" id="contact" data-reveal="right" style="--d:.15s">
@@ -1175,7 +1177,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
         <li><a href="#home">Home</a></li>
         <li><a href="#services">All Services</a></li>
         <li><a href="#/private-transfer">Private Transfer</a></li>
-        <li><a href="#packages">Travel Packages</a></li>
+        <li><a href="#packages">Best Sellers</a></li>
         <li><a href="#reviews">Reviews</a></li>
       </ul>
     </div>
