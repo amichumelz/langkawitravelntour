@@ -169,7 +169,7 @@ body.nav-hide header{transform:translateY(-105%)}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,44,38,.30) 0%,rgba(8,44,38,.42) 55%,rgba(8,44,38,.68) 100%);z-index:1}
 .p-dot{position:absolute;border-radius:50%;background:rgba(255,255,255,.65);filter:blur(1px);z-index:4;animation:floatDot linear infinite;pointer-events:none}
 @keyframes floatDot{0%{transform:translateY(0);opacity:0}15%{opacity:.8}85%{opacity:.5}100%{transform:translateY(-130px);opacity:0}}
-.hero-inner{position:relative;z-index:5;max-width:880px}
+.hero-inner{position:relative;z-index:5;max-width:880px;margin-top:44px}
 .hero-badge,.hero-sub,.hero-cta,.hero-stats{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s var(--ease)}
 body.loaded .hero-badge{opacity:1;transform:none;transition-delay:.2s}
 body.loaded .hero-sub{opacity:1;transform:none;transition-delay:.6s}
@@ -934,6 +934,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 
   /* Hero Section */
   .hero{padding:105px var(--mobile-gutter) 140px;min-height:90vh}
+  .hero-inner{margin-top:28px}
   .hero-badge{padding:6px 14px;font-size:.72rem}
   .hero h1{font-size:2.05rem;margin:16px 0 8px}
   .hero-sub{font-size:.88rem;margin:10px auto 22px;line-height:1.55}
@@ -1201,11 +1202,6 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
         WhatsApp Us
       </a>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat"><b data-countup="9" data-suffix="+">9+</b><span>Services Offered</span></div>
-      <div class="hstat"><b data-countup="4.9" data-dec="1" data-suffix="★">4.9★</b><span>Traveller Rating</span></div>
-      <div class="hstat"><b data-countup="2300" data-suffix="+">2,300+</b><span>Happy Guests</span></div>
     </div>
   </div>
 
