@@ -127,7 +127,7 @@ body.nav-hide header{transform:translateY(-105%)}
 .mobile-menu-overlay.open{opacity:1;visibility:visible}
 
 /* Mobile drawer sheet */
-.mobile-drawer{position:fixed;top:0;right:0;bottom:0;width:min(84vw,320px);height:100dvh;max-height:none;background:#ffffff;z-index:999;border-radius:16px 0 0 16px;box-shadow:-18px 0 40px rgba(10,35,28,.18),-4px 0 14px rgba(0,0,0,.06);display:flex;flex-direction:column;clip-path:inset(0 0 0 100%);visibility:hidden;transition:clip-path .4s cubic-bezier(.16,1,.3,1),visibility .4s;overflow:hidden}
+.mobile-drawer{position:fixed;top:0;right:0;bottom:0;width:min(84vw,320px);height:var(--app-vh,100dvh);max-height:none;background:#ffffff;z-index:999;border-radius:16px 0 0 16px;box-shadow:-18px 0 40px rgba(10,35,28,.18),-4px 0 14px rgba(0,0,0,.06);display:flex;flex-direction:column;clip-path:inset(0 0 0 100%);visibility:hidden;transition:clip-path .4s cubic-bezier(.16,1,.3,1),visibility .4s;overflow:hidden}
 .mobile-drawer.open{clip-path:inset(0);visibility:visible}
 
 .md-top{display:flex;align-items:center;justify-content:space-between;padding:18px 16px;border-bottom:1px solid #E8EEEB;background:#ffffff;flex:none}
@@ -685,7 +685,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .cart-input.invalid{border-color:#E23B0E;background:#FFF7F5;box-shadow:0 0 0 3.5px rgba(226,59,14,.12)}
 
 /* ============ CHECKOUT ============ */
-.ck-overlay{position:fixed;inset:0;background:rgba(10,30,25,.65);backdrop-filter:blur(5px);z-index:120;display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
+.ck-overlay{position:fixed;inset:0;height:var(--app-vh,100dvh);background:rgba(10,30,25,.65);backdrop-filter:blur(5px);z-index:120;display:none;align-items:center;justify-content:center;padding:18px;overflow:hidden}
 .ck-overlay.show{display:flex}
 .ck-box{background:#fff;border-radius:24px;max-width:980px;width:100%;max-height:94vh;overflow:hidden;display:grid;grid-template-columns:1.12fr .88fr;animation:pop .35s var(--ease);position:relative}
 .ck-close{position:absolute;top:16px;right:18px;width:38px;height:38px;border-radius:12px;background:#F1F7F3;display:grid;place-items:center;color:#0D2B24;border:none;cursor:pointer;z-index:20;transition:.2s}
@@ -735,6 +735,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .pay-toyyib:hover{background:#056747}
 .payment-note{font-size:.84rem;color:#274035;margin-top:-4px}
 #ckSummary{display:none!important}
+#ckForm{display:none!important}
 .ck-processing{padding:70px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px;grid-column:span 2}
 .spinner{width:64px;height:64px;border:5px solid #E3EEE8;border-top-color:var(--orange);border-radius:50%;animation:spin .9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -752,7 +753,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .success-meta small{color:#333;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em}
 .ck-success p{color:#222;font-size:.88rem;max-width:440px}
 .ck-success{min-width:0;max-width:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.receipt-card{width:100%;max-width:520px;background:#fff;border:1px solid #DDEBE4;border-radius:18px;overflow:hidden;text-align:left;box-shadow:0 18px 42px rgba(13,43,36,.12)}
+.receipt-card{width:100%;max-width:520px;align-self:stretch;background:#fff;border:1px solid #DDEBE4;border-radius:18px;overflow:hidden;text-align:left;box-shadow:0 18px 42px rgba(13,43,36,.12)}
 .receipt-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:linear-gradient(135deg,#0D2B24,#087A57);color:#fff}
 .receipt-brand{display:flex;align-items:center;gap:10px;min-width:0}
 .receipt-brand img{width:38px;height:38px;object-fit:contain;flex:none}
@@ -890,16 +891,16 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .vid-cap{padding:30px 16px 14px}
 
   /* Modals as native-feeling bottom sheets on mobile */
-  .ck-overlay{padding:16px;align-items:center}
-  .ck-box{border-radius:20px;max-height:calc(100dvh - 32px);height:calc(100dvh - 32px);min-height:0;display:flex;flex-direction:column}
+  .ck-overlay{padding:16px 16px calc(24px + env(safe-area-inset-bottom, 0px));align-items:center}
+  .ck-box{border-radius:20px;max-height:calc(var(--app-vh, 100dvh) - 40px - env(safe-area-inset-bottom, 0px));height:calc(var(--app-vh, 100dvh) - 40px - env(safe-area-inset-bottom, 0px));min-height:0;display:flex;flex-direction:column}
   .ck-summary{flex:none;max-height:26vh;border-radius:20px 20px 0 0;padding:18px 20px 14px}
   .ck-form{flex:1;min-height:0;max-height:none;padding:22px 20px 34px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-  .ck-success{flex:1;max-height:none;padding:34px 20px 28px;min-height:0;justify-content:flex-start}
+  .ck-success{flex:1;max-height:none;padding:24px 12px 20px;min-height:0;justify-content:flex-start}
   .ck-close{top:12px;right:14px;background:rgba(255,255,255,.2);color:#fff}
   .ck-close:hover{background:rgba(255,255,255,.3)}
 
-  .svc-overlay{padding:16px;align-items:center}
-  .svc-modal{border-radius:20px;max-height:calc(100dvh - 32px)}
+  .svc-overlay{padding:16px 16px calc(24px + env(safe-area-inset-bottom, 0px));align-items:center}
+  .svc-modal{border-radius:20px;max-height:calc(var(--app-vh, 100dvh) - 40px - env(safe-area-inset-bottom, 0px))}
   .sm-head{height:165px}
   .sm-body{padding:20px 18px 28px}
   .sm-close{top:12px;right:12px}
@@ -1717,7 +1718,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     <button class="ck-close" onclick="closeCheckout()" aria-label="Close checkout">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <div class="ck-form" id="ckForm">
+    <div class="ck-form hidden" id="ckForm" aria-hidden="true">
       <h3>Checkout</h3>
       <p>Complete your booking &amp; payment — it only takes a minute.</p>
       <div class="step-t">1 · Your Details</div>
@@ -1808,6 +1809,14 @@ const rm = n => "RM " + Number(n).toLocaleString("en-MY");
 const todayISO = () => new Date().toISOString().split("T")[0];
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const imgUrl = (id, w=900) => (id.startsWith('http') || id.startsWith('images/') || id.startsWith('/') || id.startsWith('.')) ? id : `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=60`;
+
+function updateViewportHeight(){
+  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  document.documentElement.style.setProperty("--app-vh", `${viewportHeight}px`);
+}
+updateViewportHeight();
+window.addEventListener("resize", updateViewportHeight, {passive:true});
+window.visualViewport?.addEventListener("resize", updateViewportHeight, {passive:true});
 
 function toast(msg){
   const t = document.createElement("div");
