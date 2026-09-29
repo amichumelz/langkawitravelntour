@@ -152,7 +152,7 @@ body.nav-hide header{transform:translateY(-105%)}
 .md-link:active .md-arr{transform:translateX(3px);color:var(--green)}
 
 .md-foot{padding:14px 16px calc(18px + env(safe-area-inset-bottom, 0px));border-top:1px solid #E8EEEB;background:#ffffff;display:flex;flex-direction:column;gap:10px;flex:none}
-.md-wa-btn{background:#25D366;color:#fff!important;border-radius:12px;padding:12px 18px;font-size:.88rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-shadow:0 6px 18px rgba(37,211,102,.3);transition:background .2s,transform .15s}
+.md-wa-btn{width:100%;min-width:0;box-sizing:border-box;background:#25D366;color:#fff!important;border-radius:12px;padding:12px 14px;font-size:.88rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;white-space:normal;overflow-wrap:anywhere;text-decoration:none;box-shadow:0 6px 18px rgba(37,211,102,.3);transition:background .2s,transform .15s}
 .md-wa-btn:active{background:#1EBE5D;transform:scale(.98)}
 .md-status{display:flex;align-items:center;justify-content:center;gap:7px;font-size:.72rem;font-weight:600;color:#314E42}
 .md-dot{width:6px;height:6px;border-radius:50%;background:#25D366;animation:dotPulse 1.8s infinite}
@@ -603,6 +603,8 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .cd-note{font-size:.74rem;color:#274035;margin-bottom:16px;display:flex;gap:6px;font-weight:500}
 .cd-note svg{flex:none;margin-top:2px;color:var(--green)}
 .cd-foot .btn{width:100%;justify-content:center}
+.cart-payment-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cart-payment-actions .btn{min-width:0;padding:12px 8px;font-size:.82rem;white-space:normal;text-align:center}
 
 /* ============ SERVICE MODAL ============ */
 .svc-overlay{position:fixed;inset:0;background:rgba(10,30,25,.6);backdrop-filter:blur(4px);z-index:115;display:none;align-items:center;justify-content:center;padding:20px}
@@ -693,21 +695,21 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .ck-form>p{font-size:.85rem;color:#222;margin-bottom:26px}
 .step-t{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin:26px 0 14px;display:flex;align-items:center;gap:10px}
 .step-t::after{content:'';flex:1;height:1px;background:var(--line)}
-.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.f-group{display:flex;flex-direction:column;gap:6px}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;min-width:0}
+.f-group{display:flex;flex-direction:column;gap:6px;min-width:0}
 .f-group label{font-size:.78rem;font-weight:700;color:var(--dark)}
 .f-group input,.f-group textarea,.f-group select{width:100%;border:1.5px solid #D5E2DB;border-radius:12px;padding:12px 14px;font-family:inherit;font-size:.9rem;font-weight:500;outline:none;transition:border-color .2s,box-shadow .2s;color:var(--dark);background:#fff}
 .f-group input:focus,.f-group textarea:focus,.f-group select:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 3.5px rgba(11,166,120,.16)}
 .f-group input.invalid,.f-group textarea.invalid{border-color:#E23B0E;background:#FFF7F5;box-shadow:0 0 0 3.5px rgba(226,59,14,.12);animation:shakeX .35s}
 @keyframes shakeX{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .f-group textarea{resize:vertical;min-height:70px;grid-column:span 2}
-.pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-width:0}
 .pay-opt{border:1.5px solid #D5E2DB;border-radius:12px;padding:15px;display:flex;gap:12px;cursor:pointer;transition:border-color .2s,box-shadow .2s,background .2s;background:#fff}
 .pay-opt:hover{border-color:var(--green);background:#F7FCF9}
 .pay-opt input{margin-top:4px;accent-color:var(--orange)}
 .pay-opt b{font-size:.88rem;display:block;color:var(--dark)}
 .pay-opt small{font-size:.72rem;color:var(--muted)}
-.card-fields{margin-top:14px;background:#FBFDFC;border:1.5px dashed #D5E2DB;border-radius:14px;padding:18px;animation:pop .25s}
+.card-fields{margin-top:14px;background:#FBFDFC;border:1.5px dashed #D5E2DB;border-radius:14px;padding:18px;min-width:0;overflow:hidden;animation:pop .25s}
 .ck-summary{background:var(--dark);color:#DDEFE8;padding:34px 32px;overflow-y:auto}
 .ck-summary h4{color:#fff;font-size:1.05rem;font-weight:700;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
 .ck-summary h4 span{background:rgba(255,255,255,.12);border-radius:999px;padding:3px 12px;font-size:.72rem}
@@ -725,6 +727,14 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .ck-secure{font-size:.7rem;opacity:.75;margin-top:14px;display:flex;gap:6px}
 .ck-secure svg{flex:none;margin-top:2px;color:#4ADE9E}
 .ck-form .btn{width:100%;justify-content:center;margin-top:24px;padding:16px}
+.payment-gateway-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.payment-gateway-actions .btn{margin-top:0;min-width:0;white-space:normal;text-align:center}
+.pay-stripe{background:#635BFF;color:#fff;box-shadow:0 8px 18px rgba(99,91,255,.25)}
+.pay-stripe:hover{background:#5149E5}
+.pay-toyyib{background:#087A57;color:#fff;box-shadow:0 8px 18px rgba(8,122,87,.22)}
+.pay-toyyib:hover{background:#056747}
+.payment-note{font-size:.84rem;color:#274035;margin-top:-4px}
+#ckSummary{display:none!important}
 .ck-processing{padding:70px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px;grid-column:span 2}
 .spinner{width:64px;height:64px;border:5px solid #E3EEE8;border-top-color:var(--orange);border-radius:50%;animation:spin .9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -741,6 +751,32 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .success-meta b{display:block;font-size:.95rem;color:#000}
 .success-meta small{color:#333;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em}
 .ck-success p{color:#222;font-size:.88rem;max-width:440px}
+.receipt-card{width:100%;max-width:520px;background:#fff;border:1px solid #DDEBE4;border-radius:18px;overflow:hidden;text-align:left;box-shadow:0 18px 42px rgba(13,43,36,.12)}
+.receipt-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:linear-gradient(135deg,#0D2B24,#087A57);color:#fff}
+.receipt-brand{display:flex;align-items:center;gap:10px;min-width:0}
+.receipt-brand img{width:38px;height:38px;object-fit:contain;flex:none}
+.receipt-brand b{font-size:.86rem;line-height:1.2}
+.receipt-brand small{display:block;font-size:.65rem;opacity:.76;margin-top:3px}
+.receipt-status{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.16);font-size:.64rem;font-weight:800;white-space:nowrap}
+.receipt-status i{width:6px;height:6px;border-radius:50%;background:#7CFFBF}
+.receipt-body{padding:20px}
+.receipt-label{font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:#6B8177;font-weight:800}
+.receipt-ref{display:flex;align-items:end;justify-content:space-between;gap:12px;padding-bottom:16px;border-bottom:1px dashed #D7E5DE}
+.receipt-ref b{display:block;color:#0D2B24;font-size:1.15rem;letter-spacing:.06em;margin-top:4px}
+.receipt-total{text-align:right}
+.receipt-total b{display:block;color:var(--green-dark);font-size:1.45rem;line-height:1.1;margin-top:4px}
+.receipt-details{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 0;border-bottom:1px dashed #D7E5DE}
+.receipt-details b{display:block;color:#0D2B24;font-size:.82rem;margin-top:3px;overflow-wrap:anywhere}
+.receipt-items{padding:15px 0;border-bottom:1px dashed #D7E5DE;display:flex;flex-direction:column;gap:8px}
+.receipt-item{display:flex;justify-content:space-between;gap:12px;color:#274035;font-size:.78rem;font-weight:600}
+.receipt-item span:last-child{color:#0D2B24;font-weight:800;white-space:nowrap}
+.receipt-note{padding-top:14px;color:#60786D!important;font-size:.72rem!important;line-height:1.5}
+@media(max-width:540px){
+  .receipt-head{padding:15px 16px}
+  .receipt-body{padding:16px}
+  .receipt-details{gap:10px}
+  .receipt-total b{font-size:1.25rem}
+}
 .success-btns{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;justify-content:center}
 
 /* toast */
@@ -853,10 +889,10 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .vid-cap{padding:30px 16px 14px}
 
   /* Modals as native-feeling bottom sheets on mobile */
-  .ck-overlay{padding:0;align-items:flex-end}
-  .ck-box{border-radius:24px 24px 0 0;max-height:92vh;height:92vh;display:flex;flex-direction:column}
-  .ck-summary{flex:none;max-height:26vh;border-radius:24px 24px 0 0;padding:18px 20px 14px}
-  .ck-form{flex:1;padding:22px 20px 34px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .ck-overlay{padding:16px;align-items:center}
+  .ck-box{border-radius:20px;max-height:calc(100dvh - 32px);height:auto;display:flex;flex-direction:column}
+  .ck-summary{flex:none;max-height:26vh;border-radius:20px 20px 0 0;padding:18px 20px 14px}
+  .ck-form{flex:1;max-height:calc(100dvh - 32px);padding:22px 20px 34px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
   .ck-close{top:12px;right:14px;background:rgba(255,255,255,.2);color:#fff}
   .ck-close:hover{background:rgba(255,255,255,.3)}
 
@@ -953,11 +989,13 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .cd-head{padding:16px 18px}
   .cd-items{padding:14px 16px}
   .cd-foot{padding:16px}
+  .cart-payment-actions{grid-template-columns:1fr;gap:8px}
 
   /* Checkout */
   .pay-opts{grid-template-columns:1fr;gap:10px}
   .pay-opt{padding:12px 14px}
   .card-fields{padding:14px}
+  .payment-gateway-actions{grid-template-columns:1fr;gap:10px}
 
   /* Sub-banner */
   .sub-banner{padding:28px var(--mobile-gutter);border-radius:20px}
@@ -1128,7 +1166,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     <div class="vid-frame">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=70" alt="Aerial view of a turquoise Langkawi beach with palm-lined shore">
       <video autoplay muted loop playsinline preload="auto">
-        <source src="images/hero_drone.mp4" type="video/mp4">
+        <source src="images/waves_drone.mp4" type="video/mp4">
       </video>
     </div>
   </div>
@@ -1659,9 +1697,10 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     </div>
 
     <p class="cd-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pay securely online, or cash on arrival.</p>
-    <button class="btn btn-orange" id="checkoutBtn" style="font-size:.9rem;padding:13px;width:100%">Proceed to Payment
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </button>
+    <div class="cart-payment-actions">
+      <button class="btn pay-stripe" id="cartStripeBtn" type="button">Pay with Stripe</button>
+      <button class="btn pay-toyyib" id="cartToyyibBtn" type="button">Pay with ToyyibPay</button>
+    </div>
   </div>
 </aside>
 
@@ -1692,20 +1731,12 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
         <div class="f-group"><label>Total Guests</label><input id="ckGuests" type="number" min="1" max="40" value="2"></div>
         <div class="f-group"><label>Special Requests</label><textarea id="ckNotes" placeholder="Child seat, dietary needs, timing requests…"></textarea></div>
       </div>
-      <div class="step-t">3 · Payment</div>
-      <div class="pay-opts">
-        <label class="pay-opt"><input type="radio" name="paymethod" value="card" checked><div><b>Credit / Debit Card</b><small>Pay securely now — instant confirmation</small></div></label>
-        <label class="pay-opt"><input type="radio" name="paymethod" value="cod"><div><b>Cash on Arrival</b><small>Reserve now, pay our driver on the day</small></div></label>
+      <div class="step-t">3 · Choose Payment</div>
+      <p class="payment-note">Continue securely with your preferred payment provider.</p>
+      <div class="payment-gateway-actions">
+        <button class="btn pay-stripe" type="button" data-gateway="stripe">Pay with Stripe</button>
+        <button class="btn pay-toyyib" type="button" data-gateway="toyyibpay">Pay with ToyyibPay</button>
       </div>
-      <div class="card-fields" id="cardFields">
-        <div class="f-grid">
-          <div class="f-group" style="grid-column:span 2"><label>Card Number</label><input id="ckCardNum" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" maxlength="19"></div>
-          <div class="f-group" style="grid-column:span 2"><label>Name on Card</label><input id="ckCardName" type="text" placeholder="AHMAD BIN ALI"></div>
-          <div class="f-group"><label>Expiry</label><input id="ckExp" type="text" placeholder="MM/YY" maxlength="5"></div>
-          <div class="f-group"><label>CVV</label><input id="ckCvv" type="password" inputmode="numeric" placeholder="•••" maxlength="4"></div>
-        </div>
-      </div>
-      <button class="btn btn-orange" id="ckPayBtn">Pay Now</button>
     </div>
     <div class="ck-processing hidden" id="ckProcessing">
       <div class="spinner"></div>
@@ -1715,13 +1746,31 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     <div class="ck-success hidden" id="ckSuccess">
       <div class="success-ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h3 style="font-size:1.5rem">Booking Confirmed!</h3>
-      <div class="ref-box" id="ckRef">LTT-000000</div>
-      <div class="success-meta">
-        <div><small>Total Paid</small><b id="ckSuccessTotal">RM 0</b></div>
-        <div><small>Travel Date</small><b id="ckSuccessDate">—</b></div>
-        <div><small>Payment</small><b id="ckSuccessMethod">Card</b></div>
+      <div class="receipt-card">
+        <div class="receipt-head">
+          <div class="receipt-brand">
+            <img src="images/logo-white.png" alt="Langkawi Tour &amp; Transport">
+            <div><b>Langkawi Tour &amp; Transport</b><small>Official booking receipt</small></div>
+          </div>
+          <span class="receipt-status"><i></i>PAID</span>
+        </div>
+        <div class="receipt-body">
+          <div class="receipt-ref">
+            <div><span class="receipt-label">Booking reference</span><b id="ckRef">LTT-000000</b></div>
+            <div class="receipt-total"><span class="receipt-label">Total paid</span><b id="ckSuccessTotal">RM 0</b></div>
+          </div>
+          <div class="receipt-details">
+            <div><span class="receipt-label">Travel date</span><b id="ckSuccessDate">—</b></div>
+            <div><span class="receipt-label">Payment</span><b id="ckSuccessMethod">Stripe</b></div>
+            <div><span class="receipt-label">Customer</span><b id="ckSuccessCustomer">—</b></div>
+            <div><span class="receipt-label">Email</span><b id="ckSuccessEmail">—</b></div>
+          </div>
+          <div class="receipt-items" id="ckReceiptItems">
+            <div class="receipt-item"><span>Booking items</span><span>See confirmation</span></div>
+          </div>
+          <p class="receipt-note">Your receipt and booking details will be sent to your email. Our team will WhatsApp you to reconfirm pickup details.</p>
+        </div>
       </div>
-      <p>A confirmation has been sent to your email. Our team will WhatsApp you to reconfirm pickup details. Keep your booking reference handy on the day!</p>
       <div class="success-btns">
         <button class="btn btn-green" id="ckDone">Done</button>
         <a class="btn btn-ghost" id="ckWa" href="#" target="_blank" rel="noopener">WhatsApp Enquiry</a>
@@ -1746,6 +1795,10 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 /* ⚙️ CONFIG */
 const WHATSAPP_NUMBER = "60175895116";
 const WA_ENQUIRY_MSG   = "Hi! I have an enquiry about Langkawi Tour & Transport services.";
+const PAYMENT_ENDPOINTS = {
+  stripe: "",
+  toyyibpay: ""
+};
 
 const $  = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
@@ -2486,6 +2539,47 @@ function handleCartCheckout(){
   if ($("#ckEmail")) $("#ckEmail").value = email;
   if ($("#ckPhone")) $("#ckPhone").value = phone;
   openCheckout();
+}
+
+async function processCartPayment(gateway){
+  const nameInput = $("#cartCustName");
+  const emailInput = $("#cartCustEmail");
+  const phoneInput = $("#cartCustPhone");
+  const name = nameInput ? nameInput.value.trim() : "";
+  const email = emailInput ? emailInput.value.trim() : "";
+  const phone = phoneInput ? phoneInput.value.trim() : "";
+  let ok = true;
+  if (!name || name.length < 2){ if (nameInput) nameInput.classList.add("invalid"); ok = false; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ if (emailInput) emailInput.classList.add("invalid"); ok = false; }
+  if (!phone || phone.replace(/\D/g,"").length < 8){ if (phoneInput) phoneInput.classList.add("invalid"); ok = false; }
+  if (!ok){ toast("Please enter your name, email and phone number first"); return; }
+  const order = {
+    ref:"LTT-" + Date.now().toString().slice(-6),
+    travelDate: cart.find(item => item.date)?.date || todayISO(),
+    method: gateway === "stripe" ? "Stripe" : "ToyyibPay",
+    total: cartTotal(),
+    customer:{name, email, phone},
+    items: cart.map(item => ({...item, title:CATALOG[item.id]?.title, price:CATALOG[item.id]?.price}))
+  };
+  showMockReceipt(order);
+}
+
+function showMockReceipt(order){
+  $("#ckForm").classList.add("hidden");
+  $("#ckSummary").classList.add("hidden");
+  $("#ckProcessing").classList.add("hidden");
+  $("#ckSuccess").classList.remove("hidden");
+  $("#ckRef").textContent = order.ref;
+  $("#ckSuccessTotal").textContent = rm(order.total);
+  $("#ckSuccessDate").textContent = new Date(order.travelDate).toLocaleDateString("en-MY",{day:"numeric",month:"short",year:"numeric"});
+  $("#ckSuccessMethod").textContent = order.method;
+  $("#ckSuccessCustomer").textContent = order.customer.name;
+  $("#ckSuccessEmail").textContent = order.customer.email;
+  $("#ckReceiptItems").innerHTML = order.items.map(item => `<div class="receipt-item"><span>${item.qty} × ${item.title}</span><span>${rm(item.price * item.qty)}</span></div>`).join("");
+  $("#ckWa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi! I just booked online — Ref: ${order.ref}. Please reconfirm my pickup details.`)}`;
+  $("#ckOverlay").classList.add("show");
+  closeCart();
+  document.body.style.overflow = "hidden";
 }
 
 function openCart(){
@@ -3713,8 +3807,6 @@ function buildSummary(){
   const total = cartTotal();
   $("#ckSubtotal").textContent = rm(total);
   $("#ckTotal").textContent = rm(total);
-  const method = document.querySelector('input[name="paymethod"]:checked').value;
-  $("#ckPayBtn").textContent = method === "card" ? `Pay ${rm(total)} Now` : "Confirm Booking — Pay on Arrival";
 }
 function openCheckout(){
   if (!cart.length) return;
@@ -3737,12 +3829,6 @@ function validateCheckout(){
   mark($("#ckEmail"), !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#ckEmail").value.trim()));
   mark($("#ckPhone"), $("#ckPhone").value.replace(/\D/g,"").length < 8);
   mark($("#ckDate"),  !$("#ckDate").value);
-  if (document.querySelector('input[name="paymethod"]:checked').value === "card"){
-    mark($("#ckCardNum"), $("#ckCardNum").value.replace(/\D/g,"").length < 15);
-    mark($("#ckCardName"), $("#ckCardName").value.trim().length < 2);
-    mark($("#ckExp"), !/^(0[1-9]|1[0-2])\/\d{2}$/.test($("#ckExp").value.trim()));
-    mark($("#ckCvv"), $("#ckCvv").value.replace(/\D/g,"").length < 3);
-  }
   if (!ok) toast("Please fill in the required fields");
   return ok;
 }
@@ -3768,17 +3854,34 @@ function launchConfetti(){
     if (++f < 230) requestAnimationFrame(frame); else cv.remove();
   })();
 }
-async function processPayment(){
+async function processPayment(gateway){
   if (!validateCheckout()) return;
-  const method = document.querySelector('input[name="paymethod"]:checked').value;
-  if (method === "card") await new Promise(res => setTimeout(res, 2000)); /* TODO: gateway sebenar sini */
+  const endpoint = PAYMENT_ENDPOINTS[gateway];
+  if (!endpoint){
+    toast(`${gateway === "stripe" ? "Stripe" : "ToyyibPay"} payment is not configured yet`);
+    return;
+  }
   const order = {
     ref:"LTT-" + Date.now().toString().slice(-6),
-    travelDate:$("#ckDate").value, method: method === "card" ? "Card (Paid)" : "Cash on Arrival",
+    travelDate:$("#ckDate").value, method: gateway,
     total: cartTotal(),
     customer:{name:$("#ckName").value.trim(), email:$("#ckEmail").value.trim(), phone:$("#ckPhone").value.trim()},
     items: cart.map(i => ({...i, title:CATALOG[i.id]?.title, price:CATALOG[i.id]?.price, date:i.date, time:i.time}))
   };
+  $("#ckForm").classList.add("hidden"); $("#ckSummary").classList.add("hidden");
+  $("#ckProcessing").classList.remove("hidden");
+  try{
+    const response = await fetch(endpoint, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(order)});
+    if (!response.ok) throw new Error("Payment request failed");
+    const result = await response.json();
+    if (!result.checkoutUrl) throw new Error("Missing checkout URL");
+    window.location.href = result.checkoutUrl;
+    return;
+  }catch(error){
+    $("#ckProcessing").classList.add("hidden"); $("#ckForm").classList.remove("hidden");
+    toast("Payment gateway unavailable. Please try again.");
+    return;
+  }
   const orders = JSON.parse(localStorage.getItem("ltt_orders") || "[]");
   orders.push(order); localStorage.setItem("ltt_orders", JSON.stringify(orders));
   $("#ckForm").classList.add("hidden"); $("#ckSummary").classList.add("hidden");
@@ -3789,6 +3892,9 @@ async function processPayment(){
     $("#ckSuccessTotal").textContent = rm(order.total);
     $("#ckSuccessDate").textContent = new Date(order.travelDate).toLocaleDateString("en-MY",{day:"numeric",month:"short",year:"numeric"});
     $("#ckSuccessMethod").textContent = order.method;
+    $("#ckSuccessCustomer").textContent = order.customer.name;
+    $("#ckSuccessEmail").textContent = order.customer.email;
+    $("#ckReceiptItems").innerHTML = order.items.map(item => `<div class="receipt-item"><span>${item.qty} × ${item.title}</span><span>${rm(item.price * item.qty)}</span></div>`).join("");
     $("#ckWa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi! I just booked online — Ref: ${order.ref}. Please reconfirm my pickup details.`)}`;
     cart = []; saveCart(); renderCart(); updateBadge();
     launchConfetti();
@@ -3818,19 +3924,13 @@ document.addEventListener("click", e => {
  $("#closeCart").onclick = closeCart;
  $("#cartOverlay").onclick = closeCart;
  $("#emptyBrowse").onclick = () => { closeCart(); location.hash = "#services"; };
- $("#checkoutBtn").onclick = handleCartCheckout;
+ $("#cartStripeBtn").onclick = () => processCartPayment("stripe");
+ $("#cartToyyibBtn").onclick = () => processCartPayment("toyyibpay");
  $("#svcOverlay").onclick = e => { if (e.target === e.currentTarget) closeService(); };
  $("#ckOverlay").onclick = e => { if (e.target === e.currentTarget) closeCheckout(); };
- $("#ckPayBtn").onclick = processPayment;
+  $$('[data-gateway]').forEach(btn => btn.onclick = () => processPayment(btn.dataset.gateway));
  $("#ckDone").onclick = closeCheckout;
  $("#topBtn").onclick = () => window.scrollTo({top:0, behavior:"smooth"});
- $$('input[name="paymethod"]').forEach(r => r.addEventListener("change", () => {
-  $("#cardFields").classList.toggle("hidden", document.querySelector('input[name="paymethod"]:checked').value !== "card");
-  buildSummary();
-}));
- $("#ckCardNum").addEventListener("input", e => e.target.value = e.target.value.replace(/\D/g,"").slice(0,16).replace(/(\d{4})(?=\d)/g,"$1 "));
- $("#ckExp").addEventListener("input", e => { let v = e.target.value.replace(/\D/g,"").slice(0,4); if (v.length > 2) v = v.slice(0,2)+"/"+v.slice(2); e.target.value = v; });
- $("#ckCvv").addEventListener("input", e => e.target.value = e.target.value.replace(/\D/g,"").slice(0,4));
  $("#subForm").addEventListener("submit", e => { e.preventDefault(); e.target.reset(); toast("Subscribed! Exclusive Langkawi deals coming your way"); });
 function openMobileMenu(){
   $("#mobileMenu")?.classList.add("open");
