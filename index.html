@@ -977,6 +977,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 
   /* Sharing Transport */
   .share-inner{padding:50px 0}
+  .share-grid{margin-inline:8px}
   .share-card h2{font-size:1.85rem}
   .share-price b{font-size:2.3rem}
   .share-card .btn{width:100%;justify-content:center}
@@ -3926,11 +3927,19 @@ document.addEventListener("click", e => {
   const bookBtn = e.target.closest("[data-book]");
   if (bookBtn){
     e.stopPropagation();
+    if (bookBtn.dataset.book === "private-transfer"){
+      location.hash = "#/private-transfer";
+      return;
+    }
     openService(bookBtn.dataset.book);
     return;
   }
   const card = e.target.closest("[data-view]");
   if (card && !e.target.closest("[data-add]")){
+    if (card.dataset.view === "private-transfer"){
+      location.hash = "#/private-transfer";
+      return;
+    }
     openService(card.dataset.view); return;
   }
   const q = e.target.closest("[data-qact]");
