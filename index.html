@@ -31,12 +31,41 @@ section{padding:90px 0;position:relative}
 .sub{color:#274035;font-weight:500;max-width:620px;margin:0 auto}
 .center{text-align:center}
 
-/* reveal */
-[data-reveal]{opacity:0;transform:translateY(36px);transition:opacity .8s ease var(--d,0s),transform .8s var(--ease) var(--d,0s)}
-[data-reveal="left"]{transform:translateX(-44px)}
-[data-reveal="right"]{transform:translateX(44px)}
-[data-reveal="zoom"]{transform:scale(.9)}
+/* reveal & fly-out animations */
+[data-reveal]{opacity:0;transform:translateY(36px);transition:opacity .75s ease var(--d,0s),transform .75s cubic-bezier(.16,1,.3,1) var(--d,0s);will-change:opacity,transform}
+[data-reveal="left"]{transform:translateX(-55px)}
+[data-reveal="right"]{transform:translateX(55px)}
+[data-reveal="zoom"]{transform:scale(.88)}
+[data-reveal="fly-left"]{transform:translateX(-75px) rotate(-3.5deg)}
+[data-reveal="fly-right"]{transform:translateX(75px) rotate(3.5deg)}
+[data-reveal="fly-up"]{transform:translateY(55px) scale(.92)}
 [data-reveal].revealed{opacity:1;transform:none}
+
+/* Card images entrance zoom */
+.tour-card .tc-media img,
+.p-card .p-thumb img,
+.route-card .rc-img img,
+.veh-card .veh-media img{
+  transition:transform .75s cubic-bezier(.16,1,.3,1);
+}
+[data-reveal]:not(.revealed) .tc-media img,
+[data-reveal]:not(.revealed) .p-thumb img,
+[data-reveal]:not(.revealed) .rc-img img,
+[data-reveal]:not(.revealed) .veh-media img{
+  transform:scale(1.15);
+}
+[data-reveal].revealed .tc-media img,
+[data-reveal].revealed .p-thumb img,
+[data-reveal].revealed .rc-img img,
+[data-reveal].revealed .veh-media img{
+  transform:scale(1);
+}
+.tour-card:hover .tc-media img,
+.p-card:hover .p-thumb img,
+.route-card:hover .rc-img img,
+.veh-card:hover .veh-media img{
+  transform:scale(1.08)!important;
+}
 
 /* preloader */
 #preloader{position:fixed;inset:0;z-index:999;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .6s,visibility .6s}
@@ -136,6 +165,51 @@ body.loaded .h-line:nth-child(2)>span{transition-delay:.5s}
 @keyframes waveMove{to{transform:translateX(-50%)}}
 .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:6;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;color:var(--green-dark);animation:cueBounce 2s ease-in-out infinite;box-shadow:0 8px 20px rgba(8,44,38,.3)}
 @keyframes cueBounce{50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ============ HERO FLY-OUT CARDS ============ */
+.hero-fly-card{position:absolute;z-index:6;display:flex;align-items:center;gap:12px;padding:10px 16px 10px 10px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border:1.5px solid rgba(255,255,255,.85);border-radius:18px;box-shadow:0 18px 45px rgba(8,44,38,.28),0 4px 12px rgba(0,0,0,.08);transition:transform .4s var(--ease),box-shadow .3s,opacity .85s cubic-bezier(.16,1,.3,1);max-width:275px;text-align:left;cursor:pointer}
+.hero-fly-card:hover{transform:scale(1.05) translateY(-4px)!important;box-shadow:0 26px 55px rgba(8,44,38,.36)}
+
+.hero-fly-card.fly-left{left:max(20px, calc(50% - 630px));top:36%;opacity:0;transform:translateX(-140px) rotate(-6deg)}
+.hero-fly-card.fly-right{right:max(20px, calc(50% - 630px));top:48%;opacity:0;transform:translateX(140px) rotate(6deg)}
+
+.hero-fly-card.fly-left.revealed{opacity:1;animation:heroFlyLeft .85s cubic-bezier(.16,1,.3,1) forwards, floatBobLeft 5.5s .85s ease-in-out infinite alternate}
+.hero-fly-card.fly-right.revealed{opacity:1;animation:heroFlyRight .85s cubic-bezier(.16,1,.3,1) forwards, floatBobRight 6.5s .85s ease-in-out infinite alternate}
+
+@keyframes heroFlyLeft{
+  0%{opacity:0;transform:translateX(-140px) rotate(-6deg)}
+  100%{opacity:1;transform:translateX(0) rotate(-2deg)}
+}
+@keyframes heroFlyRight{
+  0%{opacity:0;transform:translateX(140px) rotate(6deg)}
+  100%{opacity:1;transform:translateX(0) rotate(2.5deg)}
+}
+
+@keyframes floatBobLeft{
+  0%{transform:translateY(0) rotate(-2deg)}
+  100%{transform:translateY(-14px) rotate(1deg)}
+}
+@keyframes floatBobRight{
+  0%{transform:translateY(0) rotate(2.5deg)}
+  100%{transform:translateY(-16px) rotate(-1.5deg)}
+}
+
+.hfc-img{width:54px;height:54px;border-radius:12px;overflow:hidden;flex:none;position:relative;box-shadow:0 4px 10px rgba(0,0,0,.15)}
+.hfc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.hero-fly-card:hover .hfc-img img{transform:scale(1.1)}
+.hfc-body{display:flex;flex-direction:column;gap:2px}
+.hfc-top{display:flex;align-items:center;gap:7px}
+.hfc-live{display:inline-flex;align-items:center;gap:4px;font-size:.62rem;font-weight:700;color:var(--green-dark);background:#E7F6F0;padding:2px 7px;border-radius:999px;letter-spacing:.04em}
+.hfc-live i{width:5px;height:5px;border-radius:50%;background:var(--green);animation:dotPulse 1.8s infinite}
+.hfc-star{font-size:.68rem;font-weight:700;color:#E68A00}
+.hfc-tag{display:inline-flex;align-items:center;font-size:.62rem;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--orange),#F0611F);padding:2px 7px;border-radius:999px;letter-spacing:.04em}
+.hfc-price{font-size:.72rem;font-weight:800;color:var(--green-dark)}
+.hero-fly-card b{font-size:.84rem;font-weight:700;color:#0D2B24;line-height:1.2}
+.hero-fly-card small{font-size:.68rem;color:#334E43;font-weight:500}
+
+@media(max-width:1120px){
+  .hero-fly-card{display:none}
+}
 
 /* transfer view entrance */
 #transferView{display:none}
@@ -778,6 +852,25 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     </div>
   </div>
 
+  <!-- Floating Fly-Out Photo Cards -->
+  <aside class="hero-fly-card fly-left" data-reveal="fly-left" data-book="sunset-dinner-cruise" aria-label="Sunset Dinner Cruise">
+    <div class="hfc-img"><img src="images/sunset_dinner_cruise.jpg" alt="Sunset Dinner Cruise" loading="eager"></div>
+    <div class="hfc-body">
+      <div class="hfc-top"><span class="hfc-live"><i></i>DAILY TRIP</span><span class="hfc-star">★ 4.9</span></div>
+      <b>Sunset Dinner Cruise</b>
+      <small>Buffet &amp; Jacuzzi Net · RM200</small>
+    </div>
+  </aside>
+
+  <aside class="hero-fly-card fly-right" data-reveal="fly-right" data-book="island-hopping" aria-label="Island Hopping Tour">
+    <div class="hfc-img"><img src="images/island_hopping.jpg" alt="Island Hopping" loading="eager"></div>
+    <div class="hfc-body">
+      <div class="hfc-top"><span class="hfc-tag">POPULAR</span><span class="hfc-price">From RM40</span></div>
+      <b>Island Hopping Tour</b>
+      <small>Tasik Dayang Bunting</small>
+    </div>
+  </aside>
+
   <a href="#why" class="scroll-cue" aria-label="Scroll down"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
 
   <div class="hero-waves">
@@ -827,16 +920,16 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
         </div>
       </div>
     </div>
-    <div class="why-media" data-reveal="right" style="--d:.15s">
-      <div class="ph-card ph-a g-island">
+    <div class="why-media">
+      <div class="ph-card ph-a g-island" data-reveal="fly-left" style="--d:.05s">
         <img src="images/island_hopping.jpg" alt="Island Hopping in Langkawi" loading="lazy">
         <div class="ph-tag">Island Hopping<small>from RM550 per boat</small></div>
       </div>
-      <div class="ph-card ph-b g-sunset">
+      <div class="ph-card ph-b g-sunset" data-reveal="fly-right" style="--d:.18s">
         <img src="images/sunset_dinner_cruise.jpg" alt="Sunset Dinner Cruise in Langkawi" loading="lazy">
         <div class="ph-tag">Sunset Dinner Cruise<small>from RM200 per person</small></div>
       </div>
-      <div class="float-card">
+      <div class="float-card" data-reveal="zoom" style="--d:.3s">
         <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#E7F6F0"/><path d="M12 6.8l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#0BA678"/></svg>
         <div><div class="stars">★★★★★</div><small>4.9 · 2,300+ happy travellers</small></div>
       </div>
@@ -1758,8 +1851,9 @@ WATERSPORTS_OPTIONS.forEach(opt => {
    RENDER
 ================================================================ */
 function renderServices(){
+  const flyDir = ["fly-left", "fly-up", "fly-right"];
   $("#servicesGrid").innerHTML = SERVICES.map((s,i) => `
-    <article class="tour-card" data-view="${s.id}" data-reveal style="--d:${(i%3)*.1}s">
+    <article class="tour-card" data-view="${s.id}" data-reveal="${flyDir[i % 3]}" style="--d:${(i%3)*.1}s">
       <div class="tc-media ${s.grad}">
         <img src="${imgUrl(s.img)}" alt="${s.title}" loading="lazy" onerror="this.remove()">
         ${s.tag ? `<span class="tc-tag">${s.tag}</span>` : ""}
@@ -1786,8 +1880,9 @@ function renderServices(){
     </article>`).join("");
 }
 function renderPackages(){
+  const flyDir = ["fly-left", "fly-up", "fly-right"];
   $("#packagesGrid").innerHTML = PACKAGES.map((p,i) => `
-    <div class="p-card ${p.featured ? "featured" : ""}" data-view="${p.id}" data-reveal="zoom" style="--d:${i*.12}s;cursor:pointer">
+    <div class="p-card ${p.featured ? "featured" : ""}" data-view="${p.id}" data-reveal="${flyDir[i % 3]}" style="--d:${(i%3)*.12}s;cursor:pointer">
       ${p.featured ? '<span class="pop-tag">★ Most Popular</span>' : ""}
       <div class="p-thumb ${p.grad || "g-island"}">
         <img src="${imgUrl(p.img,700)}" alt="${p.title}" loading="lazy" onerror="this.remove()">
@@ -1809,7 +1904,7 @@ function renderPackages(){
 }
 function renderRoutes(){
   $("#routeGrid").innerHTML = ROUTES.map((r,i) => `
-    <div class="route-card" data-reveal style="--d:${(i%2)*.12}s">
+    <div class="route-card" data-reveal="${i % 2 === 0 ? 'fly-left' : 'fly-right'}" style="--d:${(i%2)*.12}s">
       <div class="rc-img ${r.grad}"><img src="${imgUrl(r.img,700)}" alt="${r.from} to ${r.to}" loading="lazy" onerror="this.remove()"></div>
       <div class="rc-body">
         <div class="rc-route">
@@ -1828,7 +1923,7 @@ function renderRoutes(){
 }
 function renderFleet(){
   $("#fleetTrack").innerHTML = VEHICLES.map((v,i) => `
-    <article class="veh-card" data-view="${v.id}" data-reveal="zoom" style="--d:${Math.min(i,4)*.08}s;cursor:pointer">
+    <article class="veh-card" data-view="${v.id}" data-reveal="fly-up" style="--d:${Math.min(i,4)*.08}s;cursor:pointer">
       <div class="veh-media ${v.grad}">
         ${SIL[v.sil]}
         <img src="${imgUrl(v.img)}" alt="${v.name}" loading="lazy" onerror="this.remove()">
@@ -3446,18 +3541,26 @@ function runCount(el){
 }
 let revealIO;
 function initReveals(){
-  if (!("IntersectionObserver" in window)){
+  if (!("IntersectionObserver" in window) || reduceMotion){
     $$("[data-reveal]").forEach(el => el.classList.add("revealed"));
     $$("[data-countup]").forEach(runCount); return;
   }
+  if (revealIO) revealIO.disconnect();
   revealIO = new IntersectionObserver(es => es.forEach(en => {
+    const el = en.target;
     if (en.isIntersecting){
-      if (en.target.hasAttribute("data-reveal")) en.target.classList.add("revealed");
-      if (en.target.dataset.countup) runCount(en.target);
-      en.target.querySelectorAll("[data-countup]").forEach(runCount);
-      revealIO.unobserve(en.target);
+      if (el.hasAttribute("data-reveal")) el.classList.add("revealed");
+      if (el.dataset.countup) runCount(el);
+      el.querySelectorAll("[data-countup]").forEach(runCount);
+    } else {
+      const r = en.boundingClientRect || el.getBoundingClientRect();
+      if (r.top > window.innerHeight + 60 || r.bottom < -60){
+        if (el.hasAttribute("data-reveal")) el.classList.remove("revealed");
+        if (el.dataset.countup) delete el.dataset.counted;
+        el.querySelectorAll("[data-countup]").forEach(c => delete c.dataset.counted);
+      }
     }
-  }), {threshold:.12, rootMargin:"0px 0px -40px 0px"});
+  }), {threshold: 0.08, rootMargin: "0px 0px -25px 0px"});
   $$("[data-reveal]").forEach(el => revealIO.observe(el));
   $$("[data-countup]").forEach(el => { if (!el.closest("[data-reveal]")) revealIO.observe(el); });
 }
