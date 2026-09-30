@@ -2151,6 +2151,20 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .js-cards-grid .mg-card{padding:12px 14px}
 }
 
+/* ATV package switcher & responsive cards */
+.atv-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;background:#F1F5F9;padding:5px;border-radius:12px;margin-bottom:14px}
+.atv-tab{border:none;background:none;padding:10px 8px;font-size:.82rem;font-weight:700;border-radius:9px;color:#334155;cursor:pointer;transition:all .2s;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.2}
+.atv-tab .tab-meta{font-size:.7rem;font-weight:600;opacity:.85}
+.atv-tab.active{background:linear-gradient(135deg,#EA580C,#C2410C);color:#fff;box-shadow:0 3px 10px rgba(234,88,12,.32)}
+
+.atv-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.atv-cards-grid .mg-card{border:1.5px solid #E2E8F0;border-radius:12px;padding:11px 12px;cursor:pointer;background:#fff;transition:.2s;display:flex;flex-direction:column;gap:4px;text-align:left;box-shadow:0 2px 6px rgba(0,0,0,0.03)}
+.atv-cards-grid .mg-card:hover{border-color:var(--orange);transform:translateY(-1.5px)}
+.atv-cards-grid .mg-card.selected{border-color:var(--orange);background:#FFF7ED;box-shadow:0 0 0 2px var(--orange)}
+
+@media(max-width:540px){
+  .atv-cards-grid{grid-template-columns:1fr;gap:8px}
+}
 
 .sm-datetime-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 .sm-dt-input{display:block;width:100%;min-width:0;max-width:100%;padding:12px 14px;border:1.5px solid #E2E8F0;border-radius:12px;font-size:.88rem;font-weight:600;color:var(--dark);background:#fff;outline:none;text-align:left;text-align-last:left;transition:border-color .2s,box-shadow .2s;font-family:inherit}
@@ -2783,29 +2797,29 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
             </div>
             <div class="bs-head-text">
               <h3 class="bs-card-title-dark" onclick="openAtvModal()" style="cursor:pointer">ATV Jungle Adventure Ride</h3>
-              <p class="bs-card-sub-dark">1 Hour 45 Mins · Rugged Rainforest Trail</p>
+              <p class="bs-card-sub-dark">1-Hour &amp; 1h 45m Options · Nature &amp; Rainforest Trail</p>
             </div>
           </div>
           <div class="bs-price-row">
-            <span class="bs-price-num-gold">RM 250</span>
+            <span class="bs-price-num-gold">From RM 160</span>
             <span class="bs-price-meta-dark">per ATV · fits up to 2 riders</span>
           </div>
           <ul class="bs-features">
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><b>1h 45m Trail Ride</b>: Zipline, Archery, Waterfall &amp; Village Area</span>
+              <span><b>1-Hour Trail (RM 160)</b>: Pass by Paddy Field, Rubber Farm &amp; Waterfall</span>
             </li>
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><b>Price is per ATV (not per person)</b>: RM 250 flat per ATV</span>
+              <span><b>1h 45m Trail (RM 250)</b>: Zipline, Archery, Waterfall &amp; Village Area</span>
             </li>
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>1 Solo Rider = 1 ATV (RM 250) · 2 Riders sharing = 1 ATV (RM 250)</span>
+              <span><b>Price is per ATV (not per person)</b>: 1 ATV fits 1–2 riders</span>
             </li>
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>3–4 riders requires 2 ATVs (RM 500 total)</span>
+              <span>3–4 riders requires 2 ATVs (e.g. 1h = RM 320, 1h 45m = RM 500)</span>
             </li>
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2817,7 +2831,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
             </li>
           </ul>
           <button class="bs-btn-solid-orange" onclick="openAtvModal()" type="button">
-            <span>Book ATV · RM 250</span>
+            <span>Book ATV · From RM 160</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
         </article>
@@ -3900,18 +3914,25 @@ const SERVICES = [
     img: "images/atv_jungle_ride.jpg",
     grad: "g-atv",
     title: "ATV Jungle Adventure Ride",
-    price: 250,
-    priceDisplay: "RM 250",
-    unit: "per ATV · 1h 45m (fits 1–2 riders)",
-    dur: "1 Hour 45 Mins",
+    price: 160,
+    priceDisplay: "From RM 160",
+    unit: "per ATV · fits 1–2 riders",
+    dur: "1h / 1h 45m",
     rating: 4.9,
     reviews: 230,
     pax: "Fits 1–2 riders per ATV",
     qtyLabel: "ATVs",
     tag: "Top Adventure",
-    loc: "Zipline, Archery & Waterfall Trail",
-    desc: "Exhilarating 1h 45m off-road ATV rainforest adventure ride: stops at Zipline, Archery, hidden waterfall, and countryside village. Fixed price RM 250 per ATV (accommodates 1–2 riders). When exceeding 2 riders (3–4 pax), 2 ATVs are calculated at RM 500.",
-    inc: ["1h 45m rugged rainforest off-road ATV trail", "4 Key Highlights: Zipline, Archery, Waterfall & Village Area", "Fixed RM250 per ATV — fits up to 2 riders (driver & passenger)", "Extra ATV added only when riders exceed 2 (e.g. 3–4 riders = RM 500)", "Professional trail marshal, full safety briefing & helmets included"]
+    loc: "Nature Trails & Rainforest",
+    desc: "Exhilarating off-road ATV adventure rides: choose 1-Hour Trail at RM 160 (pass by paddy fields, rubber farm & waterfall) or 1h 45m Trail at RM 250 (stops at zipline, archery, waterfall & village). Fixed price per ATV (fits 1–2 riders). When exceeding 2 riders (3–4 pax), 2 ATVs are calculated.",
+    inc: [
+      "1-Hour (RM 160) or 1h 45m (RM 250) off-road ATV trail",
+      "1h highlights: Paddy Field, Rubber Farm & Waterfall",
+      "1h 45m highlights: Zipline, Archery, Waterfall & Village Area",
+      "Fixed price per ATV — fits up to 2 riders (driver & passenger)",
+      "Extra ATV added only when riders exceed 2 (e.g. 3–4 riders = 2 ATVs)",
+      "Professional trail marshal, full safety briefing & helmets included"
+    ]
   },
   {
     id: "kayak",
@@ -4121,6 +4142,26 @@ const WATERSPORTS_OPTIONS = [
 
 const ATV_OPTIONS = [
   {
+    id: "atv-1h",
+    name: "1-Hour Adventure Ride",
+    shortName: "1-Hour",
+    dur: "1 Hour",
+    price: 160,
+    unit: "per ATV · 1 Hour",
+    pax: "Fits 1–2 riders per ATV",
+    badge: "Scenic Nature",
+    desc: "Scenic 1-Hour off-road ATV trail ride passing by lush paddy fields, rubber farm, and waterfall. Fixed RM 160 per ATV (accommodates 1–2 riders). When exceeding 2 riders (3–4 pax), 2 ATVs are calculated at RM 320.",
+    stops: ["🌾 Paddy Field (Pass by)", "🌳 Rubber Farm (Pass by)", "💦 Waterfall"],
+    inc: [
+      "1-Hour guided off-road ATV countryside & nature trail ride",
+      "Scenic trail passing by Paddy Field, Rubber Farm & Waterfall",
+      "Price is PER ATV, NOT per person (RM 160 flat per ATV)",
+      "1 ATV fits 1–2 riders (driver & passenger)",
+      "When exceeding 2 riders (3–4 pax), 2 ATVs are calculated at RM 320",
+      "Safety briefing, helmets & experienced trail marshal included"
+    ]
+  },
+  {
     id: "atv-1h45m",
     name: "1h 45m Adventure Ride",
     shortName: "1h 45m",
@@ -4231,7 +4272,8 @@ ATV_OPTIONS.forEach(opt => {
     inc: opt.stops
   };
 });
-CATALOG["atv-1h"] = CATALOG["atv-1h45m"];
+CATALOG["atv"] = CATALOG["atv-1h"];
+CATALOG["atv-cruise"] = CATALOG["atv-1h"];
 
 
 VEHICLES.forEach(v => {
@@ -6599,8 +6641,8 @@ function openJetskiModal(initialId = "js-pkga"){
 /* ================================================================
    MODALS: ATV JUNGLE RIDE
 ================================================================ */
-function openAtvModal(initialId = "atv-1h45m"){
-  let currentOpt = ATV_OPTIONS[0];
+function openAtvModal(initialId = "atv-1h"){
+  let currentOpt = ATV_OPTIONS.find(o => o.id === initialId) || ATV_OPTIONS[0];
   let pax = 2; // Default 2 persons (1 ATV fits up to 2 riders)
   let selDate = todayISO();
   let selTime = "09:00 AM";
@@ -6619,10 +6661,10 @@ function openAtvModal(initialId = "atv-1h45m"){
       </div>
       <div class="sm-body">
         <div class="sm-pills">
-          <span>⏱️ 1h 45m Trail Ride</span>
-          <span>🎯 Zipline &amp; Archery</span>
-          <span>💦 Hidden Waterfall</span>
-          <span>👥 Fits 1–2 Pax per ATV</span>
+          <span>⏱️ ${currentOpt.dur}</span>
+          <span>🏍️ Guided Trail</span>
+          <span>💦 Waterfall</span>
+          <span>👥 Fits 1–2 Riders per ATV</span>
         </div>
         <h3 style="margin-bottom:4px">ATV Jungle Adventure Ride</h3>
         <div class="sm-stars">
@@ -6631,34 +6673,52 @@ function openAtvModal(initialId = "atv-1h45m"){
           <span>· 230 reviews</span>
         </div>
         <p style="margin-bottom:12px;font-size:.9rem;color:#111">
-          Take on Langkawi’s rugged off-road rainforest trail on a powerful all-terrain ATV! Features 4 key stops: Zipline experience, Archery range, hidden waterfall, and local countryside village area.
+          Take on Langkawi’s scenic nature and off-road trails on a powerful ATV! Choose our <b>1-Hour Trail</b> (paddy fields, rubber farm &amp; waterfall) or <b>1h 45m Trail</b> (zipline, archery, waterfall &amp; village):
         </p>
 
         <!-- Pricing Notice: Per ATV (Not Per Person) -->
         <div style="background:#FFF7ED;border:1.5px solid #FDBA74;border-radius:14px;padding:12px 15px;margin:8px 0 16px;display:flex;align-items:flex-start;gap:12px">
           <span style="font-size:1.35rem;line-height:1">💡</span>
           <div style="font-size:.84rem;color:#9A3412;line-height:1.5">
-            <b>Price is PER ATV (RM 250), NOT per person:</b><br>
-            • <b>1 Solo Rider</b> or <b>2 Riders sharing</b> = 1 ATV = <b>RM 250</b><br>
-            • <b>3 to 4 Riders</b> = 2 ATVs = <b>RM 500</b> (RM 250 × 2)<br>
-            • <b>5 to 6 Riders</b> = 3 ATVs = <b>RM 750</b> (RM 250 × 3)
+            <b>Price is PER ATV (${rm(currentOpt.price)}), NOT per person:</b><br>
+            • <b>1 Solo Rider</b> or <b>2 Riders sharing</b> = 1 ATV = <b>${rm(currentOpt.price)}</b><br>
+            • <b>3 to 4 Riders</b> = 2 ATVs = <b>${rm(currentOpt.price * 2)}</b> (${rm(currentOpt.price)} × 2)<br>
+            • <b>5 to 6 Riders</b> = 3 ATVs = <b>${rm(currentOpt.price * 3)}</b> (${rm(currentOpt.price)} × 3)
           </div>
         </div>
 
-        <!-- Package Card -->
-        <div class="mg-sec-title"><span>ATV Adventure Package</span><small style="color:#555;font-size:.7rem">1h 45m Duration</small></div>
-        <div class="mg-card selected" style="cursor:default;margin-bottom:14px">
-          <div class="mg-card-top">
-            <div>
-              <b style="font-size:.95rem">${currentOpt.name}</b>
-              <div style="font-size:.74rem;color:#555;font-weight:500;margin-top:2px">1 Hour 45 Mins · Fits 1–2 Riders per ATV</div>
+        <!-- Package Selection Tabs -->
+        <div class="mg-sec-title"><span>1 · Select ATV Tour Package</span><small style="color:#555;font-size:.7rem">2 Options Available</small></div>
+        <div class="atv-tabs">
+          ${ATV_OPTIONS.map(o => `
+            <button type="button" class="atv-tab ${o.id === currentOpt.id ? 'active' : ''}" data-atvid="${o.id}">
+              <span>${o.name}</span>
+              <span class="tab-meta">${rm(o.price)} / ATV · ${o.dur}</span>
+            </button>
+          `).join('')}
+        </div>
+
+        <!-- Package Cards Grid (Responsive & Tap to Select) -->
+        <div class="atv-cards-grid">
+          ${ATV_OPTIONS.map(o => `
+            <div class="mg-card ${o.id === currentOpt.id ? 'selected' : ''}" data-atvid="${o.id}">
+              <div class="mg-card-top">
+                <b style="font-size:.88rem">${o.name}</b>
+                <small style="font-weight:700;color:${o.id === currentOpt.id ? 'var(--orange-dark)' : '#64748B'}">${o.dur}</small>
+              </div>
+              <div style="font-size:.73rem;color:#475569;margin-top:2px;line-height:1.35">
+                ${o.id === 'atv-1h' ? 'Pass by Paddy Field, Rubber Farm &amp; Waterfall' : 'Zipline, Archery, Waterfall &amp; Village Area'}
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:6px">
+                <span class="mg-price" style="font-size:1.05rem;color:var(--orange-dark)">${rm(o.price)} <small style="font-size:.68rem;color:#64748B">/ ATV</small></span>
+                <span style="font-size:.72rem;font-weight:700;color:${o.id === currentOpt.id ? 'var(--orange-dark)' : '#94A3B8'}">${o.id === currentOpt.id ? '✓ Selected' : 'Tap to select'}</span>
+              </div>
             </div>
-            <span class="mg-price" style="font-size:1.15rem">RM 250 <small style="font-size:.7rem;font-weight:500;color:#555">/ ATV</small></span>
-          </div>
+          `).join('')}
         </div>
 
         <!-- Route & Highlights Included -->
-        <div class="mg-sec-title"><span>Route Highlights (${currentOpt.stops.length} Stops)</span></div>
+        <div class="mg-sec-title"><span>Route Highlights (${currentOpt.stops.length} Stops &amp; Highlights)</span></div>
         <div class="mg-stops" style="margin-bottom:14px">
           ${currentOpt.stops.map(s => `<span class="mg-stop">📍 ${s}</span>`).join('')}
         </div>
@@ -6680,7 +6740,7 @@ function openAtvModal(initialId = "atv-1h45m"){
             <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
               <div>
                 <label style="font-size:.84rem;font-weight:700;color:#0B1E2E;display:block">Number of Riders:</label>
-                <span id="atvPaxHint" style="font-size:.76rem;color:var(--orange-dark);font-weight:600">${pax === 1 ? '1 Solo Rider (1 ATV · RM 250)' : (pax === 2 ? '2 Riders sharing 1 ATV (RM 250)' : pax + ' Riders (Exceeds 2 riders → ' + atvCount + ' ATVs · RM ' + totalPrice + ')')}</span>
+                <span id="atvPaxHint" style="font-size:.76rem;color:var(--orange-dark);font-weight:600">${pax === 1 ? '1 Solo Rider (1 ATV · ' + rm(currentOpt.price) + ')' : (pax === 2 ? '2 Riders sharing 1 ATV (' + rm(currentOpt.price) + ')' : pax + ' Riders (Exceeds 2 riders → ' + atvCount + ' ATVs · ' + rm(totalPrice) + ')')}</span>
               </div>
               <div class="qty">
                 <button id="smMinus" type="button" aria-label="Decrease riders">−</button>
@@ -6690,7 +6750,7 @@ function openAtvModal(initialId = "atv-1h45m"){
             </div>
             <div id="atvBreakdown" style="margin-top:10px;padding-top:10px;border-top:1px dashed #CBD5E1;font-size:.76rem;color:#475569;display:flex;justify-content:space-between;align-items:center">
               <span>🏍️ <b>${atvCount} ATV${atvCount > 1 ? 's' : ''}</b> required (${pax} riders)</span>
-              <span style="color:#059669;font-weight:700">${atvCount} × RM 250 = ${rm(totalPrice)}</span>
+              <span style="color:#059669;font-weight:700">${atvCount} × ${rm(currentOpt.price)} = ${rm(totalPrice)}</span>
             </div>
           </div>
           <div class="sm-foot" style="margin-bottom:14px">
@@ -6706,6 +6766,18 @@ function openAtvModal(initialId = "atv-1h45m"){
 
     $("#smClose").onclick = closeService;
 
+    // Package tab & card switching
+    document.querySelectorAll(".atv-tab, .atv-cards-grid .mg-card").forEach(el => {
+      el.onclick = () => {
+        const atvId = el.getAttribute("data-atvid");
+        const found = ATV_OPTIONS.find(o => o.id === atvId);
+        if (found && found.id !== currentOpt.id) {
+          currentOpt = found;
+          render();
+        }
+      };
+    });
+
     function updQty(){
       const curAtvs = getAtvCount(pax);
       const curTotal = curAtvs * currentOpt.price;
@@ -6713,13 +6785,13 @@ function openAtvModal(initialId = "atv-1h45m"){
 
       if ($("#atvPaxHint")) {
         if (pax === 1) {
-          $("#atvPaxHint").textContent = `1 Solo Rider (1 ATV · RM 250)`;
+          $("#atvPaxHint").textContent = `1 Solo Rider (1 ATV · ${rm(currentOpt.price)})`;
         } else if (pax === 2) {
-          $("#atvPaxHint").textContent = `2 Riders sharing 1 ATV (RM 250)`;
+          $("#atvPaxHint").textContent = `2 Riders sharing 1 ATV (${rm(currentOpt.price)})`;
         } else if (pax === 3) {
-          $("#atvPaxHint").textContent = `3 Riders (Requires 2 ATVs · RM 500)`;
+          $("#atvPaxHint").textContent = `3 Riders (Requires 2 ATVs · ${rm(curTotal)})`;
         } else if (pax === 4) {
-          $("#atvPaxHint").textContent = `4 Riders sharing 2 ATVs (RM 500)`;
+          $("#atvPaxHint").textContent = `4 Riders sharing 2 ATVs (${rm(curTotal)})`;
         } else {
           $("#atvPaxHint").textContent = `${pax} Riders (Requires ${curAtvs} ATVs · ${rm(curTotal)})`;
         }
@@ -6728,7 +6800,7 @@ function openAtvModal(initialId = "atv-1h45m"){
       if ($("#atvBreakdown")) {
         $("#atvBreakdown").innerHTML = `
           <span>🏍️ <b>${curAtvs} ATV${curAtvs > 1 ? 's' : ''}</b> required (${pax} riders)</span>
-          <span style="color:#059669;font-weight:700">${curAtvs} × RM 250 = ${rm(curTotal)}</span>
+          <span style="color:#059669;font-weight:700">${curAtvs} × ${rm(currentOpt.price)} = ${rm(curTotal)}</span>
         `;
       }
 
@@ -6748,7 +6820,7 @@ function openAtvModal(initialId = "atv-1h45m"){
     $("#smAdd").onclick = e => {
       e.stopPropagation();
       const finalAtvs = getAtvCount(pax);
-      const bookingMetaTime = `${selTime} (${pax} Riders · ${finalAtvs} ATV${finalAtvs > 1 ? 's' : ''})`;
+      const bookingMetaTime = `${selTime} (${currentOpt.name} · ${pax} Riders · ${finalAtvs} ATV${finalAtvs > 1 ? 's' : ''})`;
       addToCart(currentOpt.id, e.currentTarget, finalAtvs, selDate, bookingMetaTime);
       closeService();
     };
@@ -7193,7 +7265,7 @@ function openService(id){
     return;
   }
   if (id === "atv" || id === "atv-cruise" || id.startsWith("atv-")){
-    openAtvModal(id.startsWith("atv-") ? id : "atv-1h45m");
+    openAtvModal(id.startsWith("atv-") ? id : "atv-1h");
     return;
   }
   if (id === "sunset-cruise"){
