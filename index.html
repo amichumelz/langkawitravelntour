@@ -2766,25 +2766,25 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
             </div>
             <div class="bs-head-text">
               <h3 class="bs-card-title-dark" onclick="openAtvModal()" style="cursor:pointer">ATV Jungle Adventure Ride</h3>
-              <p class="bs-card-sub-dark">1 Jam 45 Minit · Zipline, Archery, Waterfall &amp; Village</p>
+              <p class="bs-card-sub-dark">1 Jam (RM 160) &amp; 1 Jam 45 Minit (RM 250)</p>
             </div>
           </div>
           <div class="bs-price-row">
-            <span class="bs-price-num-gold">RM 250</span>
-            <span class="bs-price-meta-dark">per ATV · fits up to 2 riders</span>
+            <span class="bs-price-num-gold">RM 160</span>
+            <span class="bs-price-meta-dark">from / ATV · fits up to 2 riders</span>
           </div>
           <ul class="bs-features">
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>1 Jam 45 Minit off-road ATV trail adventure</span>
+              <span><b>Pilihan 1 Jam (RM 160)</b>: Laluan Sawah Padi, Ladang Getah &amp; Air Terjun</span>
             </li>
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>4 Lokasi: Zipline, Archery, Waterfall &amp; Village Area</span>
+              <span><b>Pilihan 1 Jam 45 Minit (RM 250)</b>: Zipline, Archery, Waterfall &amp; Village Area</span>
             </li>
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><b>Harga per ATV (RM 250, bukan per orang)</b> — 1 ATV muat 1–2 orang</span>
+              <span><b>Harga per ATV (bukan per orang)</b> — 1 ATV muat 1–2 orang</span>
             </li>
             <li class="bs-feature-item-dark">
               <svg class="bs-chk-mint" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -3768,18 +3768,18 @@ const SERVICES = [
     img: "images/atv_jungle_ride.jpg",
     grad: "g-atv",
     title: "ATV Jungle Adventure",
-    price: 250,
-    priceDisplay: "RM 250",
-    unit: "per ATV · fits 1–2 pax",
-    dur: "1 Jam 45 Minit",
+    price: 160,
+    priceDisplay: "From RM 160",
+    unit: "per ATV · from 1 hour",
+    dur: "1 Hour & 1h 45m Options",
     rating: 4.9,
     reviews: 230,
     pax: "1–2 pax per ATV",
     qtyLabel: "ATVs",
     tag: "Top Adventure",
-    loc: "Zipline, Archery, Waterfall & Village",
-    desc: "Thrilling 1h 45m off-road ATV trail ride through Langkawi's countryside and rainforest: Zipline, Archery, Waterfall & Village Area. Fixed RM250 per ATV — 1 ATV muat 1–2 orang. Tambah harga hanya bila melebihi 2 orang.",
-    inc: ["1 Jam 45 Minit off-road ATV rainforest trail", "4 Hotspots: Zipline, Archery, Waterfall & Village Area", "1 ATV memuatkan sehingga 2 orang", "Bila melebihi 2 orang, baru tambah 1 lagi ATV", "Professional trail leader & safety briefing"]
+    loc: "Paddy Field, Waterfall & Rainforest Trails",
+    desc: "Thrilling off-road ATV trail ride through Langkawi's countryside: choose 1-Hour scenic trail (RM160: Paddy Field, Rubber Farm, Waterfall) or 1h 45m adventure trail (RM250: Zipline, Archery, Waterfall, Village). Fixed price per ATV — 1 ATV muat 1–2 orang.",
+    inc: ["Pilihan 1 Jam (RM160) atau 1 Jam 45 Minit (RM250)", "1 Jam: Lalu Sawah Padi, Ladang Getah & Air Terjun", "1h 45m: Zipline, Archery, Air Terjun & Kawasan Kampung", "1 ATV memuatkan sehingga 2 orang", "Bila melebihi 2 orang, baru tambah 1 lagi ATV", "Professional trail leader & safety briefing"]
   },
   {
     id: "kayak",
@@ -3987,6 +3987,47 @@ const WATERSPORTS_OPTIONS = [
   }
 ];
 
+const ATV_OPTIONS = [
+  {
+    id: "atv-1h",
+    name: "1-Hour Countryside Ride",
+    shortName: "1 Jam (1 Hour)",
+    dur: "1 Jam",
+    price: 160,
+    unit: "per ATV · 1 jam",
+    pax: "Muat 1–2 orang per ATV",
+    badge: "Scenic Trail",
+    desc: "Pengembaraan ATV 1 Jam melalui pemandangan sawah padi, ladang getah dan air terjun Langkawi. Muat 1–2 orang bagi setiap ATV.",
+    stops: ["🌾 Paddy Field (Sawah Padi)", "🌳 Rubber Farm (Ladang Getah)", "💦 Waterfall (Air Terjun)"],
+    inc: [
+      "1 Jam off-road ATV scenic countryside ride",
+      "Laluan menarik: Sawah Padi, Ladang Getah & Air Terjun",
+      "1 ATV muat 1–2 orang (harga per unit ATV)",
+      "Lebih 2 orang baru tambah 1 lagi ATV",
+      "Safety briefing, helmets & trail guide disediakan"
+    ]
+  },
+  {
+    id: "atv-1h45m",
+    name: "1h 45m Adventure Ride",
+    shortName: "1 Jam 45 Minit",
+    dur: "1 Jam 45 Minit",
+    price: 250,
+    unit: "per ATV · 1h 45m",
+    pax: "Muat 1–2 orang per ATV",
+    badge: "★ Most Popular",
+    desc: "Pengembaraan ATV lasak 1 Jam 45 Minit merentasi denai hutan hujan dan perkampungan Langkawi: singgah di Zipline, Archery, air terjun tersembunyi, dan kawasan desa.",
+    stops: ["🌲 Zipline Experience", "🎯 Archery Range", "💦 Hidden Waterfall", "🏡 Countryside Village Area"],
+    inc: [
+      "1 Jam 45 Minit off-road ATV rainforest trail ride",
+      "4 Aktiviti & Lokasi: Zipline, Archery, Waterfall & Village Area",
+      "1 ATV muat 1–2 orang (harga per unit ATV)",
+      "Lebih 2 orang baru tambah 1 lagi ATV",
+      "Safety briefing, helmets & experienced trail marshal"
+    ]
+  }
+];
+
 const VEHICLES = [
   { id:"pt-sedan",    name:"Toyota Sedan",   pax:"1–4 pax", img:"images/vehicle_sedan.jpg",    grad:"g-transfer", sil:"car", h4:150, h8:250, desc:"Comfortable air-conditioned sedan with local driver" },
   { id:"pt-mpv",      name:"MPV",            pax:"3–6 pax",   img:"images/vehicle_mpv.jpg",      grad:"g-jetski",   sil:"car", h4:200, h8:350,  desc:"Spacious MPV for family trips and small groups" },
@@ -4054,6 +4095,24 @@ WATERSPORTS_OPTIONS.forEach(opt => {
     reviews: 175,
     pax: opt.pax,
     qtyLabel: "Rides",
+    desc: opt.desc,
+    inc: opt.stops
+  };
+});
+
+ATV_OPTIONS.forEach(opt => {
+  CATALOG[opt.id] = {
+    id: opt.id,
+    title: `ATV Ride — ${opt.name}`,
+    price: opt.price,
+    unit: opt.unit,
+    dur: opt.dur,
+    img: "images/atv_jungle_ride.jpg",
+    grad: "g-atv",
+    rating: 4.9,
+    reviews: 230,
+    pax: opt.pax,
+    qtyLabel: "ATVs",
     desc: opt.desc,
     inc: opt.stops
   };
@@ -6202,18 +6261,18 @@ function openJetskiModal(initialId = "js-pkga"){
 /* ================================================================
    MODALS: ATV JUNGLE RIDE
 ================================================================ */
-function openAtvModal(){
+function openAtvModal(initialId = "atv-1h"){
+  let currentOpt = ATV_OPTIONS.find(o => o.id === initialId) || ATV_OPTIONS[0];
   let pax = 2; // Default 2 persons (1 ATV fits up to 2 riders)
   let selDate = todayISO();
   let selTime = "09:30 AM";
   const atvTimes = ["09:30 AM", "11:00 AM", "01:00 PM", "02:30 PM", "04:00 PM", "05:00 PM"];
-  const unitPrice = 250;
 
   const getAtvCount = (p) => Math.max(1, Math.ceil(p / 2));
 
   function render(){
     const atvCount = getAtvCount(pax);
-    const totalPrice = atvCount * unitPrice;
+    const totalPrice = atvCount * currentOpt.price;
 
     $("#svcModal").innerHTML = `
       <div class="sm-head g-atv">
@@ -6222,10 +6281,10 @@ function openAtvModal(){
       </div>
       <div class="sm-body">
         <div class="sm-pills">
-          <span>🌲 1 Jam 45 Minit</span>
+          <span>⏱️ Pilihan 1h &amp; 1h 45m</span>
+          <span>🌾 Sawah Padi &amp; Waterfall</span>
           <span>🎯 Zipline &amp; Archery</span>
-          <span>💦 Waterfall &amp; Village</span>
-          <span>👥 Fits 1–2 Pax per ATV</span>
+          <span>👥 Muat 1–2 Pax per ATV</span>
         </div>
         <h3 style="margin-bottom:4px">ATV Jungle Adventure Ride</h3>
         <div class="sm-stars">
@@ -6234,46 +6293,46 @@ function openAtvModal(){
           <span>· 230 reviews</span>
         </div>
         <p style="margin-bottom:12px;font-size:.9rem;color:#111">
-          Pengembaraan ATV 1 Jam 45 Minit merentasi denai hutan hujan dan perkampungan Langkawi: singgah di Zipline, Archery, air terjun tersembunyi, dan kawasan desa.
+          Pilih pengembaraan ATV anda: <b>1 Jam</b> melalui sawah padi, ladang getah &amp; air terjun (RM 160), atau <b>1 Jam 45 Minit</b> bersama aktiviti Zipline, Archery &amp; perkampungan desa (RM 250).
         </p>
 
         <!-- Pricing Notice: Per ATV (Not Per Person) -->
         <div style="background:#FFF7ED;border:1.5px solid #FDBA74;border-radius:12px;padding:11px 13px;margin:8px 0 14px;display:flex;align-items:flex-start;gap:10px">
           <span style="font-size:1.25rem;line-height:1">💡</span>
           <div style="font-size:.82rem;color:#9A3412;line-height:1.45">
-            <b>Harga adalah per ATV (RM 250), BUKAN per orang:</b><br>
-            1 ATV boleh muat sehingga <b>2 orang</b> (pemandu &amp; pembonceng). Harga hanya bertambah apabila bilangan penunggang <b>melebihi 2 orang</b> (cth: 1–2 orang = 1 ATV · RM 250; 3–4 orang = 2 ATV · RM 500).
+            <b>Harga adalah per ATV, BUKAN per orang:</b><br>
+            1 ATV boleh muat sehingga <b>2 orang</b> (pemandu &amp; pembonceng). Harga hanya bertambah apabila bilangan penunggang <b>melebihi 2 orang</b> (cth: 1–2 orang = 1 ATV; 3–4 orang = 2 ATV).
           </div>
         </div>
 
-        <!-- Pricing Card -->
-        <div class="mg-sec-title"><span>Pricing &amp; Vehicle Allocation</span></div>
-        <div class="mg-card selected" style="cursor:default;margin-bottom:12px">
-          <div class="mg-card-top">
-            <div>
-              <b style="font-size:.95rem">1 Jam 45 Minit ATV Trail Ride</b>
-              <div style="font-size:.74rem;color:#555;font-weight:500;margin-top:2px">Muat 1–2 Orang per ATV · 9:30 AM – 5:00 PM</div>
+        <!-- 1 · Select ATV Package & Duration -->
+        <div class="mg-sec-title"><span>1 · Pilih Pakej &amp; Durasi ATV</span></div>
+        <div class="mg-cards col-2" id="atvCards" style="margin-bottom:14px">
+          ${ATV_OPTIONS.map(o => `
+            <div class="mg-card ${o.id === currentOpt.id ? 'selected' : ''}" data-atvid="${o.id}">
+              <div class="mg-card-top">
+                <div>
+                  <b style="font-size:.92rem">${o.name}</b>
+                  <div style="font-size:.73rem;color:#555;font-weight:500;margin-top:2px">${o.dur} · Muat 1–2 Orang</div>
+                </div>
+                <span class="mg-price" style="font-size:1.1rem">${rm(o.price)} <small style="font-size:.68rem;font-weight:500;color:#555">/ ATV</small></span>
+              </div>
             </div>
-            <span class="mg-price" style="font-size:1.15rem">RM 250 <span style="font-size:.72rem;font-weight:500;color:#555">/ ATV</span></span>
-          </div>
+          `).join('')}
         </div>
 
-        <!-- 4 Hotspots / Locations Included -->
-        <div class="mg-sec-title"><span>4 Hotspots &amp; Activities Included</span></div>
-        <div class="mg-stops">
-          <span class="mg-stop">🌲 Zipline Experience</span>
-          <span class="mg-stop">🎯 Archery Range</span>
-          <span class="mg-stop">💦 Hidden Waterfall Stop</span>
-          <span class="mg-stop">🏡 Countryside Village Area</span>
+        <!-- Route & Highlights Included for currentOpt -->
+        <div class="mg-sec-title"><span>Laluan &amp; Tarikan (${currentOpt.stops.length} Hentian)</span></div>
+        <div class="mg-stops" style="margin-bottom:14px">
+          ${currentOpt.stops.map(s => `<span class="mg-stop">📍 ${s}</span>`).join('')}
         </div>
 
         <!-- Inclusions Checklist -->
-        <h6 style="font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#000;font-weight:700;margin:12px 0 8px">Included With Every Ride:</h6>
+        <h6 style="font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#000;font-weight:700;margin:12px 0 8px">Termasuk Dalam Pakej (${currentOpt.name}):</h6>
         <ul class="inc-list" style="margin-bottom:14px;gap:6px">
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>1 Jam 45 Minit off-road ATV trail ride melalui hutan hujan dan desa</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Hentian aktiviti Zipline, memanah (Archery), air terjun &amp; kawasan kampung</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><b>1–2 orang bagi setiap ATV</b> (harga dikira per unit kenderaan)</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Full safety briefing, helmets &amp; experienced trail marshal</li>
+          ${currentOpt.inc.map(item => `
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>${item}</li>
+          `).join('')}
         </ul>
 
         <!-- Date & Time Selection -->
@@ -6285,7 +6344,7 @@ function openAtvModal(){
             <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
               <div>
                 <label style="font-size:.84rem;font-weight:700;color:#0B1E2E;display:block">Bilangan Penunggang (Riders):</label>
-                <span id="atvPaxHint" style="font-size:.76rem;color:var(--orange-dark);font-weight:600">2 Riders (1 ATV)</span>
+                <span id="atvPaxHint" style="font-size:.76rem;color:var(--orange-dark);font-weight:600">${pax === 1 ? '1 Rider Solo (1 ATV)' : (pax === 2 ? '2 Riders kongsi 1 ATV (' + rm(currentOpt.price) + ')' : pax + ' Riders (Lebih 2 orang → ' + atvCount + ' ATVs)')}</span>
               </div>
               <div class="qty">
                 <button id="smMinus" type="button" aria-label="Kurangkan penunggang">−</button>
@@ -6294,8 +6353,8 @@ function openAtvModal(){
               </div>
             </div>
             <div id="atvBreakdown" style="margin-top:10px;padding-top:10px;border-top:1px dashed #CBD5E1;font-size:.76rem;color:#475569;display:flex;justify-content:space-between;align-items:center">
-              <span>🏍️ <b>${atvCount} ATV</b> diperlukan (${pax} penunggang)</span>
-              <span style="color:#059669;font-weight:700">${atvCount} × RM 250 = ${rm(totalPrice)}</span>
+              <span>🏍️ <b>${atvCount} ATV${atvCount > 1 ? 's' : ''}</b> diperlukan (${pax} penunggang)</span>
+              <span style="color:#059669;font-weight:700">${atvCount} × ${rm(currentOpt.price)} = ${rm(totalPrice)}</span>
             </div>
           </div>
           <div class="sm-foot" style="margin-bottom:14px">
@@ -6311,16 +6370,27 @@ function openAtvModal(){
 
     $("#smClose").onclick = closeService;
 
+    $$("[data-atvid]").forEach(card => {
+      card.onclick = () => {
+        const id = card.dataset.atvid;
+        const opt = ATV_OPTIONS.find(o => o.id === id);
+        if (opt) {
+          currentOpt = opt;
+          render();
+        }
+      };
+    });
+
     function updQty(){
       const curAtvs = getAtvCount(pax);
-      const curTotal = curAtvs * unitPrice;
+      const curTotal = curAtvs * currentOpt.price;
       $("#smQtyVal").textContent = pax;
 
       if ($("#atvPaxHint")) {
         if (pax === 1) {
-          $("#atvPaxHint").textContent = "1 Rider Solo (1 ATV)";
+          $("#atvPaxHint").textContent = `1 Rider Solo (1 ATV · ${rm(currentOpt.price)})`;
         } else if (pax === 2) {
-          $("#atvPaxHint").textContent = "2 Riders kongsi 1 ATV (RM 250)";
+          $("#atvPaxHint").textContent = `2 Riders kongsi 1 ATV (${rm(currentOpt.price)})`;
         } else {
           $("#atvPaxHint").textContent = `${pax} Riders (Lebih 2 orang → ${curAtvs} ATVs)`;
         }
@@ -6329,7 +6399,7 @@ function openAtvModal(){
       if ($("#atvBreakdown")) {
         $("#atvBreakdown").innerHTML = `
           <span>🏍️ <b>${curAtvs} ATV${curAtvs > 1 ? 's' : ''}</b> diperlukan (${pax} penunggang)</span>
-          <span style="color:#059669;font-weight:700">${curAtvs} × RM 250 = ${rm(curTotal)}</span>
+          <span style="color:#059669;font-weight:700">${curAtvs} × ${rm(currentOpt.price)} = ${rm(curTotal)}</span>
         `;
       }
 
@@ -6349,8 +6419,8 @@ function openAtvModal(){
     $("#smAdd").onclick = e => {
       e.stopPropagation();
       const finalAtvs = getAtvCount(pax);
-      const bookingMetaTime = `${selTime} (${pax} Riders · ${finalAtvs} ATV${finalAtvs > 1 ? 's' : ''})`;
-      addToCart("atv", e.currentTarget, finalAtvs, selDate, bookingMetaTime);
+      const bookingMetaTime = `${selTime} (${pax} Riders · ${finalAtvs} ATV${finalAtvs > 1 ? 's' : ''} · ${currentOpt.name})`;
+      addToCart(currentOpt.id, e.currentTarget, finalAtvs, selDate, bookingMetaTime);
       closeService();
     };
   }
@@ -6767,8 +6837,8 @@ function openService(id){
     openKayakingModal();
     return;
   }
-  if (id === "atv" || id === "atv-cruise"){
-    openAtvModal();
+  if (id === "atv" || id === "atv-cruise" || id.startsWith("atv-")){
+    openAtvModal(id.startsWith("atv-") ? id : "atv-1h");
     return;
   }
   if (id === "sunset-cruise"){
