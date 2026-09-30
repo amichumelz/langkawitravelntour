@@ -3260,7 +3260,58 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
         </div>
       </div>
 
-      <!-- 7. VEHICLE SELECTION CARDS -->
+      <!-- 7. TRANSFER PICKUP DATE & TIME -->
+      <div class="grab-schedule-bar" style="background:#ffffff;border:1.5px solid #E2E8F0;border-radius:14px;padding:14px 18px;margin:0 0 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:0 3px 12px rgba(0,0,0,0.02)">
+        <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:.88rem;color:#0B1E2E;min-width:130px">
+          <span style="font-size:1.15rem">⏰</span>
+          <span>Pickup Schedule:</span>
+        </div>
+        <div style="flex:1;min-width:150px">
+          <label for="grabPickupDate" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Date</label>
+          <input type="date" id="grabPickupDate" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;background:#F8FAFC;outline:none;cursor:pointer">
+        </div>
+        <div style="flex:1;min-width:180px">
+          <label for="grabPickupTime" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Time</label>
+          <select id="grabPickupTime" onchange="refreshGrabUI()" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;background:#F8FAFC;outline:none;cursor:pointer">
+            <option value="On Flight / Ferry Arrival">On Flight / Ferry Arrival (Immediate)</option>
+            <option value="07:00 AM">07:00 AM (Early Morning)</option>
+            <option value="07:30 AM">07:30 AM</option>
+            <option value="08:00 AM">08:00 AM</option>
+            <option value="08:30 AM">08:30 AM</option>
+            <option value="09:00 AM">09:00 AM</option>
+            <option value="09:30 AM">09:30 AM</option>
+            <option value="10:00 AM" selected>10:00 AM (Morning)</option>
+            <option value="10:30 AM">10:30 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="11:30 AM">11:30 AM</option>
+            <option value="12:00 PM">12:00 PM (Noon)</option>
+            <option value="12:30 PM">12:30 PM</option>
+            <option value="01:00 PM">01:00 PM</option>
+            <option value="01:30 PM">01:30 PM</option>
+            <option value="02:00 PM">02:00 PM (Afternoon)</option>
+            <option value="02:30 PM">02:30 PM</option>
+            <option value="03:00 PM">03:00 PM</option>
+            <option value="03:30 PM">03:30 PM</option>
+            <option value="04:00 PM">04:00 PM</option>
+            <option value="04:30 PM">04:30 PM</option>
+            <option value="05:00 PM">05:00 PM (Evening)</option>
+            <option value="05:30 PM">05:30 PM</option>
+            <option value="06:00 PM">06:00 PM</option>
+            <option value="06:30 PM">06:30 PM</option>
+            <option value="07:00 PM">07:00 PM (Sunset / Dinner)</option>
+            <option value="07:30 PM">07:30 PM</option>
+            <option value="08:00 PM">08:00 PM</option>
+            <option value="08:30 PM">08:30 PM</option>
+            <option value="09:00 PM">09:00 PM</option>
+            <option value="09:30 PM">09:30 PM</option>
+            <option value="10:00 PM">10:00 PM (Late Night)</option>
+            <option value="10:30 PM">10:30 PM</option>
+            <option value="11:00 PM">11:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 8. VEHICLE SELECTION CARDS -->
       <div class="grab-vehicles-grid">
         <!-- Sedan -->
         <div class="grab-v-card selected" id="vcard-sedan" onclick="selectGrabVehicle('sedan')">
@@ -5171,6 +5222,11 @@ function resetGrabMapView() {
 function updateGrabFare() {
   currentGrabKm = getCalculatedKm(currentPickupKey, currentDropoffKey, currentPickupCoords, currentDropoffCoords);
   if ($("#grabCustomKm")) $("#grabCustomKm").value = currentGrabKm;
+  const pDateEl = $("#grabPickupDate");
+  if (pDateEl && !pDateEl.value) {
+    pDateEl.value = todayISO();
+    pDateEl.min = todayISO();
+  }
   refreshGrabUI();
 }
 
@@ -5206,6 +5262,7 @@ function refreshGrabUI() {
 
   const p1Name = $("#grabPickupInput")?.value.trim() || currentPickupLabel || "Pick-Up";
   const p2Name = $("#grabDropoffInput")?.value.trim() || currentDropoffLabel || "Drop-Off";
+  const pTime  = $("#grabPickupTime")?.value || "10:00 AM";
 
   const vNames = { sedan: "Toyota Sedan", mpv: "MPV", van: "Van" };
   const vFares = { sedan: fareSedan, mpv: fareMpv, van: fareVan };
@@ -5213,7 +5270,7 @@ function refreshGrabUI() {
   const selName = vNames[currentGrabVehicle] || "Toyota Sedan";
 
   if ($("#grabSelSummary")) {
-    $("#grabSelSummary").textContent = `${selName} · ${km} km (${p1Name} → ${p2Name})`;
+    $("#grabSelSummary").textContent = `${selName} · ${km} km (${p1Name} → ${p2Name}) · ⏰ ${pTime}`;
   }
   if ($("#grabBtnLabel")) {
     $("#grabBtnLabel").textContent = `Book ${selName} · ${rm(selFare)}`;
@@ -5224,6 +5281,8 @@ function bookGrabTransfer() {
   const km = currentGrabKm;
   const p1Name = $("#grabPickupInput")?.value.trim() || currentPickupLabel || "Pick-Up";
   const p2Name = $("#grabDropoffInput")?.value.trim() || currentDropoffLabel || "Drop-Off";
+  const pDate  = $("#grabPickupDate")?.value || todayISO();
+  const pTime  = $("#grabPickupTime")?.value || "10:00 AM";
   const vNames = { sedan: "Toyota Sedan (1–4 pax)", mpv: "MPV (3–6 pax)", van: "Van (6–10 pax)" };
   const vRates = { sedan: 6, mpv: 10, van: 15 };
   const vImgs  = { sedan: "images/vehicle_sedan.jpg", mpv: "images/vehicle_mpv.jpg", van: "images/vehicle_van.jpg" };
@@ -5245,13 +5304,13 @@ function bookGrabTransfer() {
     reviews: 180,
     pax: currentGrabVehicle === "sedan" ? "1–4 pax" : (currentGrabVehicle === "mpv" ? "3–6 pax" : "6–10 pax"),
     qtyLabel: "Trips",
-    desc: `Point-to-point transfer from ${p1Name} to ${p2Name} via ${vehTitle}.`,
+    desc: `Point-to-point transfer from ${p1Name} to ${p2Name} via ${vehTitle} (Pickup: ${pTime}).`,
     inc: ["Direct door-to-door transfer", "Private air-conditioned ride", "All fuel, parking & toll charges", "Luggage assistance included"]
   };
 
   CATALOG[transferId] = customTransfer;
-  addToCart(transferId, $("#btnBookGrab"), 1, todayISO(), "On Arrival / Requested Time");
-  toast(`Added ${vehTitle} Transfer to your cart! 🚗`);
+  addToCart(transferId, $("#btnBookGrab"), 1, pDate, `${pTime} · Pickup: ${p1Name}`);
+  toast(`Added ${vehTitle} Transfer to your cart! 🚗 (${pTime})`);
   openCart();
 }
 
@@ -6604,9 +6663,13 @@ function openSunsetCruiseModal(){
 function openSharingTransportModal(){
   let qty = 2; // Min. 2 persons
   let selDate = todayISO();
-  let selTime = "09:00 AM (Hotel Pickup - 10 AM to 6 PM Tour)";
+  let selTime = "09:00 AM (Hotel Pickup - Recommended)";
   let selPickupLoc = "";
-  const stTimes = ["09:00 AM (Hotel Pickup - 10 AM to 6 PM Tour)"];
+  const stTimes = [
+    "08:30 AM (Early Hotel Pickup)",
+    "09:00 AM (Hotel Pickup - Recommended)",
+    "09:30 AM (Late Hotel Pickup)"
+  ];
   const unitPrice = 300;
 
   function render(){
@@ -6684,13 +6747,22 @@ function openSharingTransportModal(){
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Minimum 2 persons required for booking</li>
         </ul>
 
-        <!-- Hotel Pickup Location Input -->
+        <!-- Hotel Pickup Location & Time Input -->
         <div style="background:#F8FAFC;border:1.5px solid #CBD5E1;border-radius:12px;padding:12px;margin-bottom:14px">
           <label for="stPickupLoc" style="font-size:.82rem;font-weight:700;color:#0F172A;display:block;margin-bottom:6px">
             🏨 Hotel / Pickup Location:
           </label>
-          <input type="text" id="stPickupLoc" placeholder="e.g. Pelangi Beach Resort, Cenang Beach hotel..." value="${selPickupLoc}" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid #94A3B8;border-radius:10px;font-size:.86rem;color:#111;outline:none;background:#fff">
-          <small style="display:block;margin-top:5px;color:#64748B;font-size:.72rem">Our driver will pick you up directly at your hotel lobby at 9:00 AM.</small>
+          <input type="text" id="stPickupLoc" placeholder="e.g. Pelangi Beach Resort, Cenang Beach hotel..." value="${selPickupLoc}" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid #94A3B8;border-radius:10px;font-size:.86rem;color:#111;outline:none;background:#fff;margin-bottom:10px">
+
+          <label for="stPickupTimeSelect" style="font-size:.82rem;font-weight:700;color:#0F172A;display:block;margin-bottom:6px">
+            ⏰ Hotel Pickup Time:
+          </label>
+          <select id="stPickupTimeSelect" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;background:#fff;outline:none;cursor:pointer">
+            <option value="08:30 AM (Early Hotel Pickup)" ${selTime.includes("08:30") ? "selected" : ""}>08:30 AM (Early Hotel Pickup)</option>
+            <option value="09:00 AM (Hotel Pickup - Recommended)" ${selTime.includes("09:00") ? "selected" : ""}>09:00 AM (Hotel Pickup - Recommended)</option>
+            <option value="09:30 AM (Late Hotel Pickup)" ${selTime.includes("09:30") ? "selected" : ""}>09:30 AM (Late Hotel Pickup)</option>
+          </select>
+          <small style="display:block;margin-top:6px;color:#64748B;font-size:.72rem">Our driver will pick you up directly at your hotel lobby at your scheduled time.</small>
         </div>
 
         <!-- Date & Time Selection -->
@@ -6722,6 +6794,15 @@ function openSharingTransportModal(){
       locInput.oninput = e => { selPickupLoc = e.target.value; };
     }
 
+    const timeSel = $("#stPickupTimeSelect");
+    if (timeSel) {
+      timeSel.onchange = e => {
+        selTime = e.target.value;
+        if ($("#smTime")) $("#smTime").value = selTime;
+        updQty();
+      };
+    }
+
     $("#smMinus").onclick = () => { if (qty > 2) { qty--; updQty(); } };
     $("#smPlus").onclick  = () => { qty++; updQty(); };
 
@@ -6732,7 +6813,11 @@ function openSharingTransportModal(){
     }
 
     $("#smDate").onchange = e => { selDate = e.target.value; updQty(); };
-    $("#smTime").onchange = e => { selTime = e.target.value; updQty(); };
+    $("#smTime").onchange = e => {
+      selTime = e.target.value;
+      if ($("#stPickupTimeSelect")) $("#stPickupTimeSelect").value = selTime;
+      updQty();
+    };
 
     $("#smAdd").onclick = e => {
       e.stopPropagation();
