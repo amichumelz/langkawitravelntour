@@ -2135,21 +2135,20 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
   .cart-cust-row{grid-template-columns:1fr!important}
 }
 
-/* Jet Ski package carousel & mobile tabs */
-.js-cards-carousel{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
-.js-swipe-hint{display:none}
-.js-pills-bar{display:none}
+/* Jet Ski package switcher & responsive cards */
+.js-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#F1F5F9;padding:4px;border-radius:12px;margin-bottom:12px}
+.js-tab{border:none;background:none;padding:9px 6px;font-size:.76rem;font-weight:700;border-radius:9px;color:#334155;cursor:pointer;transition:all .2s;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.2}
+.js-tab .tab-meta{font-size:.68rem;font-weight:600;opacity:.85}
+.js-tab.active{background:var(--blue);color:#fff;box-shadow:0 3px 10px rgba(2,132,199,.28)}
+
+.js-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.js-cards-grid .mg-card{border:1.5px solid #E2E8F0;border-radius:12px;padding:11px 12px;cursor:pointer;background:#fff;transition:.2s;display:flex;flex-direction:column;gap:4px;text-align:left;box-shadow:0 2px 6px rgba(0,0,0,0.03)}
+.js-cards-grid .mg-card:hover{border-color:var(--blue);transform:translateY(-1.5px)}
+.js-cards-grid .mg-card.selected{border-color:var(--blue);background:#F0F9FF;box-shadow:0 0 0 2px var(--blue)}
+
 @media(max-width:640px){
-  .js-pills-bar{display:flex;gap:6px;background:#F1F5F9;padding:4px;border-radius:12px;margin-bottom:10px}
-  .js-pill{flex:1;border:none;background:none;padding:8px 4px;font-size:.74rem;font-weight:700;border-radius:9px;color:#334155;cursor:pointer;transition:all .2s;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.15}
-  .js-pill .pill-price{font-size:.68rem;font-weight:600;opacity:.85}
-  .js-pill.active{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(2,132,199,.25)}
-  .js-cards-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain;gap:10px;padding:4px 2px 10px;margin:0 -2px 10px;scrollbar-width:thin;scrollbar-color:var(--blue) #F1F5F9}
-  .js-cards-carousel::-webkit-scrollbar{height:5px}
-  .js-cards-carousel::-webkit-scrollbar-track{background:#F1F5F9;border-radius:999px}
-  .js-cards-carousel::-webkit-scrollbar-thumb{background:var(--blue);border-radius:999px}
-  .js-cards-carousel .mg-card{flex:0 0 76%;min-width:220px;max-width:270px;scroll-snap-align:start;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-  .js-swipe-hint{display:inline-flex;align-items:center;gap:4px;color:var(--blue);font-size:.72rem;font-weight:700}
+  .js-cards-grid{grid-template-columns:1fr;gap:8px}
+  .js-cards-grid .mg-card{padding:12px 14px}
 }
 
 
@@ -6473,30 +6472,32 @@ function openJetskiModal(initialId = "js-pkga"){
         </div>
         <p style="margin-bottom:12px;font-size:.9rem;color:#111">Ride the open water! Guided jet ski island expeditions around Langkawi’s coastline and remote secluded islands. Select your package:</p>
 
-        <!-- Package Selection Cards -->
-        <div class="mg-sec-title">
-          <span>Select Jet Ski Package</span>
-          <span class="js-swipe-hint" onclick="$('#jsCards')?.scrollTo({left:9999,behavior:'smooth'})" style="cursor:pointer">Swipe for Package C 👉</span>
-        </div>
+        <!-- Package Selection -->
+        <div class="mg-sec-title"><span>Select Jet Ski Package</span><small style="color:#555;font-size:.7rem">3 Packages Available</small></div>
 
-        <!-- Quick mobile package switch tabs -->
-        <div class="js-pills-bar">
+        <!-- Quick 3-package tabs (100% visible on mobile) -->
+        <div class="js-tabs">
           ${JETSKI_OPTIONS.map(o => `
-            <button type="button" class="js-pill ${o.id === currentOpt.id ? 'active' : ''}" data-jsid="${o.id}">
-              ${o.name} <span class="pill-price">(${rm(o.price)})</span>
+            <button type="button" class="js-tab ${o.id === currentOpt.id ? 'active' : ''}" data-jsid="${o.id}">
+              <span>${o.name}</span>
+              <span class="tab-meta">${rm(o.price)} · ${o.dur}</span>
             </button>
           `).join('')}
         </div>
 
-        <div class="js-cards-carousel" id="jsCards">
+        <!-- 3 Cards: 3 columns on desktop, 1 column stack on mobile (100% visible, never cropped) -->
+        <div class="js-cards-grid" id="jsCards">
           ${JETSKI_OPTIONS.map(o => `
             <div class="mg-card ${o.id === currentOpt.id ? 'selected' : ''}" data-jsid="${o.id}">
               <div class="mg-card-top">
-                <b>${o.name}</b>
+                <b style="font-size:.88rem">${o.name}</b>
                 <small>${o.dur}</small>
               </div>
-              <span style="font-size:.72rem;color:#444;font-weight:600;margin-top:2px">${o.sub}</span>
-              <span class="mg-price">${rm(o.price)}</span>
+              <span style="font-size:.74rem;color:#475569;font-weight:600;margin-top:2px">${o.sub}</span>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:4px">
+                <span class="mg-price" style="font-size:1.05rem;color:var(--blue)">${rm(o.price)}</span>
+                <span style="font-size:.72rem;font-weight:600;color:${o.id === currentOpt.id ? 'var(--blue)' : '#64748B'}">${o.id === currentOpt.id ? '✓ Selected' : 'Tap to select'}</span>
+              </div>
             </div>
           `).join('')}
         </div>
@@ -6557,19 +6558,9 @@ function openJetskiModal(initialId = "js-pkga"){
 
     $("#smClose").onclick = closeService;
 
-    // Smoothly ensure selected card is centered in carousel when scrollable
-    const jsContainer = $("#jsCards");
-    const activeCard = $(`#jsCards [data-jsid="${currentOpt.id}"]`);
-    if (jsContainer && activeCard && jsContainer.scrollWidth > jsContainer.clientWidth) {
-      setTimeout(() => {
-        const targetScroll = (activeCard.offsetLeft - jsContainer.offsetLeft) - (jsContainer.clientWidth - activeCard.clientWidth) / 2;
-        jsContainer.scrollTo({ left: Math.max(0, targetScroll), behavior: 'smooth' });
-      }, 30);
-    }
-
-    $$("[data-jsid]").forEach(card => {
-      card.onclick = () => {
-        const id = card.dataset.jsid;
+    $$("[data-jsid]").forEach(el => {
+      el.onclick = () => {
+        const id = el.dataset.jsid;
         const opt = JETSKI_OPTIONS.find(o => o.id === id);
         if (opt) { currentOpt = opt; render(); }
       };
