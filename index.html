@@ -3261,53 +3261,58 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
       </div>
 
       <!-- 7. TRANSFER PICKUP DATE & TIME -->
-      <div class="grab-schedule-bar" style="background:#ffffff;border:1.5px solid #E2E8F0;border-radius:14px;padding:14px 18px;margin:0 0 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:0 3px 12px rgba(0,0,0,0.02)">
-        <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:.88rem;color:#0B1E2E;min-width:130px">
-          <span style="font-size:1.15rem">⏰</span>
-          <span>Pickup Schedule:</span>
+      <div class="grab-schedule-bar" style="background:#ffffff;border:1.5px solid #E2E8F0;border-radius:14px;padding:14px 18px;margin:0 0 18px;box-shadow:0 3px 12px rgba(0,0,0,0.02)">
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:.88rem;color:#0B1E2E;min-width:130px">
+            <span style="font-size:1.15rem">⏰</span>
+            <span>Pickup Schedule:</span>
+          </div>
+          <div style="flex:1;min-width:150px">
+            <label for="grabPickupDate" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Date</label>
+            <input type="date" id="grabPickupDate" onchange="updateGrabPickupTimes()" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;background:#F8FAFC;outline:none;cursor:pointer">
+          </div>
+          <div style="flex:1;min-width:180px">
+            <label for="grabPickupTime" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Time</label>
+            <select id="grabPickupTime" onchange="onGrabPickupTimeChange()" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;background:#F8FAFC;outline:none;cursor:pointer">
+              <option value="07:00 AM">07:00 AM (Early Morning)</option>
+              <option value="07:30 AM">07:30 AM</option>
+              <option value="08:00 AM">08:00 AM</option>
+              <option value="08:30 AM">08:30 AM</option>
+              <option value="09:00 AM">09:00 AM</option>
+              <option value="09:30 AM">09:30 AM</option>
+              <option value="10:00 AM" selected>10:00 AM (Morning)</option>
+              <option value="10:30 AM">10:30 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="11:30 AM">11:30 AM</option>
+              <option value="12:00 PM">12:00 PM (Noon)</option>
+              <option value="12:30 PM">12:30 PM</option>
+              <option value="01:00 PM">01:00 PM</option>
+              <option value="01:30 PM">01:30 PM</option>
+              <option value="02:00 PM">02:00 PM (Afternoon)</option>
+              <option value="02:30 PM">02:30 PM</option>
+              <option value="03:00 PM">03:00 PM</option>
+              <option value="03:30 PM">03:30 PM</option>
+              <option value="04:00 PM">04:00 PM</option>
+              <option value="04:30 PM">04:30 PM</option>
+              <option value="05:00 PM">05:00 PM (Evening)</option>
+              <option value="05:30 PM">05:30 PM</option>
+              <option value="06:00 PM">06:00 PM</option>
+              <option value="06:30 PM">06:30 PM</option>
+              <option value="07:00 PM">07:00 PM (Sunset / Dinner)</option>
+              <option value="07:30 PM">07:30 PM</option>
+              <option value="08:00 PM">08:00 PM</option>
+              <option value="08:30 PM">08:30 PM</option>
+              <option value="09:00 PM">09:00 PM</option>
+              <option value="09:30 PM">09:30 PM</option>
+              <option value="10:00 PM">10:00 PM (Late Night)</option>
+              <option value="10:30 PM">10:30 PM</option>
+              <option value="11:00 PM">11:00 PM</option>
+            </select>
+          </div>
         </div>
-        <div style="flex:1;min-width:150px">
-          <label for="grabPickupDate" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Date</label>
-          <input type="date" id="grabPickupDate" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;background:#F8FAFC;outline:none;cursor:pointer">
-        </div>
-        <div style="flex:1;min-width:180px">
-          <label for="grabPickupTime" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Time</label>
-          <select id="grabPickupTime" onchange="refreshGrabUI()" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;background:#F8FAFC;outline:none;cursor:pointer">
-            <option value="On Flight / Ferry Arrival">On Flight / Ferry Arrival (Immediate)</option>
-            <option value="07:00 AM">07:00 AM (Early Morning)</option>
-            <option value="07:30 AM">07:30 AM</option>
-            <option value="08:00 AM">08:00 AM</option>
-            <option value="08:30 AM">08:30 AM</option>
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="09:30 AM">09:30 AM</option>
-            <option value="10:00 AM" selected>10:00 AM (Morning)</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="12:00 PM">12:00 PM (Noon)</option>
-            <option value="12:30 PM">12:30 PM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="01:30 PM">01:30 PM</option>
-            <option value="02:00 PM">02:00 PM (Afternoon)</option>
-            <option value="02:30 PM">02:30 PM</option>
-            <option value="03:00 PM">03:00 PM</option>
-            <option value="03:30 PM">03:30 PM</option>
-            <option value="04:00 PM">04:00 PM</option>
-            <option value="04:30 PM">04:30 PM</option>
-            <option value="05:00 PM">05:00 PM (Evening)</option>
-            <option value="05:30 PM">05:30 PM</option>
-            <option value="06:00 PM">06:00 PM</option>
-            <option value="06:30 PM">06:30 PM</option>
-            <option value="07:00 PM">07:00 PM (Sunset / Dinner)</option>
-            <option value="07:30 PM">07:30 PM</option>
-            <option value="08:00 PM">08:00 PM</option>
-            <option value="08:30 PM">08:30 PM</option>
-            <option value="09:00 PM">09:00 PM</option>
-            <option value="09:30 PM">09:30 PM</option>
-            <option value="10:00 PM">10:00 PM (Late Night)</option>
-            <option value="10:30 PM">10:30 PM</option>
-            <option value="11:00 PM">11:00 PM</option>
-          </select>
+        <div style="margin-top:10px;padding:8px 12px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;font-size:.78rem;color:#92400E;display:flex;align-items:center;gap:8px">
+          <span style="font-size:1rem;line-height:1">⏱️</span>
+          <span><b>Advance Notice Required:</b> All transfers must be booked at least <b>1 hour in advance</b> of pickup time.</span>
         </div>
       </div>
 
@@ -3400,29 +3405,39 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     </div>
 
     <!-- Private Tour Pickup Location & Time Bar -->
-    <div class="fleet-pickup-bar" data-reveal style="--d:.1s;background:#ffffff;border:1.5px solid #E2E8F0;border-radius:16px;padding:14px 18px;margin:18px 0 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:0 4px 16px rgba(0,0,0,0.03)">
-      <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:.88rem;color:#0B1E2E;min-width:130px">
-        <span style="font-size:1.15rem">📍</span>
-        <span>Pickup Details:</span>
+    <div class="fleet-pickup-bar" data-reveal style="--d:.1s;background:#ffffff;border:1.5px solid #E2E8F0;border-radius:16px;padding:14px 18px;margin:18px 0 22px;box-shadow:0 4px 16px rgba(0,0,0,0.03)">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:.88rem;color:#0B1E2E;min-width:130px">
+          <span style="font-size:1.15rem">📍</span>
+          <span>Pickup Details:</span>
+        </div>
+        <div style="flex:1;min-width:200px">
+          <label for="fleetPickupLoc" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Location / Hotel</label>
+          <input type="text" id="fleetPickupLoc" placeholder="Type hotel name, airport or jetty..." value="Hotel in Cenang / Kuah" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;outline:none;background:#F8FAFC">
+        </div>
+        <div style="min-width:150px">
+          <label for="fleetPickupDate" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Date</label>
+          <input type="date" id="fleetPickupDate" onchange="updateFleetPickupTimes()" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;outline:none;background:#F8FAFC;cursor:pointer">
+        </div>
+        <div style="min-width:160px">
+          <label for="fleetPickupTime" style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Time</label>
+          <select id="fleetPickupTime" onchange="onFleetPickupTimeChange()" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;outline:none;background:#F8FAFC;cursor:pointer">
+            <option value="08:00 AM">08:00 AM</option>
+            <option value="09:00 AM" selected>09:00 AM (Recommended)</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="12:00 PM">12:00 PM (Noon)</option>
+            <option value="01:00 PM">01:00 PM</option>
+            <option value="02:00 PM">02:00 PM</option>
+            <option value="03:00 PM">03:00 PM</option>
+            <option value="04:00 PM">04:00 PM</option>
+            <option value="05:00 PM">05:00 PM</option>
+          </select>
+        </div>
       </div>
-      <div style="flex:1;min-width:200px">
-        <label style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Location / Hotel</label>
-        <input type="text" id="fleetPickupLoc" placeholder="Type hotel name, airport or jetty..." value="Hotel in Cenang / Kuah" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;outline:none;background:#F8FAFC">
-      </div>
-      <div style="min-width:160px">
-        <label style="display:block;font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Pickup Time</label>
-        <select id="fleetPickupTime" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:.86rem;font-weight:600;color:#0B1E2E;outline:none;background:#F8FAFC;cursor:pointer">
-          <option value="08:00 AM">08:00 AM</option>
-          <option value="08:30 AM">08:30 AM</option>
-          <option value="09:00 AM" selected>09:00 AM (Recommended)</option>
-          <option value="09:30 AM">09:30 AM</option>
-          <option value="10:00 AM">10:00 AM</option>
-          <option value="10:30 AM">10:30 AM</option>
-          <option value="11:00 AM">11:00 AM</option>
-          <option value="01:00 PM">01:00 PM</option>
-          <option value="02:00 PM">02:00 PM</option>
-          <option value="03:00 PM">03:00 PM</option>
-        </select>
+      <div style="margin-top:10px;padding:8px 12px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;font-size:.78rem;color:#92400E;display:flex;align-items:center;gap:8px">
+        <span style="font-size:1rem;line-height:1">⏱️</span>
+        <span><b>Advance Notice Required:</b> Private tour charters must be booked at least <b>1 hour in advance</b> of pickup time.</span>
       </div>
     </div>
 
@@ -3712,17 +3727,66 @@ const PAYMENT_ENDPOINTS = {
 const $  = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const rm = n => "RM " + Number(n).toLocaleString("en-MY");
-const todayISO = () => new Date().toISOString().split("T")[0];
+const todayISO = () => {
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+const tomorrowISO = () => {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+const formatDateToISO = d => {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+// Standard hourly session times: every 1 hour from 9:00 AM to 5:00 PM for packages without specific fixed slots
+const STANDARD_HOURLY_TIMES = [
+  "09:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "01:00 PM",
+  "02:00 PM",
+  "03:00 PM",
+  "04:00 PM",
+  "05:00 PM"
+];
+
+function parseDateTime(dateStr, timeStr) {
+  if (!dateStr || !timeStr) return null;
+  const match = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (!match) return null;
+  let hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  const meridiem = match[3].toUpperCase();
+  if (meridiem === "PM" && hours < 12) hours += 12;
+  if (meridiem === "AM" && hours === 12) hours = 0;
+  const parts = dateStr.split("-").map(Number);
+  if (parts.length < 3 || parts.some(isNaN)) return null;
+  return new Date(parts[0], parts[1] - 1, parts[2], hours, minutes, 0, 0);
+}
+
+function isTransferAtLeastOneHourAhead(dateStr, timeStr) {
+  const targetDate = parseDateTime(dateStr, timeStr);
+  if (!targetDate) return true;
+  const now = new Date();
+  const diffMs = targetDate.getTime() - now.getTime();
+  const minNoticeMs = 60 * 60 * 1000; // 1 hour minimum notice
+  return diffMs >= minNoticeMs;
+}
+
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const imgUrl = (id, w=900) => (id.startsWith('http') || id.startsWith('images/') || id.startsWith('/') || id.startsWith('.')) ? id : `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=60`;
-function updateViewportHeight(){
-  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  document.documentElement.style.setProperty("--app-vh", `${viewportHeight}px`);
-}
-updateViewportHeight();
-window.addEventListener("resize", updateViewportHeight, {passive:true});
-window.visualViewport?.addEventListener("resize", updateViewportHeight, {passive:true});
-
 function updateViewportHeight(){
   const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   document.documentElement.style.setProperty("--app-vh", `${viewportHeight}px`);
@@ -5207,11 +5271,183 @@ function updateGrabFare() {
   currentGrabKm = getCalculatedKm(currentPickupKey, currentDropoffKey, currentPickupCoords, currentDropoffCoords);
   if ($("#grabCustomKm")) $("#grabCustomKm").value = currentGrabKm;
   const pDateEl = $("#grabPickupDate");
-  if (pDateEl && !pDateEl.value) {
-    pDateEl.value = todayISO();
+  if (pDateEl) {
+    if (!pDateEl.value) pDateEl.value = todayISO();
     pDateEl.min = todayISO();
   }
+  updateGrabPickupTimes();
+  updateFleetPickupTimes();
   refreshGrabUI();
+}
+
+const ALL_GRAB_TRANSFER_SLOTS = [
+  { value: "07:00 AM", label: "07:00 AM (Early Morning)" },
+  { value: "07:30 AM", label: "07:30 AM" },
+  { value: "08:00 AM", label: "08:00 AM" },
+  { value: "08:30 AM", label: "08:30 AM" },
+  { value: "09:00 AM", label: "09:00 AM" },
+  { value: "09:30 AM", label: "09:30 AM" },
+  { value: "10:00 AM", label: "10:00 AM (Morning)" },
+  { value: "10:30 AM", label: "10:30 AM" },
+  { value: "11:00 AM", label: "11:00 AM" },
+  { value: "11:30 AM", label: "11:30 AM" },
+  { value: "12:00 PM", label: "12:00 PM (Noon)" },
+  { value: "12:30 PM", label: "12:30 PM" },
+  { value: "01:00 PM", label: "01:00 PM" },
+  { value: "01:30 PM", label: "01:30 PM" },
+  { value: "02:00 PM", label: "02:00 PM (Afternoon)" },
+  { value: "02:30 PM", label: "02:30 PM" },
+  { value: "03:00 PM", label: "03:00 PM" },
+  { value: "03:30 PM", label: "03:30 PM" },
+  { value: "04:00 PM", label: "04:00 PM" },
+  { value: "04:30 PM", label: "04:30 PM" },
+  { value: "05:00 PM", label: "05:00 PM (Evening)" },
+  { value: "05:30 PM", label: "05:30 PM" },
+  { value: "06:00 PM", label: "06:00 PM" },
+  { value: "06:30 PM", label: "06:30 PM" },
+  { value: "07:00 PM", label: "07:00 PM (Sunset / Dinner)" },
+  { value: "07:30 PM", label: "07:30 PM" },
+  { value: "08:00 PM", label: "08:00 PM" },
+  { value: "08:30 PM", label: "08:30 PM" },
+  { value: "09:00 PM", label: "09:00 PM" },
+  { value: "09:30 PM", label: "09:30 PM" },
+  { value: "10:00 PM", label: "10:00 PM (Late Night)" },
+  { value: "10:30 PM", label: "10:30 PM" },
+  { value: "11:00 PM", label: "11:00 PM" }
+];
+
+function updateGrabPickupTimes() {
+  const pDateEl = $("#grabPickupDate");
+  const pTimeEl = $("#grabPickupTime");
+  if (!pDateEl || !pTimeEl) return;
+
+  const selDate = pDateEl.value || todayISO();
+  const isToday = (selDate === todayISO());
+  let currentVal = pTimeEl.value;
+  let firstAvailableVal = null;
+  let hasValidSlotsToday = false;
+
+  const html = ALL_GRAB_TRANSFER_SLOTS.map(slot => {
+    let disabled = false;
+    let extraLabel = "";
+
+    if (isToday) {
+      if (!isTransferAtLeastOneHourAhead(selDate, slot.value)) {
+        disabled = true;
+        extraLabel = " (Min. 1h notice required)";
+      } else {
+        hasValidSlotsToday = true;
+        if (!firstAvailableVal) firstAvailableVal = slot.value;
+      }
+    } else {
+      if (!firstAvailableVal) firstAvailableVal = slot.value;
+    }
+
+    return `<option value="${slot.value}" ${disabled ? "disabled style='color:#94a3b8;background:#f1f5f9;'" : ""}>${slot.label}${extraLabel}</option>`;
+  }).join("");
+
+  if (isToday && !hasValidSlotsToday) {
+    pDateEl.value = tomorrowISO();
+    pDateEl.min = todayISO();
+    toast("Transfers require at least 1 hour advance notice. Date set to tomorrow.");
+    updateGrabPickupTimes();
+    return;
+  }
+
+  pTimeEl.innerHTML = html;
+
+  const selectedOpt = pTimeEl.querySelector(`option[value="${currentVal}"]`);
+  if (!selectedOpt || selectedOpt.disabled) {
+    pTimeEl.value = firstAvailableVal || ALL_GRAB_TRANSFER_SLOTS[0].value;
+  } else {
+    pTimeEl.value = currentVal;
+  }
+
+  refreshGrabUI();
+}
+
+function onGrabPickupTimeChange() {
+  const pDate = $("#grabPickupDate")?.value || todayISO();
+  const pTime = $("#grabPickupTime")?.value || "10:00 AM";
+  if (!isTransferAtLeastOneHourAhead(pDate, pTime)) {
+    toast("⚠️ Transfers must be booked at least 1 hour in advance of pickup time.");
+    updateGrabPickupTimes();
+    return;
+  }
+  refreshGrabUI();
+}
+
+const ALL_FLEET_CHARTER_SLOTS = [
+  { value: "08:00 AM", label: "08:00 AM (Early Pickup)" },
+  { value: "09:00 AM", label: "09:00 AM (Recommended)" },
+  { value: "10:00 AM", label: "10:00 AM" },
+  { value: "11:00 AM", label: "11:00 AM" },
+  { value: "12:00 PM", label: "12:00 PM (Noon)" },
+  { value: "01:00 PM", label: "01:00 PM" },
+  { value: "02:00 PM", label: "02:00 PM" },
+  { value: "03:00 PM", label: "03:00 PM" },
+  { value: "04:00 PM", label: "04:00 PM" },
+  { value: "05:00 PM", label: "05:00 PM" }
+];
+
+function updateFleetPickupTimes() {
+  const pDateEl = $("#fleetPickupDate");
+  const pTimeEl = $("#fleetPickupTime");
+  if (!pDateEl || !pTimeEl) return;
+
+  if (!pDateEl.value) pDateEl.value = todayISO();
+  pDateEl.min = todayISO();
+
+  const selDate = pDateEl.value || todayISO();
+  const isToday = (selDate === todayISO());
+  let currentVal = pTimeEl.value;
+  let firstAvailableVal = null;
+  let hasValidSlotsToday = false;
+
+  const html = ALL_FLEET_CHARTER_SLOTS.map(slot => {
+    let disabled = false;
+    let extraLabel = "";
+
+    if (isToday) {
+      if (!isTransferAtLeastOneHourAhead(selDate, slot.value)) {
+        disabled = true;
+        extraLabel = " (Min. 1h notice required)";
+      } else {
+        hasValidSlotsToday = true;
+        if (!firstAvailableVal) firstAvailableVal = slot.value;
+      }
+    } else {
+      if (!firstAvailableVal) firstAvailableVal = slot.value;
+    }
+
+    return `<option value="${slot.value}" ${disabled ? "disabled style='color:#94a3b8;background:#f1f5f9;'" : ""}>${slot.label}${extraLabel}</option>`;
+  }).join("");
+
+  if (isToday && !hasValidSlotsToday) {
+    pDateEl.value = tomorrowISO();
+    pDateEl.min = todayISO();
+    toast("Charter transfers require at least 1 hour advance notice. Date set to tomorrow.");
+    updateFleetPickupTimes();
+    return;
+  }
+
+  pTimeEl.innerHTML = html;
+
+  const selectedOpt = pTimeEl.querySelector(`option[value="${currentVal}"]`);
+  if (!selectedOpt || selectedOpt.disabled) {
+    pTimeEl.value = firstAvailableVal || ALL_FLEET_CHARTER_SLOTS[0].value;
+  } else {
+    pTimeEl.value = currentVal;
+  }
+}
+
+function onFleetPickupTimeChange() {
+  const pDate = $("#fleetPickupDate")?.value || todayISO();
+  const pTime = $("#fleetPickupTime")?.value || "09:00 AM";
+  if (!isTransferAtLeastOneHourAhead(pDate, pTime)) {
+    toast("⚠️ Private tour charters must be booked at least 1 hour in advance of pickup time.");
+    updateFleetPickupTimes();
+  }
 }
 
 function onCustomKmChange() {
@@ -5267,6 +5503,19 @@ function bookGrabTransfer() {
   const p2Name = $("#grabDropoffInput")?.value.trim() || currentDropoffLabel || "Drop-Off";
   const pDate  = $("#grabPickupDate")?.value || todayISO();
   const pTime  = $("#grabPickupTime")?.value || "10:00 AM";
+
+  // Validate minimum 1 hour advance notice for transfers
+  if (!isTransferAtLeastOneHourAhead(pDate, pTime)) {
+    toast("⚠️ Notice: Transfers must be booked at least 1 hour in advance of pickup time.");
+    const timeEl = $("#grabPickupTime");
+    if (timeEl) {
+      timeEl.style.borderColor = "#EF4444";
+      timeEl.focus();
+      setTimeout(() => { timeEl.style.borderColor = ""; }, 3000);
+    }
+    return;
+  }
+
   const vNames = { sedan: "Toyota Sedan (1–4 pax)", mpv: "MPV (3–6 pax)", van: "Van (6–10 pax)" };
   const vRates = { sedan: 6, mpv: 10, van: 15 };
   const vImgs  = { sedan: "images/vehicle_sedan.jpg", mpv: "images/vehicle_mpv.jpg", van: "images/vehicle_van.jpg" };
@@ -5422,8 +5671,21 @@ function addFleetToCart(vid) {
   const catalogId = `${vid}-${dur}h`;
   const btn = $(`#fadd-${vid}`);
   const pickupLoc = $("#fleetPickupLoc")?.value.trim() || "Hotel in Langkawi";
+  const pickupDate = $("#fleetPickupDate")?.value || todayISO();
   const pickupTime = $("#fleetPickupTime")?.value || "09:00 AM";
-  addToCart(catalogId, btn, 1, todayISO(), `${pickupTime} · Pickup: ${pickupLoc}`);
+
+  if (!isTransferAtLeastOneHourAhead(pickupDate, pickupTime)) {
+    toast("⚠️ Notice: Charter transfers must be booked at least 1 hour in advance of pickup time.");
+    const timeEl = $("#fleetPickupTime");
+    if (timeEl) {
+      timeEl.style.borderColor = "#EF4444";
+      timeEl.focus();
+      setTimeout(() => { timeEl.style.borderColor = ""; }, 3000);
+    }
+    return;
+  }
+
+  addToCart(catalogId, btn, 1, pickupDate, `${pickupTime} · Pickup: ${pickupLoc}`);
   openCart();
 }
 
@@ -5712,6 +5974,7 @@ function closeService(){
 }
 
 function renderDateTimeSelector(selDate, selTime, timesArray){
+  const times = (timesArray && timesArray.length) ? timesArray : STANDARD_HOURLY_TIMES;
   return `
     <div class="sm-datetime-grid">
       <div>
@@ -5721,7 +5984,7 @@ function renderDateTimeSelector(selDate, selTime, timesArray){
       <div>
         <label style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#333;margin-bottom:6px;display:block">Select Session Time</label>
         <select id="smTime" class="sm-dt-input">
-          ${timesArray.map(t => `<option value="${t}" ${t === selTime ? 'selected' : ''}>${t}</option>`).join('')}
+          ${times.map(t => `<option value="${t}" ${t === selTime ? 'selected' : ''}>${t}</option>`).join('')}
         </select>
       </div>
     </div>`;
@@ -5735,8 +5998,8 @@ function openMangroveModal(initialId = "mg-sharing-child"){
   let activeCat = currentOpt.cat;
   let qty = 1;
   let selDate = todayISO();
-  let selTime = activeCat === "sharing" ? "09:00 AM (Sharing Tour Departure)" : "10:00 AM";
-  const mgTimes = activeCat === "sharing" ? ["09:00 AM (Sharing Tour Departure)"] : ["09:00 AM", "10:00 AM", "11:30 AM", "02:00 PM", "03:00 PM", "04:30 PM"];
+  let selTime = activeCat === "sharing" ? "09:00 AM (Sharing Tour Departure)" : "09:00 AM";
+  const mgTimes = activeCat === "sharing" ? ["09:00 AM (Sharing Tour Departure)"] : STANDARD_HOURLY_TIMES;
 
   function render(){
     const optsInCat = MANGROVE_OPTIONS.filter(o => o.cat === activeCat);
@@ -5793,7 +6056,7 @@ function openMangroveModal(initialId = "mg-sharing-child"){
         </div>
 
         <!-- Date & Time Selection -->
-        ${renderDateTimeSelector(selDate, selTime, activeCat === 'sharing' ? ["09:00 AM (Sharing Tour Departure)"] : ["09:00 AM", "10:00 AM", "11:30 AM", "02:00 PM", "03:00 PM", "04:30 PM"])}
+        ${renderDateTimeSelector(selDate, selTime, activeCat === 'sharing' ? ["09:00 AM (Sharing Tour Departure)"] : STANDARD_HOURLY_TIMES)}
 
         <!-- Inclusions -->
         <h6 style="font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#000;font-weight:700;margin:12px 0 8px">What Is Included:</h6>
@@ -5828,7 +6091,7 @@ function openMangroveModal(initialId = "mg-sharing-child"){
     $$("[data-mgcat]").forEach(btn => {
       btn.onclick = () => {
         activeCat = btn.dataset.mgcat;
-        selTime = activeCat === "sharing" ? "09:00 AM (Sharing Tour Departure)" : "10:00 AM";
+        selTime = activeCat === "sharing" ? "09:00 AM (Sharing Tour Departure)" : "09:00 AM";
         render();
       };
     });
@@ -5895,7 +6158,7 @@ function openIslandHoppingModal(){
     const currentPrice = getCurrentPrice();
     const ihTimes = mode === "sharing"
       ? ["09:00 AM – 02:00 PM"]
-      : ["09:00 AM", "09:30 AM", "11:00 AM", "02:00 PM", "02:30 PM", "04:00 PM"];
+      : STANDARD_HOURLY_TIMES;
 
     $("#svcModal").innerHTML = `
       <div class="sm-head g-island">
@@ -6349,8 +6612,8 @@ function openAtvModal(initialId = "atv-1h45m"){
   let currentOpt = ATV_OPTIONS[0];
   let pax = 2; // Default 2 persons (1 ATV fits up to 2 riders)
   let selDate = todayISO();
-  let selTime = "09:30 AM";
-  const atvTimes = ["09:30 AM", "11:00 AM", "01:00 PM", "02:30 PM", "04:00 PM", "05:00 PM"];
+  let selTime = "09:00 AM";
+  const atvTimes = STANDARD_HOURLY_TIMES;
 
   const getAtvCount = (p) => Math.max(1, Math.ceil(p / 2));
 
@@ -6814,8 +7077,8 @@ function openWatersportsModal(initialId = "ws-combo"){
   let currentOpt = WATERSPORTS_OPTIONS.find(o => o.id === initialId) || WATERSPORTS_OPTIONS[0];
   let qty = 1;
   let selDate = todayISO();
-  let selTime = "10:00 AM";
-  const wsTimes = ["10:00 AM", "11:30 AM", "02:00 PM", "03:30 PM", "04:30 PM"];
+  let selTime = "09:00 AM";
+  const wsTimes = STANDARD_HOURLY_TIMES;
 
   function render(){
     $("#svcModal").innerHTML = `
@@ -6970,8 +7233,8 @@ function openService(id){
   ];
   let qty = 1;
   let selDate = todayISO();
-  let selTime = "10:00 AM";
-  const defTimes = ["09:00 AM", "10:00 AM", "11:30 AM", "02:00 PM", "03:30 PM", "05:00 PM"];
+  let selTime = "09:00 AM";
+  const defTimes = STANDARD_HOURLY_TIMES;
   $("#svcModal").innerHTML = `
     <div class="sm-head ${s.grad || "g-island"}">
       ${s.img ? `<img src="${imgUrl(s.img,1100)}" alt="${s.title}" onerror="this.remove()">` : ""}
@@ -7064,13 +7327,43 @@ function openCheckout(){
 function closeCheckout(){ $("#ckOverlay").classList.remove("show"); document.body.style.overflow = ""; }
 function validateCheckout(){
   let ok = true;
-  const mark = (el, bad) => { el.classList.toggle("invalid", bad); if (bad) ok = false; };
-  mark($("#ckName"),  $("#ckName").value.trim().length < 2);
-  mark($("#ckEmail"), !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#ckEmail").value.trim()));
-  mark($("#ckPhone"), $("#ckPhone").value.replace(/\D/g,"").length < 8);
-  mark($("#ckDate"),  !$("#ckDate").value);
-  if (!ok) toast("Please fill in the required fields");
-  return ok;
+  const mark = (el, bad) => { if (el){ el.classList.toggle("invalid", bad); if (bad) ok = false; } };
+  mark($("#ckName"),  $("#ckName")?.value.trim().length < 2);
+  mark($("#ckEmail"), !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#ckEmail")?.value.trim() || ""));
+  mark($("#ckPhone"), ($("#ckPhone")?.value.replace(/\D/g,"") || "").length < 8);
+  mark($("#ckDate"),  !$("#ckDate")?.value);
+  if (!ok) {
+    toast("Please fill in the required fields");
+    return false;
+  }
+
+  // Validate that any transfer items in the cart are booked at least 1 hour in advance
+  for (const item of cart) {
+    if (item.id.startsWith("grab-tf-") || item.id.startsWith("pt-") || item.id.includes("transfer")) {
+      if (!isTransferAtLeastOneHourAhead(item.date, item.time)) {
+        toast(`⚠️ Notice: Transfer "${CATALOG[item.id]?.title || 'Transfer'}" must be booked at least 1 hour in advance of pickup time.`);
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+function processCartPayment(gateway){
+  if (!cart.length) {
+    toast("Your cart is empty");
+    return;
+  }
+  for (const item of cart) {
+    if (item.id.startsWith("grab-tf-") || item.id.startsWith("pt-") || item.id.includes("transfer")) {
+      if (!isTransferAtLeastOneHourAhead(item.date, item.time)) {
+        toast(`⚠️ Notice: Transfer "${CATALOG[item.id]?.title || 'Transfer'}" must be booked at least 1 hour in advance of pickup time.`);
+        return;
+      }
+    }
+  }
+  openCheckout();
 }
 function launchConfetti(){
   if (reduceMotion) return;
