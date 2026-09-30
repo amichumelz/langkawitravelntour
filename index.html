@@ -2730,7 +2730,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
             </div>
             <div class="bs-head-text">
               <h3 class="bs-card-title-white" onclick="openMangroveModal('mg-sharing-child')" style="cursor:pointer">Kilim Mangrove Safari Tour</h3>
-              <p class="bs-card-sub-white">Half Day · 3 Hours · Daily 9:00 AM</p>
+              <p class="bs-card-sub-white">Half Day · 4 Hours · Daily 9:00 AM</p>
             </div>
           </div>
           <div class="bs-price-row">
@@ -2740,7 +2740,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
           <ul class="bs-features">
             <li class="bs-feature-item-white">
               <svg class="bs-chk-green" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>3-Hour Kilim Geoforest mangrove boat tour</span>
+              <span>4-Hour Kilim Geoforest mangrove boat tour</span>
             </li>
             <li class="bs-feature-item-white">
               <svg class="bs-chk-green" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -3855,8 +3855,8 @@ const SERVICES = [
     qtyLabel: "Pax / Boat",
     tag: "Best Seller",
     loc: "Kilim Geoforest, Langkawi",
-    desc: "Glide through Langkawi's Kilim Geoforest mangrove rivers — choose 4h Sharing at 9 AM with lunch & hotel pickup (Kids RM90 / Adults RM120) or 3h/4h Private Boat from RM350.",
-    inc: ["4h Sharing at 9 AM with Hotel Pickup & Lunch", "Private boat options for 3h & 4h (up to 20 pax)", "Bat Cave, floating fish farm & eagle watching", "All life jackets & safety gear included", "Experienced local boatman & guide"]
+    desc: "Glide through Langkawi's Kilim Geoforest mangrove rivers — choose 4h Sharing at 9 AM with lunch & hotel pickup (Kids RM90 / Adults RM120) or 2h/3h Private Boat from RM350.",
+    inc: ["4h Sharing at 9 AM with Hotel Pickup & Lunch", "Private boat options for 2h & 3h (up to 15 pax)", "Bat Cave, floating fish farm & eagle watching", "All life jackets & safety gear included", "Experienced local boatman & guide"]
   },
   {
     id: "island-hopping",
@@ -3988,29 +3988,29 @@ const SERVICES = [
 ];
 
 const MANGROVE_OPTIONS = [
-  // 3-Hour Sharing (9 AM) (updated from 4-Hour)
+  // 4-Hour Sharing (9 AM)
   {
     id: "mg-sharing-child",
     cat: "sharing",
-    catLabel: "3h Sharing (9 AM)",
+    catLabel: "4h Sharing (9 AM)",
     name: "Child (3–11 yrs)",
     pax: "Per Child",
     price: 90,
-    unit: "per child · 3 hrs",
-    dur: "3 Hours · Dep 9:00 AM",
-    desc: "3-Hour sharing mangrove tour. Departure at 9:00 AM. Includes return hotel pickup & drop-off and fried rice lunch.",
+    unit: "per child · 4 hrs",
+    dur: "4 Hours · Dep 9:00 AM",
+    desc: "4-Hour sharing mangrove tour. Departure at 9:00 AM. Includes return hotel pickup & drop-off and fried rice lunch.",
     stops: ["Bat Cave", "Fish Farm", "Eagle Feeding", "Andaman Sea (Kilim)", "Crocodile Cave", "Lunch (Fried Rice Included)", "Hotel Pickup & Drop-Off"]
   },
   {
     id: "mg-sharing-adult",
     cat: "sharing",
-    catLabel: "3h Sharing (9 AM)",
+    catLabel: "4h Sharing (9 AM)",
     name: "Adult (12+ yrs)",
     pax: "Per Adult",
     price: 120,
-    unit: "per adult · 3 hrs",
-    dur: "3 Hours · Dep 9:00 AM",
-    desc: "3-Hour sharing mangrove tour. Departure at 9:00 AM. Includes return hotel pickup & drop-off and fried rice lunch.",
+    unit: "per adult · 4 hrs",
+    dur: "4 Hours · Dep 9:00 AM",
+    desc: "4-Hour sharing mangrove tour. Departure at 9:00 AM. Includes return hotel pickup & drop-off and fried rice lunch.",
     stops: ["Bat Cave", "Fish Farm", "Eagle Feeding", "Andaman Sea (Kilim)", "Crocodile Cave", "Lunch (Fried Rice Included)", "Hotel Pickup & Drop-Off"]
   },
 
@@ -6024,12 +6024,12 @@ function openMangroveModal(initialId = "mg-sharing-child"){
           <b>4.8</b>
           <span>· 280 reviews</span>
         </div>
-        <p style="margin-bottom:12px;font-size:.9rem;color:#111">A breathtaking journey into the green heart of Langkawi. Choose our 3-Hour Sharing tour with pickup and fried rice lunch, or private chartered boat:</p>
+        <p style="margin-bottom:12px;font-size:.9rem;color:#111">A breathtaking journey into the green heart of Langkawi. Choose our 4-Hour Sharing tour with pickup and fried rice lunch, or private chartered boat:</p>
 
         <!-- Category Tabs -->
         <div class="mg-sec-title"><span>1 · Select Tour Option</span></div>
         <div class="mg-tabs" style="grid-template-columns:repeat(3,1fr)">
-          <button class="mg-tab ${activeCat === 'sharing' ? 'active' : ''}" data-mgcat="sharing">3h Sharing (9 AM)<br><small style="opacity:.85">From RM90</small></button>
+          <button class="mg-tab ${activeCat === 'sharing' ? 'active' : ''}" data-mgcat="sharing">4h Sharing (9 AM)<br><small style="opacity:.85">From RM90</small></button>
           <button class="mg-tab ${activeCat === '2h' ? 'active' : ''}" data-mgcat="2h">2h Private Boat<br><small style="opacity:.85">From RM350</small></button>
           <button class="mg-tab ${activeCat === '3h' ? 'active' : ''}" data-mgcat="3h">3h Private Boat<br><small style="opacity:.85">From RM550</small></button>
         </div>
