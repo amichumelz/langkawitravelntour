@@ -3633,7 +3633,10 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
       </div>
     </div>
 
-    <p class="cd-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pay securely online, or cash on arrival.</p>
+    <p class="cd-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pay securely online via Stripe or ToyyibPay FPX.</p>
+    <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:8px 12px;font-size:.74rem;color:#475569;margin-bottom:10px;line-height:1.4">
+      💳 <b>Stripe</b> (Cards/Wallets) or 🏦 <b>ToyyibPay</b> (Malaysian FPX). Standard gateway fees apply.
+    </div>
     <div class="cart-payment-actions">
       <button class="btn pay-stripe" id="cartStripeBtn" type="button">Pay with Stripe</button>
       <button class="btn pay-toyyib" id="cartToyyibBtn" type="button">Pay with ToyyibPay</button>
@@ -3669,7 +3672,11 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
         <div class="f-group"><label>Special Requests</label><textarea id="ckNotes" placeholder="Child seat, dietary needs, timing requests…"></textarea></div>
       </div>
       <div class="step-t">3 · Choose Payment</div>
-      <p class="payment-note">Continue securely with your preferred payment provider.</p>
+      <p class="payment-note" style="margin-bottom:8px">Continue securely with your preferred payment gateway:</p>
+      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:10px 14px;font-size:.78rem;color:#475569;margin-bottom:12px;line-height:1.45">
+        <div>💳 <b>Stripe</b>: Visa, Mastercard, Apple Pay, Google Pay &amp; FPX (Includes standard gateway handling fee).</div>
+        <div style="margin-top:4px">🏦 <b>ToyyibPay</b>: All Malaysian Online Banks via FPX (Standard RM1.00 bank FPX charge at portal).</div>
+      </div>
       <div class="payment-gateway-actions">
         <button class="btn pay-stripe" type="button" data-gateway="stripe">Pay with Stripe</button>
         <button class="btn pay-toyyib" type="button" data-gateway="toyyibpay">Pay with ToyyibPay</button>
@@ -3733,8 +3740,8 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 const WHATSAPP_NUMBER = "60175895116";
 const WA_ENQUIRY_MSG   = "Hi! I have an enquiry about Langkawi Tour & Transport services.";
 const PAYMENT_ENDPOINTS = {
-  stripe: "",
-  toyyibpay: ""
+  stripe: "/api/pay/stripe",
+  toyyibpay: "/api/pay/toyyibpay"
 };
 
 const $  = s => document.querySelector(s);
@@ -7458,43 +7465,137 @@ async function processPayment(gateway){
     return;
   }
   const order = {
-    ref:"LTT-" + Date.now().toString().slice(-6),
-    travelDate:$("#ckDate").value, method: gateway,
+    ref: "LTT-" + Date.now().toString().slice(-6),
+    travelDate: $("#ckDate").value,
+    method: gateway,
     total: cartTotal(),
-    customer:{name:$("#ckName").value.trim(), email:$("#ckEmail").value.trim(), phone:$("#ckPhone").value.trim()},
+    customer: {
+      name: $("#ckName").value.trim(),
+      email: $("#ckEmail").value.trim(),
+      phone: $("#ckPhone").value.trim()
+    },
+    pickup: $("#ckPickup")?.value.trim() || "",
+    guests: $("#ckGuests")?.value || 2,
+    notes: $("#ckNotes")?.value.trim() || "",
     items: cart.map(i => ({...i, title:CATALOG[i.id]?.title, price:CATALOG[i.id]?.price, date:i.date, time:i.time}))
   };
-  $("#ckForm").classList.add("hidden"); $("#ckSummary").classList.add("hidden");
+
+  $("#ckForm").classList.add("hidden");
+  $("#ckSummary").classList.add("hidden");
   $("#ckProcessing").classList.remove("hidden");
-  try{
-    const response = await fetch(endpoint, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(order)});
-    if (!response.ok) throw new Error("Payment request failed");
-    const result = await response.json();
-    if (!result.checkoutUrl) throw new Error("Missing checkout URL");
+
+  try {
+    // Save pending order in localStorage for receipt retrieval after payment redirect
+    localStorage.setItem("ltt_pending_order", JSON.stringify(order));
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order)
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || !result.checkoutUrl) {
+      throw new Error(result.error || "Payment request failed from gateway");
+    }
+
+    // Redirect to live payment gateway (Stripe or ToyyibPay)
     window.location.href = result.checkoutUrl;
     return;
-  }catch(error){
-    $("#ckProcessing").classList.add("hidden"); $("#ckForm").classList.remove("hidden");
-    toast("Payment gateway unavailable. Please try again.");
-    return;
+  } catch (error) {
+    console.error("Payment Initiation Error:", error);
+    $("#ckProcessing").classList.add("hidden");
+    $("#ckForm").classList.remove("hidden");
+    $("#ckSummary").classList.remove("hidden");
+    toast(`Payment Error: ${error.message || "Gateway unavailable. Please check settings."}`);
   }
-  const orders = JSON.parse(localStorage.getItem("ltt_orders") || "[]");
-  orders.push(order); localStorage.setItem("ltt_orders", JSON.stringify(orders));
-  $("#ckForm").classList.add("hidden"); $("#ckSummary").classList.add("hidden");
-  $("#ckProcessing").classList.remove("hidden");
-  setTimeout(() => {
-    $("#ckProcessing").classList.add("hidden"); $("#ckSuccess").classList.remove("hidden");
-    $("#ckRef").textContent = order.ref;
-    $("#ckSuccessTotal").textContent = rm(order.total);
-    $("#ckSuccessDate").textContent = new Date(order.travelDate).toLocaleDateString("en-MY",{day:"numeric",month:"short",year:"numeric"});
-    $("#ckSuccessMethod").textContent = order.method;
-    $("#ckSuccessCustomer").textContent = order.customer.name;
-    $("#ckSuccessEmail").textContent = order.customer.email;
-    $("#ckReceiptItems").innerHTML = order.items.map(item => `<div class="receipt-item"><span>${item.qty} × ${item.title}</span><span>${rm(item.price * item.qty)}</span></div>`).join("");
-    $("#ckWa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi! I just booked online — Ref: ${order.ref}. Please reconfirm my pickup details.`)}`;
-    cart = []; saveCart(); renderCart(); updateBadge();
-    launchConfetti();
-  }, 2100);
+}
+
+function handlePaymentReturn(){
+  const params = new URLSearchParams(window.location.search);
+  const paymentStatus = params.get("payment");
+  const statusId = params.get("status_id"); // ToyyibPay return (1=success, 2=pending, 3=fail)
+  const orderRef = params.get("ref") || params.get("billcode") || "";
+
+  // Check if return was successful
+  const isSuccess = paymentStatus === "success" || statusId === "1" || (paymentStatus === "toyyibpay_return" && statusId === "1");
+  const isCancelled = paymentStatus === "cancel" || statusId === "3";
+
+  if (isSuccess) {
+    let savedOrder = null;
+    try {
+      savedOrder = JSON.parse(localStorage.getItem("ltt_pending_order"));
+    } catch(e){}
+
+    const ref = orderRef || savedOrder?.ref || ("LTT-" + Date.now().toString().slice(-6));
+    const total = savedOrder?.total || cartTotal() || 0;
+    const customer = savedOrder?.customer || { name: "Valued Guest", email: "—", phone: "—" };
+    const travelDate = savedOrder?.travelDate || todayISO();
+    const isStripe = params.get("gateway") === "stripe" || params.get("session_id");
+    const methodDisplay = isStripe ? "Stripe (Card / Apple Pay / Google Pay)" : "ToyyibPay (FPX Online Banking)";
+
+    // Save to permanent completed orders
+    const orders = JSON.parse(localStorage.getItem("ltt_orders") || "[]");
+    orders.push({
+      ref,
+      total,
+      customer,
+      travelDate,
+      method: methodDisplay,
+      paidAt: new Date().toISOString(),
+      items: savedOrder?.items || []
+    });
+    localStorage.setItem("ltt_orders", JSON.stringify(orders));
+
+    // Display confirmation modal
+    openCheckout();
+    $("#ckForm")?.classList.add("hidden");
+    $("#ckSummary")?.classList.add("hidden");
+    $("#ckProcessing")?.classList.add("hidden");
+    $("#ckSuccess")?.classList.remove("hidden");
+
+    if ($("#ckRef")) $("#ckRef").textContent = ref;
+    if ($("#ckSuccessTotal")) $("#ckSuccessTotal").textContent = rm(total);
+    if ($("#ckSuccessDate")) $("#ckSuccessDate").textContent = formatDateDisplay(travelDate);
+    if ($("#ckSuccessMethod")) $("#ckSuccessMethod").textContent = methodDisplay;
+    if ($("#ckSuccessCustomer")) $("#ckSuccessCustomer").textContent = customer.name;
+    if ($("#ckSuccessEmail")) $("#ckSuccessEmail").textContent = customer.email;
+
+    if ($("#ckReceiptItems") && savedOrder?.items) {
+      $("#ckReceiptItems").innerHTML = savedOrder.items.map(item => `
+        <div class="receipt-item">
+          <span>${item.qty} × ${item.title}</span>
+          <span>${rm((item.price || 0) * item.qty)}</span>
+        </div>
+      `).join("");
+    }
+
+    if ($("#ckWa")) {
+      const waMsg = `Hi! I have just paid online for Langkawi Tour & Travel — Ref: ${ref}. Name: ${customer.name}. Travel Date: ${formatDateDisplay(travelDate)}. Total: ${rm(total)}. Please reconfirm my tour & pickup arrangements.`;
+      $("#ckWa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
+    }
+
+    // Clear cart and pending order
+    cart = [];
+    saveCart();
+    renderCart();
+    updateCartBadge();
+    localStorage.removeItem("ltt_pending_order");
+
+    setTimeout(launchConfetti, 300);
+    toast(`Payment successful! Booking confirmed: ${ref}`);
+
+    // Clean URL
+    try {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } catch(e){}
+  } else if (isCancelled) {
+    toast("Payment was cancelled or not completed. Your selected tours are still in your cart.");
+    try {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } catch(e){}
+  }
 }
 
 /* events */
@@ -7909,6 +8010,7 @@ renderStops();
 renderCartDrawer();
 updateCartBadge();
 initHeroSlideshow();
+handlePaymentReturn();
 </script>
 </body>
 </html>

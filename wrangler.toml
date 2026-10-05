@@ -1,0 +1,11 @@
+name = "langkawi-tour-api"
+main = "worker.js"
+compatibility_date = "2024-09-01"
+
+[vars]
+TOYYIBPAY_ENV = "production"
+# Set your actual secret keys securely using:
+# npx wrangler secret put STRIPE_SECRET_KEY
+# npx wrangler secret put TOYYIBPAY_SECRET_KEY
+# npx wrangler secret put TOYYIBPAY_CATEGORY_CODE
+# npx wrangler secret put SITE_URL
