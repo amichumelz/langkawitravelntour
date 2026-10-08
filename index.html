@@ -2964,6 +2964,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     <!-- Category Filters -->
     <div class="gal-tabs" data-reveal style="--d:.1s">
       <button class="gal-tab active" data-filter="all">All Photos</button>
+      <button class="gal-tab" data-filter="guest">Real Guests (Google Maps)</button>
       <button class="gal-tab" data-filter="mangrove">Mangrove &amp; Kayak</button>
       <button class="gal-tab" data-filter="sea">Islands &amp; Cruise</button>
       <button class="gal-tab" data-filter="adventure">ATV &amp; Jetski</button>
@@ -2972,6 +2973,37 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 
     <!-- Gallery Grid -->
     <div class="gal-grid" id="galGrid">
+      <!-- Real Google Maps Photos -->
+      <div class="gal-item" data-cat="adventure guest" onclick="openGalleryLightbox('images/real_guest_atv_ride.jpg', 'Real Guest Experience · ATV Jungle Trail Ride')">
+        <img src="images/real_guest_atv_ride.jpg" alt="Guest ATV Adventure Ride" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · ATV</span>
+          <span class="gal-caption">Fun Rainforest &amp; Waterfall Ride</span>
+        </div>
+      </div>
+      <div class="gal-item" data-cat="mangrove guest" onclick="openGalleryLightbox('images/real_guest_mangrove_tour.jpg', 'Real Guest Experience · Kilim Geoforest Mangrove Tour')">
+        <img src="images/real_guest_mangrove_tour.jpg" alt="Guest Mangrove Tour" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · Mangrove</span>
+          <span class="gal-caption">Mangrove Safari with Langkawi Tour &amp; Transport</span>
+        </div>
+      </div>
+      <div class="gal-item" data-cat="sea guest" onclick="openGalleryLightbox('images/real_guest_jetty_group.jpg', 'Real Guest Experience · Happy Family at Tour Boat Jetty')">
+        <img src="images/real_guest_jetty_group.jpg" alt="Guest Tour Boat Jetty" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · Tour Jetty</span>
+          <span class="gal-caption">Family Island Hopping &amp; Boat Tour</span>
+        </div>
+      </div>
+      <div class="gal-item" data-cat="sea guest" onclick="openGalleryLightbox('images/real_guest_beach_view.jpg', 'Real Guest Experience · Relaxing at Langkawi Beach')">
+        <img src="images/real_guest_beach_view.jpg" alt="Guest Beach Excursion" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · Beach</span>
+          <span class="gal-caption">Scenic Island &amp; Coastline View</span>
+        </div>
+      </div>
+
+      <!-- Tour Showcase Photos -->
       <div class="gal-item" data-cat="mangrove" onclick="openGalleryLightbox('images/mangrove_tour.jpg', 'Kilim Geoforest Mangrove Safari &amp; Eagle Watching')">
         <img src="images/mangrove_tour.jpg" alt="Kilim Mangrove Safari" loading="lazy">
         <div class="gal-overlay">
@@ -5621,7 +5653,8 @@ function initGalleryTabs() {
       tab.classList.add("active");
       const f = tab.dataset.filter || "all";
       $$(".gal-item").forEach(item => {
-        if (f === "all" || item.dataset.cat === f) {
+        const cats = (item.dataset.cat || "").trim().split(/\s+/);
+        if (f === "all" || cats.includes(f)) {
           item.style.display = "";
         } else {
           item.style.display = "none";
