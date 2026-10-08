@@ -7367,43 +7367,68 @@ function closeService(){ $("#svcOverlay").classList.remove("show"); document.bod
 function buildSummary(){
   $("#ckItemCount").textContent = `${cartCount()} item${cartCount() > 1 ? "s" : ""}`;
   $("#ckSummaryItems").innerHTML = cart.filter(i => CATALOG[i.id]).map(i => {
-    const s = CATALOG[i.id];
+    const s = CATALOG[i.id] || { title: i.id, price: 0, grad: "g-island" };
     return `<div class="ck-item">
       <div class="mini ${s.grad || "g-island"}">${s.img ? `<img src="${imgUrl(s.img,120)}" alt="">` : ""}</div>
       <div>
-        <h6>${s.title}</h6>
+        <h6>${s.title || "Tour Item"}</h6>
         ${(i.date || i.time) ? `<small style="display:block;color:var(--green-dark);font-weight:700;margin:1px 0">📅 ${formatDateDisplay(i.date)} · ⏰ ${i.time}</small>` : ""}
-        <small>${i.qty} × ${rm(s.price)}</small>
+        <small>${i.qty} × ${rm(s.price || 0)}</small>
       </div>
-      <span class="amt">${rm(s.price * i.qty)}</span></div>`;
+      <span class="amt">${rm((s.price || 0) * i.qty)}</span></div>`;
   }).join("");
   const total = cartTotal();
-  $("#ckSubtotal").textContent = rm(total);
-  $("#ckTotal").textContent = rm(total);
+  if ($("#ckSubtotal")) $("#ckSubtotal").textContent = rm(total);
+  if ($("#ckTotal")) $("#ckTotal").textContent = rm(total);
 }
-function openCheckout(){
-  if (!cart.length) return;
+
+function loadCustDetails(){
+  // Copy contact details from Cart Drawer to Checkout Modal
+  const cartName = $("#cartCustName")?.value.trim() || "";
+  const cartEmail = $("#cartCustEmail")?.value.trim() || "";
+  const cartPhone = $("#cartCustPhone")?.value.trim() || "";
+
+  if ($("#ckName") && cartName) $("#ckName").value = cartName;
+  if ($("#ckEmail") && cartEmail) $("#ckEmail").value = cartEmail;
+  if ($("#ckPhone") && cartPhone) $("#ckPhone").value = cartPhone;
+
+  // Prefill preferred travel date if not set
+  if ($("#ckDate") && !$("#ckDate").value) {
+    const itemWithDate = cart.find(i => i.date);
+    $("#ckDate").value = itemWithDate?.date || todayISO();
+  }
+}
+
+function openCheckout(targetGateway){
+  if (!cart.length) {
+    toast("Your cart is empty. Please add a tour package first.");
+    return;
+  }
   buildSummary();
-  ["ckProcessing","ckSuccess"].forEach(id => $("#"+id).classList.add("hidden"));
-  $("#ckForm").classList.remove("hidden"); $("#ckSummary").classList.remove("hidden");
-  $("#ckDate").min = todayISO();
-  // prefill first item's date if set
-  const firstItemWithDate = cart.find(i => i.date);
-  if (firstItemWithDate && !$("#ckDate").value) $("#ckDate").value = firstItemWithDate.date;
+  ["ckProcessing","ckSuccess"].forEach(id => $("#"+id)?.classList.add("hidden"));
+  $("#ckForm")?.classList.remove("hidden");
+  $("#ckSummary")?.classList.remove("hidden");
+  if ($("#ckDate")) $("#ckDate").min = todayISO();
   loadCustDetails();
   $("#ckOverlay").classList.add("show");
-  closeCart(); document.body.style.overflow = "hidden";
+  closeCart();
+  document.body.style.overflow = "hidden";
 }
-function closeCheckout(){ $("#ckOverlay").classList.remove("show"); document.body.style.overflow = ""; }
+
+function closeCheckout(){
+  $("#ckOverlay").classList.remove("show");
+  document.body.style.overflow = "";
+}
+
 function validateCheckout(){
   let ok = true;
   const mark = (el, bad) => { if (el){ el.classList.toggle("invalid", bad); if (bad) ok = false; } };
-  mark($("#ckName"),  $("#ckName")?.value.trim().length < 2);
+  mark($("#ckName"),  ($("#ckName")?.value.trim().length || 0) < 2);
   mark($("#ckEmail"), !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#ckEmail")?.value.trim() || ""));
   mark($("#ckPhone"), ($("#ckPhone")?.value.replace(/\D/g,"") || "").length < 8);
   mark($("#ckDate"),  !$("#ckDate")?.value);
   if (!ok) {
-    toast("Please fill in the required fields");
+    toast("Please fill in all required contact details");
     return false;
   }
 
@@ -7422,7 +7447,7 @@ function validateCheckout(){
 
 function processCartPayment(gateway){
   if (!cart.length) {
-    toast("Your cart is empty");
+    toast("Your cart is empty. Please add a tour package first.");
     return;
   }
   for (const item of cart) {
@@ -7433,8 +7458,24 @@ function processCartPayment(gateway){
       }
     }
   }
-  openCheckout();
+
+  // Sync customer details from cart drawer
+  loadCustDetails();
+
+  const hasName = ($("#ckName")?.value.trim().length || 0) >= 2;
+  const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#ckEmail")?.value.trim() || "");
+  const hasPhone = ($("#ckPhone")?.value.replace(/\D/g,"") || "").length >= 8;
+  const hasDate = !!$("#ckDate")?.value;
+
+  if (hasName && hasEmail && hasPhone && hasDate) {
+    openCheckout();
+    processPayment(gateway);
+  } else {
+    openCheckout();
+    toast("Please complete your contact details below to proceed with payment");
+  }
 }
+
 function launchConfetti(){
   if (reduceMotion) return;
   const cv = document.createElement("canvas"); cv.className = "confetti-canvas";
@@ -7457,6 +7498,7 @@ function launchConfetti(){
     if (++f < 230) requestAnimationFrame(frame); else cv.remove();
   })();
 }
+
 async function processPayment(gateway){
   if (!validateCheckout()) return;
   const endpoint = PAYMENT_ENDPOINTS[gateway];
@@ -7477,12 +7519,23 @@ async function processPayment(gateway){
     pickup: $("#ckPickup")?.value.trim() || "",
     guests: $("#ckGuests")?.value || 2,
     notes: $("#ckNotes")?.value.trim() || "",
-    items: cart.map(i => ({...i, title:CATALOG[i.id]?.title, price:CATALOG[i.id]?.price, date:i.date, time:i.time}))
+    items: cart.map(i => ({...i, title:CATALOG[i.id]?.title || i.id, price:CATALOG[i.id]?.price || 0, date:i.date, time:i.time}))
   };
 
-  $("#ckForm").classList.add("hidden");
-  $("#ckSummary").classList.add("hidden");
-  $("#ckProcessing").classList.remove("hidden");
+  $("#ckForm")?.classList.add("hidden");
+  $("#ckSummary")?.classList.add("hidden");
+  $("#ckProcessing")?.classList.remove("hidden");
+
+  // If opening directly as a local file, inform user
+  if (window.location.protocol === "file:") {
+    setTimeout(() => {
+      $("#ckProcessing")?.classList.add("hidden");
+      $("#ckForm")?.classList.remove("hidden");
+      $("#ckSummary")?.classList.remove("hidden");
+      alert("⚠️ Local File Notice:\nYou are viewing this site directly from local files (file://).\nLive payment gateways require an active web server or your deployed Cloudflare Pages URL.\n\nPlease test via your live Cloudflare Pages URL or run a local server.");
+    }, 500);
+    return;
+  }
 
   try {
     // Save pending order in localStorage for receipt retrieval after payment redirect
@@ -7497,7 +7550,13 @@ async function processPayment(gateway){
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok || !result.checkoutUrl) {
-      throw new Error(result.error || "Payment request failed from gateway");
+      let errMsg = result.error || "";
+      if (response.status === 404) {
+        errMsg = `API endpoint ${endpoint} was not found (404). Ensure the project is deployed on Cloudflare Pages with Functions enabled.`;
+      } else if (!errMsg) {
+        errMsg = `Gateway returned error code ${response.status}. Please check Cloudflare Environment Variables.`;
+      }
+      throw new Error(errMsg);
     }
 
     // Redirect to live payment gateway (Stripe or ToyyibPay)
@@ -7505,10 +7564,11 @@ async function processPayment(gateway){
     return;
   } catch (error) {
     console.error("Payment Initiation Error:", error);
-    $("#ckProcessing").classList.add("hidden");
-    $("#ckForm").classList.remove("hidden");
-    $("#ckSummary").classList.remove("hidden");
-    toast(`Payment Error: ${error.message || "Gateway unavailable. Please check settings."}`);
+    $("#ckProcessing")?.classList.add("hidden");
+    $("#ckForm")?.classList.remove("hidden");
+    $("#ckSummary")?.classList.remove("hidden");
+    toast(`Payment Error: ${error.message || "Gateway unavailable."}`);
+    alert(`Payment Gateway Notice:\n${error.message || "Failed to connect to payment gateway. Please try again."}`);
   }
 }
 
