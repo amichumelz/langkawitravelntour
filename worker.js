@@ -149,7 +149,7 @@ async function handleStripe(request, env) {
 async function handleToyyibPay(request, env) {
   try {
     const secretKey = env.TOYYIBPAY_SECRET_KEY;
-    const categoryCode = env.TOYYIBPAY_CATEGORY_CODE;
+    const categoryCode = env.TOYYIBPAY_CATEGORY_CODE || "4zr2m3v5";
     const isSandbox = (env.TOYYIBPAY_ENV || "").toLowerCase() === "sandbox";
 
     if (!secretKey) {
