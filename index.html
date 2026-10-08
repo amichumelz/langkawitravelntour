@@ -2222,12 +2222,10 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 .ck-secure{font-size:.7rem;opacity:.75;margin-top:14px;display:flex;gap:6px}
 .ck-secure svg{flex:none;margin-top:2px;color:#38BDF8}
 .ck-form .btn{width:100%;justify-content:center;margin-top:24px;padding:16px}
-.payment-gateway-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-.payment-gateway-actions .btn{margin-top:0;min-width:0;white-space:normal;text-align:center}
+.payment-gateway-actions{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.payment-gateway-actions .btn{margin-top:0;width:100%;justify-content:center;text-align:center}
 .pay-stripe{background:#635BFF;color:#fff;box-shadow:0 8px 18px rgba(99,91,255,.25)}
 .pay-stripe:hover{background:#5149E5}
-.pay-toyyib{background:#0369A1;color:#fff;box-shadow:0 8px 18px rgba(3,105,161,.22)}
-.pay-toyyib:hover{background:#025A8B}
 .payment-note{font-size:.84rem;color:#334155;margin-top:-4px}
 #ckSummary{display:none!important}
 #ckForm{display:none!important}
@@ -3633,13 +3631,12 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
       </div>
     </div>
 
-    <p class="cd-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pay securely online via Stripe or ToyyibPay FPX.</p>
+    <p class="cd-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pay securely online via Stripe.</p>
     <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:8px 12px;font-size:.74rem;color:#475569;margin-bottom:10px;line-height:1.4">
-      💳 <b>Stripe</b> (Cards/Wallets) or 🏦 <b>ToyyibPay</b> (Malaysian FPX). Standard gateway fees apply.
+      💳 <b>FPX Online Banking &amp; Cards</b> (Maybank2u, CIMB, Bank Islam, Visa, Mastercard, Apple/Google Pay).
     </div>
     <div class="cart-payment-actions">
-      <button class="btn pay-stripe" id="cartStripeBtn" type="button">Pay with Stripe</button>
-      <button class="btn pay-toyyib" id="cartToyyibBtn" type="button">Pay with ToyyibPay</button>
+      <button class="btn pay-stripe" id="cartStripeBtn" type="button" style="width:100%;justify-content:center">Pay with Stripe (Cards &amp; FPX)</button>
     </div>
   </div>
 </aside>
@@ -3671,15 +3668,15 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
         <div class="f-group"><label>Total Guests</label><input id="ckGuests" type="number" min="1" max="40" value="2"></div>
         <div class="f-group"><label>Special Requests</label><textarea id="ckNotes" placeholder="Child seat, dietary needs, timing requests…"></textarea></div>
       </div>
-      <div class="step-t">3 · Choose Payment</div>
-      <p class="payment-note" style="margin-bottom:8px">Continue securely with your preferred payment gateway:</p>
-      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:10px 14px;font-size:.78rem;color:#475569;margin-bottom:12px;line-height:1.45">
-        <div>💳 <b>Stripe</b>: Visa, Mastercard, Apple Pay, Google Pay &amp; FPX (Includes standard gateway handling fee).</div>
-        <div style="margin-top:4px">🏦 <b>ToyyibPay</b>: All Malaysian Online Banks via FPX (Standard RM1.00 bank FPX charge at portal).</div>
+      <div class="step-t">3 · Payment</div>
+      <p class="payment-note" style="margin-bottom:8px">Pay securely online with Stripe:</p>
+      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:12px 14px;font-size:.78rem;color:#475569;margin-bottom:14px;line-height:1.5">
+        <div>🏦 <b>FPX Online Banking</b>: Maybank2u, CIMB Clicks, Public Bank, RHB, Hong Leong, Bank Islam &amp; all Malaysian banks.</div>
+        <div style="margin-top:4px">💳 <b>Cards &amp; Digital Wallets</b>: Visa, Mastercard, Apple Pay &amp; Google Pay.</div>
+        <div style="margin-top:4px;font-size:.72rem;color:#64748B">Standard processing fee (3% + RM 1.00) is included at checkout.</div>
       </div>
       <div class="payment-gateway-actions">
-        <button class="btn pay-stripe" type="button" data-gateway="stripe">Pay with Stripe</button>
-        <button class="btn pay-toyyib" type="button" data-gateway="toyyibpay">Pay with ToyyibPay</button>
+        <button class="btn pay-stripe" type="button" id="ckStripeBtn" data-gateway="stripe" style="width:100%;justify-content:center;padding:15px;font-size:1rem;font-weight:700">Proceed to Payment (Cards &amp; FPX Online Banking)</button>
       </div>
     </div>
     <div class="ck-processing hidden" id="ckProcessing">
@@ -3740,8 +3737,7 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
 const WHATSAPP_NUMBER = "60175895116";
 const WA_ENQUIRY_MSG   = "Hi! I have an enquiry about Langkawi Tour & Transport services.";
 const PAYMENT_ENDPOINTS = {
-  stripe: "/api/pay/stripe",
-  toyyibpay: "/api/pay/toyyibpay"
+  stripe: "/api/pay/stripe"
 };
 
 const $  = s => document.querySelector(s);
@@ -7445,7 +7441,7 @@ function validateCheckout(){
   return true;
 }
 
-function processCartPayment(gateway){
+function processCartPayment(gateway = "stripe"){
   if (!cart.length) {
     toast("Your cart is empty. Please add a tour package first.");
     return;
@@ -7469,7 +7465,7 @@ function processCartPayment(gateway){
 
   if (hasName && hasEmail && hasPhone && hasDate) {
     openCheckout();
-    processPayment(gateway);
+    processPayment("stripe");
   } else {
     openCheckout();
     toast("Please complete your contact details below to proceed with payment");
@@ -7499,17 +7495,17 @@ function launchConfetti(){
   })();
 }
 
-async function processPayment(gateway){
+async function processPayment(gateway = "stripe"){
   if (!validateCheckout()) return;
-  const endpoint = PAYMENT_ENDPOINTS[gateway];
+  const endpoint = PAYMENT_ENDPOINTS[gateway] || PAYMENT_ENDPOINTS.stripe;
   if (!endpoint){
-    toast(`${gateway === "stripe" ? "Stripe" : "ToyyibPay"} payment is not configured yet`);
+    toast("Stripe payment is not configured yet");
     return;
   }
   const order = {
     ref: "LTT-" + Date.now().toString().slice(-6),
     travelDate: $("#ckDate").value,
-    method: gateway,
+    method: "stripe",
     total: cartTotal(),
     customer: {
       name: $("#ckName").value.trim(),
@@ -7559,7 +7555,7 @@ async function processPayment(gateway){
       throw new Error(errMsg);
     }
 
-    // Redirect to live payment gateway (Stripe or ToyyibPay)
+    // Redirect to live Stripe Checkout
     window.location.href = result.checkoutUrl;
     return;
   } catch (error) {
@@ -7575,12 +7571,11 @@ async function processPayment(gateway){
 function handlePaymentReturn(){
   const params = new URLSearchParams(window.location.search);
   const paymentStatus = params.get("payment");
-  const statusId = params.get("status_id"); // ToyyibPay return (1=success, 2=pending, 3=fail)
-  const orderRef = params.get("ref") || params.get("billcode") || "";
+  const orderRef = params.get("ref") || "";
 
-  // Check if return was successful
-  const isSuccess = paymentStatus === "success" || statusId === "1" || (paymentStatus === "toyyibpay_return" && statusId === "1");
-  const isCancelled = paymentStatus === "cancel" || statusId === "3";
+  // Check if return was successful from Stripe
+  const isSuccess = paymentStatus === "success" || !!params.get("session_id");
+  const isCancelled = paymentStatus === "cancel";
 
   if (isSuccess) {
     let savedOrder = null;
@@ -7592,8 +7587,7 @@ function handlePaymentReturn(){
     const total = savedOrder?.total || cartTotal() || 0;
     const customer = savedOrder?.customer || { name: "Valued Guest", email: "—", phone: "—" };
     const travelDate = savedOrder?.travelDate || todayISO();
-    const isStripe = params.get("gateway") === "stripe" || params.get("session_id");
-    const methodDisplay = isStripe ? "Stripe (Card / Apple Pay / Google Pay)" : "ToyyibPay (FPX Online Banking)";
+    const methodDisplay = "Stripe (Card / FPX Online Banking / Digital Wallets)";
 
     // Save to permanent completed orders
     const orders = JSON.parse(localStorage.getItem("ltt_orders") || "[]");
@@ -7702,11 +7696,11 @@ document.addEventListener("click", e => {
  $("#closeCart").onclick = closeCart;
  $("#cartOverlay").onclick = closeCart;
  $("#emptyBrowse").onclick = () => { closeCart(); location.hash = "#services"; };
- $("#cartStripeBtn").onclick = () => processCartPayment("stripe");
- $("#cartToyyibBtn").onclick = () => processCartPayment("toyyibpay");
+ if ($("#cartStripeBtn")) $("#cartStripeBtn").onclick = () => processCartPayment("stripe");
  $("#svcOverlay").onclick = e => { if (e.target === e.currentTarget) closeService(); };
  $("#ckOverlay").onclick = e => { if (e.target === e.currentTarget) closeCheckout(); };
-  $$('[data-gateway]').forEach(btn => btn.onclick = () => processPayment(btn.dataset.gateway));
+ if ($("#ckStripeBtn")) $("#ckStripeBtn").onclick = () => processPayment("stripe");
+ $$('[data-gateway]').forEach(btn => btn.onclick = () => processPayment(btn.dataset.gateway || "stripe"));
  $("#ckDone").onclick = closeCheckout;
  $("#topBtn").onclick = () => window.scrollTo({top:0, behavior:"smooth"});
 function openMobileMenu(){

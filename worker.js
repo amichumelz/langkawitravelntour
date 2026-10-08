@@ -1,6 +1,6 @@
 /**
  * Standalone Cloudflare Worker: worker.js
- * Handles payment routing for /api/pay/stripe and /api/pay/toyyibpay
+ * Handles payment routing for /api/pay/stripe (Cards, FPX Online Banking, Apple/Google Pay)
  */
 
 const CORS_HEADERS = {
@@ -21,7 +21,7 @@ export default {
 
     // Health check endpoint
     if (url.pathname === "/api/health") {
-      return new Response(JSON.stringify({ status: "ok", service: "Langkawi Tour Payment API" }), {
+      return new Response(JSON.stringify({ status: "ok", service: "Langkawi Tour Stripe Payment API" }), {
         headers: CORS_HEADERS
       });
     }
@@ -29,11 +29,6 @@ export default {
     // Stripe checkout session endpoint
     if (url.pathname === "/api/pay/stripe" && request.method === "POST") {
       return handleStripe(request, env);
-    }
-
-    // ToyyibPay bill creation endpoint
-    if (url.pathname === "/api/pay/toyyibpay" && request.method === "POST") {
-      return handleToyyibPay(request, env);
     }
 
     return new Response(JSON.stringify({ error: "Endpoint not found" }), {
@@ -80,6 +75,8 @@ async function handleStripe(request, env) {
     params.append("metadata[customer_name]", order.customer.name || "");
     params.append("metadata[customer_phone]", order.customer.phone || "");
     params.append("metadata[travel_date]", order.travelDate || "");
+    
+    // Enable Credit/Debit Card and Malaysian FPX Online Banking
     params.append("payment_method_types[0]", "card");
     params.append("payment_method_types[1]", "fpx");
 
@@ -109,7 +106,7 @@ async function handleStripe(request, env) {
     if (processingFeeCents > 0) {
       params.append(`line_items[${itemIndex}][price_data][currency]`, "myr");
       params.append(`line_items[${itemIndex}][price_data][product_data][name]`, "Payment Processing & Gateway Fee");
-      params.append(`line_items[${itemIndex}][price_data][product_data][description]`, "Card & Online Banking transaction processing fee (3% + RM 1.00)");
+      params.append(`line_items[${itemIndex}][price_data][product_data][description]`, "Card & FPX Online Banking transaction processing fee (3% + RM 1.00)");
       params.append(`line_items[${itemIndex}][price_data][unit_amount]`, processingFeeCents.toString());
       params.append(`line_items[${itemIndex}][quantity]`, "1");
     }
@@ -133,119 +130,6 @@ async function handleStripe(request, env) {
 
     return new Response(
       JSON.stringify({ success: true, checkoutUrl: session.url, sessionId: session.id }),
-      { status: 200, headers: CORS_HEADERS }
-    );
-  } catch (err) {
-    return new Response(
-      JSON.stringify({ error: err.message || "Internal server error" }),
-      { status: 500, headers: CORS_HEADERS }
-    );
-  }
-}
-
-/**
- * Handle ToyyibPay Bill Creation
- */
-async function handleToyyibPay(request, env) {
-  try {
-    const secretKey = env.TOYYIBPAY_SECRET_KEY;
-    const categoryCode = env.TOYYIBPAY_CATEGORY_CODE || "4zr2m3v5";
-    const isSandbox = (env.TOYYIBPAY_ENV || "").toLowerCase() === "sandbox";
-
-    if (!secretKey) {
-      return new Response(
-        JSON.stringify({ error: "TOYYIBPAY_SECRET_KEY is not configured in Cloudflare environment variables." }),
-        { status: 500, headers: CORS_HEADERS }
-      );
-    }
-
-    if (!categoryCode) {
-      return new Response(
-        JSON.stringify({ error: "TOYYIBPAY_CATEGORY_CODE is not configured. Please add Category Code from ToyyibPay dashboard." }),
-        { status: 500, headers: CORS_HEADERS }
-      );
-    }
-
-    const order = await request.json();
-    if (!order || !order.total || !order.customer || !order.customer.email) {
-      return new Response(
-        JSON.stringify({ error: "Invalid order payload. Missing customer details or total." }),
-        { status: 400, headers: CORS_HEADERS }
-      );
-    }
-
-    const reqUrl = new URL(request.url);
-    const siteUrl = (env.SITE_URL || reqUrl.origin).replace(/\/$/, "");
-
-    const toyyibHost = isSandbox ? "https://dev.toyyibpay.com" : "https://toyyibpay.com";
-    const createBillUrl = `${toyyibHost}/index.php/api/createBill`;
-    const amountInSen = Math.round(Number(order.total) * 100);
-
-    let cleanPhone = (order.customer.phone || "").replace(/[^0-9]/g, "");
-    if (cleanPhone.startsWith("60")) cleanPhone = "0" + cleanPhone.slice(2);
-    if (!cleanPhone) cleanPhone = "0175895116";
-
-    const params = new URLSearchParams();
-    params.append("userSecretKey", secretKey.trim());
-    params.append("categoryCode", categoryCode.trim());
-    params.append("billName", `Tour Ref: ${order.ref}`.substring(0, 30));
-    params.append("billDescription", `Langkawi Tour Booking ${order.ref} - ${order.customer.name}`.substring(0, 100));
-    params.append("billPriceSetting", "1");
-    params.append("billPayorInfo", "1");
-    params.append("billAmount", amountInSen.toString());
-    params.append("billReturnUrl", `${siteUrl}/?payment=toyyibpay_return&ref=${encodeURIComponent(order.ref)}`);
-    params.append("billCallbackUrl", `${siteUrl}/api/pay/toyyibpay-callback`);
-    params.append("billExternalReferenceNo", order.ref);
-    params.append("billTo", (order.customer.name || "Customer").substring(0, 30));
-    params.append("billEmail", order.customer.email);
-    params.append("billPhone", cleanPhone);
-    params.append("billSplitPayment", "0");
-    params.append("billSplitPaymentArgs", "");
-    params.append("billPaymentChannel", "0");
-    params.append("billDisplayMerchant", "1");
-    params.append("billContentEmail", `Thank you for booking with Langkawi Tour & Travel. Booking Ref: ${order.ref}. Travel Date: ${order.travelDate || 'As booked'}.`);
-    // Customer bears the fee
-    params.append("billChargeToCustomer", "1");
-
-    const toyyibRes = await fetch(createBillUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString()
-    });
-
-    const responseText = await toyyibRes.text();
-    let data;
-    try {
-      data = JSON.parse(responseText);
-    } catch (e) {
-      return new Response(
-        JSON.stringify({ error: "Invalid response from ToyyibPay API: " + responseText }),
-        { status: 502, headers: CORS_HEADERS }
-      );
-    }
-
-    let billCode = null;
-    if (Array.isArray(data) && data.length > 0) {
-      if (data[0].BillCode) billCode = data[0].BillCode;
-      else if (data[0].msg) {
-        return new Response(
-          JSON.stringify({ error: `ToyyibPay Error: ${data[0].msg}` }),
-          { status: 400, headers: CORS_HEADERS }
-        );
-      }
-    } else if (data && data.BillCode) {
-      billCode = data.BillCode;
-    }
-
-    if (!billCode) {
-      return new Response(
-        JSON.stringify({ error: "Failed to obtain ToyyibPay BillCode.", details: data }),
-        { status: 400, headers: CORS_HEADERS }
-      );
-    }
-
-    return new Response(
-      JSON.stringify({ success: true, checkoutUrl: `${toyyibHost}/${billCode}`, billCode: billCode }),
       { status: 200, headers: CORS_HEADERS }
     );
   } catch (err) {
