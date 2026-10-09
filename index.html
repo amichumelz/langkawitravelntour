@@ -2964,100 +2964,92 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     <!-- Category Filters -->
     <div class="gal-tabs" data-reveal style="--d:.1s">
       <button class="gal-tab active" data-filter="all">All Photos</button>
-      <button class="gal-tab" data-filter="guest">Real Guests (Google Maps)</button>
-      <button class="gal-tab" data-filter="mangrove">Mangrove &amp; Kayak</button>
-      <button class="gal-tab" data-filter="sea">Islands &amp; Cruise</button>
-      <button class="gal-tab" data-filter="adventure">ATV &amp; Jetski</button>
-      <button class="gal-tab" data-filter="fleet">Private Fleet</button>
+      <button class="gal-tab" data-filter="mangrove">Mangrove &amp; Caves</button>
+      <button class="gal-tab" data-filter="adventure">ATV Adventure</button>
+      <button class="gal-tab" data-filter="sea">Islands &amp; Sea</button>
+      <button class="gal-tab" data-filter="tours">Shopping &amp; Island Tours</button>
     </div>
 
     <!-- Gallery Grid -->
     <div class="gal-grid" id="galGrid">
-      <!-- Real Google Maps Photos -->
-      <div class="gal-item" data-cat="adventure guest" onclick="openGalleryLightbox('images/real_guest_atv_ride.jpg', 'Real Guest Experience · ATV Jungle Trail Ride')">
-        <img src="images/real_guest_atv_ride.jpg" alt="Guest ATV Adventure Ride" loading="lazy">
+      <!-- 1. ATV Adventure Group -->
+      <div class="gal-item" data-cat="adventure" onclick="openGalleryLightbox('images/real_guest_atv_group.jpg', 'Real Guest Experience · ATV Rainforest Adventure Group')">
+        <img src="images/real_guest_atv_group.jpg" alt="Guest ATV Adventure Group" loading="lazy">
         <div class="gal-overlay">
           <span class="gal-tag">★ Real Guest · ATV</span>
-          <span class="gal-caption">Fun Rainforest &amp; Waterfall Ride</span>
+          <span class="gal-caption">Rainforest Trail &amp; Quad Bike Fun</span>
         </div>
       </div>
-      <div class="gal-item" data-cat="mangrove guest" onclick="openGalleryLightbox('images/real_guest_mangrove_tour.jpg', 'Real Guest Experience · Kilim Geoforest Mangrove Tour')">
+
+      <!-- 2. Kilim Geoforest Park Landmark -->
+      <div class="gal-item" data-cat="mangrove" onclick="openGalleryLightbox('images/real_guest_kilim_geoforest.jpg', 'Real Guest Experience · Kilim Geoforest Park Boat Cruise')">
+        <img src="images/real_guest_kilim_geoforest.jpg" alt="Kilim Geoforest Boat Tour" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · Mangrove</span>
+          <span class="gal-caption">Kilim Geoforest Park Cliff Landmark</span>
+        </div>
+      </div>
+
+      <!-- 3. Gua Kelawar Bat Cave -->
+      <div class="gal-item" data-cat="mangrove" onclick="openGalleryLightbox('images/real_guest_gua_kelawar.jpg', 'Real Guest Experience · Gua Kelawar (Bat Cave) Exploration')">
+        <img src="images/real_guest_gua_kelawar.jpg" alt="Gua Kelawar Bat Cave Tour" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · Mangrove</span>
+          <span class="gal-caption">Gua Kelawar Boardwalk Discovery</span>
+        </div>
+      </div>
+
+      <!-- 4. Private Boat Tour -->
+      <div class="gal-item" data-cat="sea" onclick="openGalleryLightbox('images/real_guest_island_boat.jpg', 'Real Guest Experience · Private Island &amp; Boat Excursion')">
+        <img src="images/real_guest_island_boat.jpg" alt="Private Boat Island Tour" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · Boat Tour</span>
+          <span class="gal-caption">Private Island Hopping &amp; Beach Stop</span>
+        </div>
+      </div>
+
+      <!-- 5. Loccino Duty-Free Shopping -->
+      <div class="gal-item" data-cat="tours" onclick="openGalleryLightbox('images/real_guest_loccino_shopping.jpg', 'Real Guest Experience · Loccino Langkawi Shopping Tour')">
+        <img src="images/real_guest_loccino_shopping.jpg" alt="Loccino Langkawi Shopping Tour" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · Island Tour</span>
+          <span class="gal-caption">Duty-Free &amp; Local Treats Shopping</span>
+        </div>
+      </div>
+
+      <!-- 6. Mangrove Tour with Company Banner -->
+      <div class="gal-item" data-cat="mangrove" onclick="openGalleryLightbox('images/real_guest_mangrove_tour.jpg', 'Real Guest Experience · Kilim Mangrove Safari Tour')">
         <img src="images/real_guest_mangrove_tour.jpg" alt="Guest Mangrove Tour" loading="lazy">
         <div class="gal-overlay">
           <span class="gal-tag">★ Real Guest · Mangrove</span>
           <span class="gal-caption">Mangrove Safari with Langkawi Tour &amp; Transport</span>
         </div>
       </div>
-      <div class="gal-item" data-cat="sea guest" onclick="openGalleryLightbox('images/real_guest_jetty_group.jpg', 'Real Guest Experience · Happy Family at Tour Boat Jetty')">
+
+      <!-- 7. Couple ATV Trail Ride -->
+      <div class="gal-item" data-cat="adventure" onclick="openGalleryLightbox('images/real_guest_atv_ride.jpg', 'Real Guest Experience · Couple ATV Rainforest Trail Ride')">
+        <img src="images/real_guest_atv_ride.jpg" alt="Guest ATV Adventure Ride" loading="lazy">
+        <div class="gal-overlay">
+          <span class="gal-tag">★ Real Guest · ATV</span>
+          <span class="gal-caption">Fun Jungle &amp; Waterfall Ride</span>
+        </div>
+      </div>
+
+      <!-- 8. Tour Boat Jetty Family Departure -->
+      <div class="gal-item" data-cat="sea" onclick="openGalleryLightbox('images/real_guest_jetty_group.jpg', 'Real Guest Experience · Family Island Tour Departure')">
         <img src="images/real_guest_jetty_group.jpg" alt="Guest Tour Boat Jetty" loading="lazy">
         <div class="gal-overlay">
-          <span class="gal-tag">★ Real Guest · Tour Jetty</span>
+          <span class="gal-tag">★ Real Guest · Boat Jetty</span>
           <span class="gal-caption">Family Island Hopping &amp; Boat Tour</span>
         </div>
       </div>
-      <div class="gal-item" data-cat="sea guest" onclick="openGalleryLightbox('images/real_guest_beach_view.jpg', 'Real Guest Experience · Relaxing at Langkawi Beach')">
+
+      <!-- 9. Scenic Beach View -->
+      <div class="gal-item" data-cat="sea" onclick="openGalleryLightbox('images/real_guest_beach_view.jpg', 'Real Guest Experience · Relaxing at Langkawi Beach')">
         <img src="images/real_guest_beach_view.jpg" alt="Guest Beach Excursion" loading="lazy">
         <div class="gal-overlay">
           <span class="gal-tag">★ Real Guest · Beach</span>
           <span class="gal-caption">Scenic Island &amp; Coastline View</span>
-        </div>
-      </div>
-
-      <!-- Tour Showcase Photos -->
-      <div class="gal-item" data-cat="mangrove" onclick="openGalleryLightbox('images/mangrove_tour.jpg', 'Kilim Geoforest Mangrove Safari &amp; Eagle Watching')">
-        <img src="images/mangrove_tour.jpg" alt="Kilim Mangrove Safari" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Mangrove</span>
-          <span class="gal-caption">Kilim Geoforest &amp; Eagle Feeding</span>
-        </div>
-      </div>
-      <div class="gal-item" data-cat="mangrove" onclick="openGalleryLightbox('images/mangrove_kayak.jpg', 'Mangrove Kayaking Tour in Kilim Tranquil Rivers')">
-        <img src="images/mangrove_kayak.jpg" alt="Mangrove Kayaking" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Kayaking</span>
-          <span class="gal-caption">Tranquil Mangrove River Paddling</span>
-        </div>
-      </div>
-      <div class="gal-item" data-cat="sea" onclick="openGalleryLightbox('images/island_hopping.jpg', 'Island Hopping · Dayang Bunting Freshwater Lake')">
-        <img src="images/island_hopping.jpg" alt="Island Hopping" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Island Hopping</span>
-          <span class="gal-caption">Lake of the Pregnant Maiden</span>
-        </div>
-      </div>
-      <div class="gal-item" data-cat="adventure" onclick="openGalleryLightbox('images/atv_jungle_ride.jpg', 'ATV Rainforest Trail Ride to Hidden Waterfall')">
-        <img src="images/atv_jungle_ride.jpg" alt="ATV Jungle Adventure" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">ATV Ride</span>
-          <span class="gal-caption">Rainforest Trail to Waterfall</span>
-        </div>
-      </div>
-      <div class="gal-item" data-cat="adventure" onclick="openGalleryLightbox('images/jetski_tour.jpg', 'Jet Ski Island Expeditions across Pantai Chenang')">
-        <img src="images/jetski_tour.jpg" alt="Jet Ski Tour" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Jet Ski</span>
-          <span class="gal-caption">Pantai Chenang &amp; Secluded Islands</span>
-        </div>
-      </div>
-      <div class="gal-item" data-cat="sea" onclick="openGalleryLightbox('images/sunset_dinner_cruise.jpg', 'Sunset Dinner Cruise with Open Deck Buffet &amp; Jacuzzi Net')">
-        <img src="images/sunset_dinner_cruise.jpg" alt="Sunset Dinner Cruise" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Sunset Cruise</span>
-          <span class="gal-caption">Golden Hour Dinner Cruise</span>
-        </div>
-      </div>
-      <div class="gal-item" data-cat="sea" onclick="openGalleryLightbox('images/eagle_square_langkawi.jpg', 'Dataran Lang · Iconic Langkawi Eagle Square Landmark')">
-        <img src="images/eagle_square_langkawi.jpg" alt="Eagle Square Dataran Lang" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Landmark</span>
-          <span class="gal-caption">Dataran Lang Eagle Square</span>
-        </div>
-      </div>
-      <div class="gal-item" data-cat="fleet" onclick="openGalleryLightbox('images/private_transfer.jpg', 'Private Transfer &amp; Island Tour Fleet')">
-        <img src="images/private_transfer.jpg" alt="Private Fleet" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Fleet</span>
-          <span class="gal-caption">Private Island Chauffeur &amp; Tour</span>
         </div>
       </div>
     </div>
