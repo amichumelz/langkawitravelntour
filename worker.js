@@ -75,6 +75,13 @@ async function handleStripe(request, env) {
     params.append("metadata[customer_name]", order.customer.name || "");
     params.append("metadata[customer_phone]", order.customer.phone || "");
     params.append("metadata[travel_date]", order.travelDate || "");
+    if (order.pickup) params.append("metadata[pickup_location]", String(order.pickup).slice(0, 500));
+    if (order.guests) params.append("metadata[total_guests]", String(order.guests).slice(0, 50));
+    if (order.notes) params.append("metadata[special_requests]", String(order.notes).slice(0, 500));
+    if (Array.isArray(order.items) && order.items.length > 0) {
+      const summaryItems = order.items.map(i => `${i.qty || 1}x ${i.title || i.id} (${i.date || order.travelDate} ${i.time || ''})`).join(" | ");
+      params.append("metadata[booked_packages]", summaryItems.slice(0, 500));
+    }
     
     // Enable Credit/Debit Card and Malaysian FPX Online Banking
     params.append("payment_method_types[0]", "card");

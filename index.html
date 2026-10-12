@@ -3731,8 +3731,12 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
     <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:8px 12px;font-size:.74rem;color:#475569;margin-bottom:10px;line-height:1.4">
       💳 <b>FPX Online Banking &amp; Cards</b> (Maybank2u, CIMB, Bank Islam, Visa, Mastercard, Apple/Google Pay).
     </div>
-    <div class="cart-payment-actions">
+    <div class="cart-payment-actions" style="display:flex;flex-direction:column;gap:8px">
       <button class="btn pay-stripe" id="cartStripeBtn" type="button" style="width:100%;justify-content:center">Pay with Stripe (Cards &amp; FPX)</button>
+      <a class="btn btn-ghost" id="cartWaBtn" href="#" target="_blank" rel="noopener" style="width:100%;justify-content:center;border-color:#25D366;color:#128C7E;font-size:.84rem;display:flex;align-items:center;gap:6px;text-decoration:none">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
+        Tanya Pakej Troli di WhatsApp
+      </a>
     </div>
   </div>
 </aside>
@@ -3797,20 +3801,30 @@ footer h5{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:20px}
             <div class="receipt-total"><span class="receipt-label">Total paid</span><b id="ckSuccessTotal">RM 0</b></div>
           </div>
           <div class="receipt-details">
-            <div><span class="receipt-label">Travel date</span><b id="ckSuccessDate">—</b></div>
-            <div><span class="receipt-label">Payment</span><b id="ckSuccessMethod">Stripe</b></div>
             <div><span class="receipt-label">Customer</span><b id="ckSuccessCustomer">—</b></div>
+            <div><span class="receipt-label">Phone / WhatsApp</span><b id="ckSuccessPhone">—</b></div>
             <div><span class="receipt-label">Email</span><b id="ckSuccessEmail">—</b></div>
+            <div><span class="receipt-label">Travel date</span><b id="ckSuccessDate">—</b></div>
+            <div><span class="receipt-label">Total guests</span><b id="ckSuccessGuests">—</b></div>
+            <div><span class="receipt-label">Payment</span><b id="ckSuccessMethod">Stripe</b></div>
+            <div style="grid-column:1/-1"><span class="receipt-label">Pickup Location</span><b id="ckSuccessPickup">—</b></div>
+            <div id="ckSuccessNotesWrap" class="hidden" style="grid-column:1/-1"><span class="receipt-label">Special Requests</span><b id="ckSuccessNotes" style="font-style:italic">—</b></div>
           </div>
           <div class="receipt-items" id="ckReceiptItems">
             <div class="receipt-item"><span>Booking items</span><span>See confirmation</span></div>
           </div>
-          <p class="receipt-note">Your receipt and booking details will be sent to your email. Our team will WhatsApp you to reconfirm pickup details.</p>
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:12px 14px;margin-top:14px;font-size:.82rem;color:#166534;line-height:1.5">
+            <div style="font-weight:700;margin-bottom:2px">📲 Langkah Seterusnya / Next Step:</div>
+            <div>Sila klik butang hijau di bawah untuk hantar butiran penuh pakej &amp; maklumat pickup ke WhatsApp kami untuk pengesahan segera.</div>
+          </div>
         </div>
       </div>
-      <div class="success-btns">
-        <button class="btn btn-green" id="ckDone">Done</button>
-        <a class="btn btn-ghost" id="ckWa" href="#" target="_blank" rel="noopener">WhatsApp Enquiry</a>
+      <div class="success-btns" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <a class="btn" id="ckWa" href="#" target="_blank" rel="noopener" style="flex:1;min-width:240px;background:#25D366;color:#fff;font-weight:700;font-size:.95rem;padding:14px;justify-content:center;border-radius:12px;display:flex;align-items:center;gap:8px;text-decoration:none;box-shadow:0 4px 14px rgba(37,211,102,.35)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-2.799 7.534c-1.147 0-2.273-.308-3.264-.887l-.234-.139-2.423.635.647-2.363-.152-.242c-.806-1.283-1.232-2.758-1.232-4.268 0-4.418 3.598-8.014 8.017-8.014 2.14 0 4.148.835 5.659 2.35 1.51 1.514 2.342 3.524 2.342 5.664-.001 4.419-3.598 8.014-8.018 8.014m6.821-14.835c-1.82-1.821-4.238-2.824-6.82-2.824-5.316 0-9.643 4.325-9.645 9.643 0 1.7.444 3.359 1.288 4.816l-1.368 4.997 5.115-1.341c1.407.767 2.99 1.172 4.603 1.173h.004c5.316 0 9.643-4.326 9.645-9.644 0-2.577-1.003-4.998-2.822-6.82"/></svg>
+          Hantar Butiran Tempahan ke WhatsApp
+        </a>
+        <button class="btn btn-ghost" id="ckDone" onclick="closeCheckout()" style="padding:14px 22px">Selesai</button>
       </div>
     </div>
     <div class="ck-summary" id="ckSummary">
@@ -6078,7 +6092,12 @@ function renderCartDrawer(){
         </div>
       </div>`;
   }).join("");
+
+  if ($("#cartWaBtn")) {
+    $("#cartWaBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(formatCartWhatsAppMessage())}`;
+  }
 }
+const renderCart = renderCartDrawer;
 
 function changeCartQty(idx, delta){
   if (!cart[idx]) return;
@@ -7593,6 +7612,114 @@ function launchConfetti(){
   })();
 }
 
+function formatBookingWhatsAppMessage(order){
+  const ref = order.ref || ("LTT-" + Date.now().toString().slice(-6));
+  const cust = order.customer || {};
+  const travelDate = order.travelDate || todayISO();
+  const items = Array.isArray(order.items) ? order.items : [];
+  const total = order.total || 0;
+  const method = order.method || "Stripe (Card / FPX Online Banking / Digital Wallets)";
+  const pickup = order.pickup || "";
+  const guests = order.guests || "";
+  const notes = order.notes || "";
+
+  let lines = [];
+  lines.push("🌴 *PENGESAHAN TEMPAHAN / BOOKING CONFIRMATION* 🌴");
+  lines.push("*Langkawi Tour & Transport*");
+  lines.push("");
+  lines.push("✅ *Status: BAYARAN BERJAYA (PAID ONLINE)*");
+  lines.push(`🔖 *No. Rujukan:* ${ref}`);
+  lines.push(`💳 *Kaedah Bayaran:* ${method}`);
+  lines.push(`💰 *Jumlah Bayaran:* ${rm(total)}`);
+  lines.push(`📅 *Tarikh Utama:* ${formatDateDisplay(travelDate)}`);
+  lines.push("");
+  lines.push("━━━━━━━━━━━━━━━━━━━━");
+  lines.push("👤 *MAKLUMAT PELANGGAN / GUEST:*");
+  lines.push(`• *Nama:* ${cust.name || '—'}`);
+  if (cust.phone) lines.push(`• *No. Telefon:* ${cust.phone}`);
+  if (cust.email) lines.push(`• *Emel:* ${cust.email}`);
+  if (guests) lines.push(`• *Bilangan Tetamu:* ${guests} Orang`);
+  if (pickup) lines.push(`• *Lokasi Pickup:* ${pickup}`);
+
+  lines.push("");
+  lines.push("━━━━━━━━━━━━━━━━━━━━");
+  lines.push(`📦 *SENARAI PAKEJ & TEMPAHAN (${items.length} item):*`);
+
+  if (items.length > 0) {
+    items.forEach((item, idx) => {
+      const itemTitle = item.title || (CATALOG[item.id]?.title) || item.id || `Pakej #${idx + 1}`;
+      const itemQty = item.qty || 1;
+      const itemPrice = (item.price !== undefined && item.price !== null) ? Number(item.price) : ((CATALOG[item.id]?.price) || 0);
+      const itemTotal = itemPrice * itemQty;
+      const itemDate = item.date ? formatDateDisplay(item.date) : formatDateDisplay(travelDate);
+      const itemTime = item.time || "";
+
+      lines.push("");
+      lines.push(`${idx + 1}. *${itemTitle}*`);
+      lines.push(`   • *Kuantiti:* ${itemQty}`);
+      if (itemDate || itemTime) {
+        lines.push(`   • *Tarikh & Masa:* ${itemDate}${itemTime ? ' · ' + itemTime : ''}`);
+      }
+      if (itemTotal > 0) {
+        lines.push(`   • *Harga:* ${rm(itemTotal)}${itemQty > 1 ? ` (${rm(itemPrice)} × ${itemQty})` : ''}`);
+      }
+    });
+  } else {
+    lines.push("");
+    lines.push(`• *Butiran Pakej:* Sila semak pautan resit & sistem tempahan (${ref})`);
+  }
+
+  if (notes && notes.trim()) {
+    lines.push("");
+    lines.push("━━━━━━━━━━━━━━━━━━━━");
+    lines.push("📝 *Nota / Permintaan Khas:*");
+    lines.push(notes.trim());
+  }
+
+  lines.push("");
+  lines.push("━━━━━━━━━━━━━━━━━━━━");
+  lines.push("Saya telah membuat bayaran secara online. Mohon pihak Langkawi Tour & Transport semak dan sahkan jadual serta urusan pickup ini. Terima kasih! 🙏");
+
+  return lines.join("\n");
+}
+
+function formatCartWhatsAppMessage(){
+  if (!cart.length) return WA_ENQUIRY_MSG;
+  const custName = $("#cartCustName")?.value.trim() || $("#ckName")?.value.trim() || "";
+  const custPhone = $("#cartCustPhone")?.value.trim() || $("#ckPhone")?.value.trim() || "";
+  const travelDate = $("#ckDate")?.value || todayISO();
+
+  let lines = [];
+  lines.push("🌴 *PERTANYAAN PAKEJ / TOUR ENQUIRY* 🌴");
+  lines.push("*Langkawi Tour & Transport*");
+  lines.push("");
+  if (custName) lines.push(`👤 *Nama:* ${custName}`);
+  if (custPhone) lines.push(`📞 *Telefon:* ${custPhone}`);
+  lines.push(`📅 *Tarikh Dirancang:* ${formatDateDisplay(travelDate)}`);
+  lines.push(`💰 *Anggaran Subtotal:* ${rm(cartTotal())}`);
+  lines.push("");
+  lines.push("━━━━━━━━━━━━━━━━━━━━");
+  lines.push(`📦 *Pakej Pilihan Dalam Troli (${cart.length} item):*`);
+
+  cart.forEach((i, idx) => {
+    const s = CATALOG[i.id] || { title: i.id, price: 0 };
+    lines.push("");
+    lines.push(`${idx + 1}. *${s.title}*`);
+    lines.push(`   • *Kuantiti:* ${i.qty}`);
+    if (i.date || i.time) {
+      lines.push(`   • *Tarikh & Masa:* ${formatDateDisplay(i.date)}${i.time ? ' · ' + i.time : ''}`);
+    }
+    if (s.price) {
+      lines.push(`   • *Harga:* ${rm(s.price * i.qty)}`);
+    }
+  });
+
+  lines.push("");
+  lines.push("━━━━━━━━━━━━━━━━━━━━");
+  lines.push("Boleh saya dapatkan pengesahan ketersediaan (availability) dan maklumat lanjut untuk pakej di atas? Terima kasih! 🙏");
+  return lines.join("\n");
+}
+
 async function processPayment(gateway = "stripe"){
   if (!validateCheckout()) return;
   const endpoint = PAYMENT_ENDPOINTS[gateway] || PAYMENT_ENDPOINTS.stripe;
@@ -7600,9 +7727,10 @@ async function processPayment(gateway = "stripe"){
     toast("Stripe payment is not configured yet");
     return;
   }
+  const travelDate = $("#ckDate").value || todayISO();
   const order = {
     ref: "LTT-" + Date.now().toString().slice(-6),
-    travelDate: $("#ckDate").value,
+    travelDate,
     method: "stripe",
     total: cartTotal(),
     customer: {
@@ -7613,7 +7741,19 @@ async function processPayment(gateway = "stripe"){
     pickup: $("#ckPickup")?.value.trim() || "",
     guests: $("#ckGuests")?.value || 2,
     notes: $("#ckNotes")?.value.trim() || "",
-    items: cart.map(i => ({...i, title:CATALOG[i.id]?.title || i.id, price:CATALOG[i.id]?.price || 0, date:i.date, time:i.time}))
+    items: cart.map(i => {
+      const cat = CATALOG[i.id] || {};
+      return {
+        id: i.id,
+        title: cat.title || i.title || i.id,
+        price: (cat.price !== undefined && cat.price !== null) ? cat.price : (i.price || 0),
+        qty: i.qty || 1,
+        date: i.date || travelDate,
+        time: i.time || "Flexible",
+        unit: cat.unit || "",
+        pax: cat.pax || ""
+      };
+    })
   };
 
   $("#ckForm")?.classList.add("hidden");
@@ -7632,8 +7772,11 @@ async function processPayment(gateway = "stripe"){
   }
 
   try {
-    // Save pending order in localStorage for receipt retrieval after payment redirect
+    // Save pending order across multiple persistent storages for receipt & WhatsApp retrieval
     localStorage.setItem("ltt_pending_order", JSON.stringify(order));
+    localStorage.setItem("ltt_pending_order_" + order.ref, JSON.stringify(order));
+    localStorage.setItem("ltt_last_order", JSON.stringify(order));
+    try { sessionStorage.setItem("ltt_pending_order", JSON.stringify(order)); } catch(e){}
 
     const response = await fetch(endpoint, {
       method: "POST",
@@ -7678,27 +7821,75 @@ function handlePaymentReturn(){
   if (isSuccess) {
     let savedOrder = null;
     try {
-      savedOrder = JSON.parse(localStorage.getItem("ltt_pending_order"));
+      if (orderRef) {
+        savedOrder = JSON.parse(localStorage.getItem("ltt_pending_order_" + orderRef));
+      }
+      if (!savedOrder) {
+        savedOrder = JSON.parse(localStorage.getItem("ltt_pending_order"));
+      }
+      if (!savedOrder) {
+        savedOrder = JSON.parse(sessionStorage.getItem("ltt_pending_order"));
+      }
+      if (!savedOrder) {
+        savedOrder = JSON.parse(localStorage.getItem("ltt_last_order"));
+      }
+      if (!savedOrder) {
+        savedOrder = JSON.parse(localStorage.getItem("ltt_last_successful_order"));
+      }
+      if (!savedOrder && orderRef) {
+        const orders = JSON.parse(localStorage.getItem("ltt_orders") || "[]");
+        savedOrder = orders.find(o => o.ref === orderRef);
+      }
     } catch(e){}
 
     const ref = orderRef || savedOrder?.ref || ("LTT-" + Date.now().toString().slice(-6));
     const total = savedOrder?.total || cartTotal() || 0;
     const customer = savedOrder?.customer || { name: "Valued Guest", email: "—", phone: "—" };
     const travelDate = savedOrder?.travelDate || todayISO();
+    const pickup = savedOrder?.pickup || "";
+    const guests = savedOrder?.guests || "";
+    const notes = savedOrder?.notes || "";
     const methodDisplay = "Stripe (Card / FPX Online Banking / Digital Wallets)";
 
-    // Save to permanent completed orders
-    const orders = JSON.parse(localStorage.getItem("ltt_orders") || "[]");
-    orders.push({
+    const items = (savedOrder?.items && savedOrder.items.length)
+      ? savedOrder.items
+      : (cart.length ? cart.map(i => {
+          const cat = CATALOG[i.id] || {};
+          return {
+            id: i.id,
+            title: cat.title || i.title || i.id,
+            price: (cat.price !== undefined && cat.price !== null) ? cat.price : (i.price || 0),
+            qty: i.qty || 1,
+            date: i.date || travelDate,
+            time: i.time || "Flexible"
+          };
+        }) : []);
+
+    const completedOrderData = {
       ref,
       total,
       customer,
       travelDate,
+      pickup,
+      guests,
+      notes,
       method: methodDisplay,
       paidAt: new Date().toISOString(),
-      items: savedOrder?.items || []
-    });
-    localStorage.setItem("ltt_orders", JSON.stringify(orders));
+      items
+    };
+
+    // Save to permanent completed orders list
+    try {
+      const orders = JSON.parse(localStorage.getItem("ltt_orders") || "[]");
+      const existingIdx = orders.findIndex(o => o.ref === ref);
+      if (existingIdx >= 0) {
+        orders[existingIdx] = completedOrderData;
+      } else {
+        orders.push(completedOrderData);
+      }
+      localStorage.setItem("ltt_orders", JSON.stringify(orders));
+      localStorage.setItem("ltt_last_successful_order", JSON.stringify(completedOrderData));
+    } catch(e){}
 
     // Display confirmation modal
     openCheckout();
@@ -7712,28 +7903,45 @@ function handlePaymentReturn(){
     if ($("#ckSuccessDate")) $("#ckSuccessDate").textContent = formatDateDisplay(travelDate);
     if ($("#ckSuccessMethod")) $("#ckSuccessMethod").textContent = methodDisplay;
     if ($("#ckSuccessCustomer")) $("#ckSuccessCustomer").textContent = customer.name;
-    if ($("#ckSuccessEmail")) $("#ckSuccessEmail").textContent = customer.email;
+    if ($("#ckSuccessPhone")) $("#ckSuccessPhone").textContent = customer.phone || "—";
+    if ($("#ckSuccessEmail")) $("#ckSuccessEmail").textContent = customer.email || "—";
+    if ($("#ckSuccessPickup")) $("#ckSuccessPickup").textContent = pickup || "To be confirmed via WhatsApp";
+    if ($("#ckSuccessGuests")) $("#ckSuccessGuests").textContent = guests ? `${guests} Guests` : "—";
 
-    if ($("#ckReceiptItems") && savedOrder?.items) {
-      $("#ckReceiptItems").innerHTML = savedOrder.items.map(item => `
-        <div class="receipt-item">
-          <span>${item.qty} × ${item.title}</span>
-          <span>${rm((item.price || 0) * item.qty)}</span>
+    if ($("#ckSuccessNotesWrap")) {
+      if (notes && notes.trim()) {
+        $("#ckSuccessNotesWrap").classList.remove("hidden");
+        if ($("#ckSuccessNotes")) $("#ckSuccessNotes").textContent = notes.trim();
+      } else {
+        $("#ckSuccessNotesWrap").classList.add("hidden");
+      }
+    }
+
+    if ($("#ckReceiptItems") && items.length) {
+      $("#ckReceiptItems").innerHTML = items.map(item => `
+        <div class="receipt-item" style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #E2E8F0">
+          <div>
+            <div style="font-weight:700;color:#0F172A;font-size:.88rem">${item.qty} × ${item.title}</div>
+            ${(item.date || item.time) ? `<div style="font-size:.76rem;color:#0284C7;font-weight:600;margin-top:2px">📅 ${formatDateDisplay(item.date || travelDate)}${item.time ? ' · ⏰ ' + item.time : ''}</div>` : ''}
+          </div>
+          <div style="font-weight:700;color:#0F172A;font-size:.9rem;white-space:nowrap;margin-left:12px">${rm((item.price || 0) * item.qty)}</div>
         </div>
       `).join("");
     }
 
+    // Prepare complete WhatsApp message with all package details
+    const waMsg = formatBookingWhatsAppMessage(completedOrderData);
     if ($("#ckWa")) {
-      const waMsg = `Hi! I have just paid online for Langkawi Tour & Travel — Ref: ${ref}. Name: ${customer.name}. Travel Date: ${formatDateDisplay(travelDate)}. Total: ${rm(total)}. Please reconfirm my tour & pickup arrangements.`;
       $("#ckWa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
     }
 
-    // Clear cart and pending order
+    // Clear cart and pending order safely
     cart = [];
     saveCart();
-    renderCart();
+    renderCartDrawer();
     updateCartBadge();
     localStorage.removeItem("ltt_pending_order");
+    try { sessionStorage.removeItem("ltt_pending_order"); } catch(e){}
 
     setTimeout(launchConfetti, 300);
     toast(`Payment successful! Booking confirmed: ${ref}`);
